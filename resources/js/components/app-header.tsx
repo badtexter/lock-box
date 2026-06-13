@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid, LogOut, Menu, Settings, User } from 'lucide-react';
+import { LayoutGrid, LogOut, Menu, Moon, Settings, Sun, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,6 +14,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet';
+import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
 import { dashboard } from '@/routes';
 
@@ -26,6 +27,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
     const page = usePage();
     const { auth } = page.props;
     const getInitials = useInitials();
+    const { appearance, updateAppearance } = useAppearance();
 
     return (
         <>
@@ -38,61 +40,27 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                         prefetch
                         className="flex items-center gap-3 font-semibold text-[#030812] dark:text-white"
                     >
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#0033FF] to-[#977DFF]" />
                         <span className="text-lg tracking-tight">
                             LockBox
                         </span>
                     </Link>
 
-                    {/* CENTER - NAV */}
-                    <div className="hidden md:flex items-center gap-2">
-                        <Link
-                            href={dashboard()}
-                            className="
-                                px-4 py-2 rounded-xl text-sm font-medium
-                                bg-white/40 dark:bg-white/5
-                                hover:bg-white/60 dark:hover:bg-white/10
-                                transition
-                                text-[#030812] dark:text-white
-                            "
-                        >
-                            <LayoutGrid className="inline w-4 h-4 mr-2" />
-                            Dashboard
-                        </Link>
-                    </div>
-
                     {/* RIGHT - USER + MOBILE MENU */}
                     <div className="flex items-center gap-3">
-                        {/* Mobile Menu Button */}
-                        <Sheet>
-                            <SheetTrigger asChild className="md:hidden">
-                                <Button variant="ghost" size="icon">
-                                    <Menu className="w-5 h-5" />
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent side="right" className="bg-white/90 dark:bg-[#0b0f2f]/90 backdrop-blur-xl">
-                                <SheetHeader>
-                                    <SheetTitle>Menu</SheetTitle>
-                                </SheetHeader>
-                                <div className="mt-4 space-y-2">
-                                    <Link
-                                        href={dashboard()}
-                                        className="
-                                            flex items-center gap-2
-                                            px-3 py-2 rounded-lg
-                                            text-sm
-                                            text-[#030812] dark:text-white
-                                            hover:bg-white/60 dark:hover:bg-white/10
-                                            transition
-                                        "
-                                    >
-                                        <LayoutGrid className="w-4 h-4" />
-                                        Dashboard
-                                    </Link>
-                                </div>
-                            </SheetContent>
-                        </Sheet>
-
+                        {/* Theme Toggle */}
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => updateAppearance(appearance === 'light' ? 'dark' : 'light')}
+                            title="Toggle theme"
+                        >
+                            {appearance === 'light' ? (
+                                <Sun className="w-5 h-5 text-amber-500" />
+                            ) : (
+                                <Moon className="w-5 h-5 text-white" />
+                            )}
+                        </Button>
+                        
                         {/* Avatar / User Dropdown */}
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
@@ -125,7 +93,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                     </p>
                                 </div>
 
-                                {/* PROFILE */}
+                                {/* PROFILE - not active yet*/}
                                 <Link
                                     href="/profile"
                                     className="
