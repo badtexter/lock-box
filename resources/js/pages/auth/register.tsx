@@ -158,5 +158,5 @@ export default function Register({ passwordRules }: Props) {
 
 Register.layout = {
     title: 'Create an account',
-    description: 'Enter your details below to create your account',
+    description: 'Start securing your passwords with LockBox',
 };
