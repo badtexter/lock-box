@@ -37,6 +37,13 @@ export default function Register({ passwordRules }: Props) {
                                     autoComplete="name"
                                     name="name"
                                     placeholder="Full name"
+                                    className="
+                                        h-12
+                                        rounded-xl
+                                        border-white/10
+                                        bg-white/5
+                                        backdrop-blur-sm
+                                    "
                                 />
                                 <InputError
                                     message={errors.name}
@@ -54,6 +61,13 @@ export default function Register({ passwordRules }: Props) {
                                     autoComplete="email"
                                     name="email"
                                     placeholder="email@example.com"
+                                    className="
+                                        h-12
+                                        rounded-xl
+                                        border-white/10
+                                        bg-white/5
+                                        backdrop-blur-sm
+                                    "
                                 />
                                 <InputError message={errors.email} />
                             </div>
@@ -67,6 +81,13 @@ export default function Register({ passwordRules }: Props) {
                                     autoComplete="new-password"
                                     name="password"
                                     placeholder="Password"
+                                    className="
+                                        h-12
+                                        rounded-xl
+                                        border-white/10
+                                        bg-white/5
+                                        backdrop-blur-sm
+                                    "
                                     passwordrules={passwordRules}
                                 />
                                 <InputError message={errors.password} />
@@ -83,6 +104,13 @@ export default function Register({ passwordRules }: Props) {
                                     autoComplete="new-password"
                                     name="password_confirmation"
                                     placeholder="Confirm password"
+                                    className="
+                                        h-12
+                                        rounded-xl
+                                        border-white/10
+                                        bg-white/5
+                                        backdrop-blur-sm
+                                    "
                                     passwordrules={passwordRules}
                                 />
                                 <InputError
@@ -92,9 +120,23 @@ export default function Register({ passwordRules }: Props) {
 
                             <Button
                                 type="submit"
-                                className="mt-2 w-full"
                                 tabIndex={5}
                                 data-test="register-user-button"
+                                disabled={processing}
+                                className="
+                                    mt-2
+                                    w-full
+                                    h-12
+                                    rounded-xl
+                                    text-white
+                                    shadow-lg
+                                    transition-all
+                                    hover:brightness-110
+                                "
+                                style={{
+                                    background:
+                                        'linear-gradient(135deg,#2B5CFF,#977DFF)',
+                                }}
                             >
                                 {processing && <Spinner />}
                                 Create account
@@ -116,5 +158,5 @@ export default function Register({ passwordRules }: Props) {
 
 Register.layout = {
     title: 'Create an account',
-    description: 'Enter your details below to create your account',
+    description: 'Start securing your passwords with LockBox',
 };

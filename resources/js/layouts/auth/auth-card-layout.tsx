@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
 import type { PropsWithChildren } from 'react';
-import AppLogoIcon from '@/components/app-logo-icon';
+// Logo icon removed — using text-only branding
 import {
     Card,
     CardContent,
@@ -9,6 +9,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { home } from '@/routes';
+import { useAppearance } from '@/hooks/use-appearance';
 
 export default function AuthCardLayout({
     children,
@@ -19,28 +20,46 @@ export default function AuthCardLayout({
     title?: string;
     description?: string;
 }>) {
+    const { resolvedAppearance, updateAppearance } = useAppearance();
+    const toggle = () => updateAppearance(resolvedAppearance === 'dark' ? 'light' : 'dark');
+
     return (
-        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
-            <div className="flex w-full max-w-md flex-col gap-6">
-                <Link
-                    href={home()}
-                    className="flex items-center gap-2 self-center font-medium"
-                >
-                    <div className="flex h-9 w-9 items-center justify-center">
-                        <AppLogoIcon className="size-9 fill-current text-black dark:text-white" />
-                    </div>
+        <div className="min-h-screen h-screen overflow-hidden">
+            <header className="w-full py-4 px-6 md:px-10 flex items-center justify-between">
+                <Link href={home()} className="flex items-center gap-2">
+                    <span className="text-2xl font-extrabold">LockBox</span>
                 </Link>
 
-                <div className="flex flex-col gap-6">
-                    <Card className="rounded-xl">
-                        <CardHeader className="px-10 pt-8 pb-0 text-center">
-                            <CardTitle className="text-xl">{title}</CardTitle>
-                            <CardDescription>{description}</CardDescription>
-                        </CardHeader>
-                        <CardContent className="px-10 py-8">
-                            {children}
-                        </CardContent>
-                    </Card>
+                <button
+                    onClick={toggle}
+                    className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                    aria-label="Toggle theme"
+                >
+                    {resolvedAppearance === 'dark' ? (
+                        <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.12-2.12a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414l2.12 2.12a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM9 4a1 1 0 100-2 1 1 0 000 2zm0 12a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" />
+                        </svg>
+                    ) : (
+                        <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                        </svg>
+                    )}
+                </button>
+            </header>
+
+            <div className="flex h-full flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
+                <div className="flex w-full max-w-md flex-col gap-6 max-h-full overflow-auto">
+                    <div className="flex flex-col gap-6">
+                        <Card className="rounded-xl max-h-[calc(100vh-8rem)] overflow-auto">
+                            <CardHeader className="px-10 pt-8 pb-0 text-center">
+                                <CardTitle className="text-xl">{title}</CardTitle>
+                                <CardDescription>{description}</CardDescription>
+                            </CardHeader>
+                            <CardContent className="px-10 py-8">
+                                {children}
+                            </CardContent>
+                        </Card>
+                    </div>
                 </div>
             </div>
         </div>

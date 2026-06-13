@@ -31,10 +31,15 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                                 id="email"
                                 type="email"
                                 name="email"
-                                autoComplete="email"
                                 value={email}
-                                className="mt-1 block w-full"
                                 readOnly
+                                className="
+                                    h-12
+                                    rounded-xl
+                                    border-white/10
+                                    bg-white/5
+                                    backdrop-blur-sm
+                                "
                             />
                             <InputError
                                 message={errors.email}
@@ -48,10 +53,16 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                                 id="password"
                                 name="password"
                                 autoComplete="new-password"
-                                className="mt-1 block w-full"
                                 autoFocus
-                                placeholder="Password"
+                                placeholder="New password"
                                 passwordrules={passwordRules}
+                                className="
+                                    h-12
+                                    rounded-xl
+                                    border-white/10
+                                    bg-white/5
+                                    backdrop-blur-sm
+                                "
                             />
                             <InputError message={errors.password} />
                         </div>
@@ -64,9 +75,15 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                                 id="password_confirmation"
                                 name="password_confirmation"
                                 autoComplete="new-password"
-                                className="mt-1 block w-full"
                                 placeholder="Confirm password"
                                 passwordrules={passwordRules}
+                                className="
+                                    h-12
+                                    rounded-xl
+                                    border-white/10
+                                    bg-white/5
+                                    backdrop-blur-sm
+                                "
                             />
                             <InputError
                                 message={errors.password_confirmation}
@@ -76,12 +93,25 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
 
                         <Button
                             type="submit"
-                            className="mt-4 w-full"
                             disabled={processing}
                             data-test="reset-password-button"
+                            className="
+                                mt-4
+                                w-full
+                                h-12
+                                rounded-xl
+                                text-white
+                                shadow-lg
+                                transition-all
+                                hover:brightness-110
+                            "
+                            style={{
+                                background:
+                                    'linear-gradient(135deg,#2B5CFF,#977DFF)',
+                            }}
                         >
                             {processing && <Spinner />}
-                            Reset password
+                            Create new password
                         </Button>
                     </div>
                 )}
@@ -91,6 +121,6 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
 }
 
 ResetPassword.layout = {
-    title: 'Reset password',
-    description: 'Please enter your new password below',
+    title: 'Create a new password',
+    description: 'Choose a strong password to secure your LockBox account',
 };

@@ -33,6 +33,13 @@ export default function ForgotPassword({ status }: { status?: string }) {
                                     autoComplete="off"
                                     autoFocus
                                     placeholder="email@example.com"
+                                    className="
+                                        h-12
+                                        rounded-xl
+                                        border-white/10
+                                        bg-white/5
+                                        backdrop-blur-sm
+                                    "
                                 />
 
                                 <InputError message={errors.email} />
@@ -40,14 +47,26 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
                             <div className="my-6 flex items-center justify-start">
                                 <Button
-                                    className="w-full"
                                     disabled={processing}
                                     data-test="email-password-reset-link-button"
+                                    className="
+                                        w-full
+                                        h-12
+                                        rounded-xl
+                                        text-white
+                                        shadow-lg
+                                        transition-all
+                                        hover:brightness-110
+                                    "
+                                    style={{
+                                        background:
+                                            'linear-gradient(135deg,#2B5CFF,#977DFF)',
+                                    }}
                                 >
                                     {processing && (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />
                                     )}
-                                    Email password reset link
+                                    Send reset link
                                 </Button>
                             </div>
                         </>
