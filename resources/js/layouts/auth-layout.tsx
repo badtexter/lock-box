@@ -14,6 +14,7 @@ export default function AuthLayout({
 
             {/* Background */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                
 
                 {[1, 2, 3, 4, 5, 6].map((i) => (
                     <div
@@ -63,11 +64,14 @@ export default function AuthLayout({
                         rounded-3xl
                         p-8
                         backdrop-blur-xl
-                    "
-                    style={{
-                        background: 'rgba(255,255,255,.06)',
-                        border: '1px solid rgba(255,255,255,.08)',
-                    }}
+                        bg-white/80
+                        dark:bg-white/5
+                        border border-gray-200
+                        dark:border-white/10
+                        shadow-lg
+                        dark:shadow-none
+                        ring-1 ring-black/5
+                        dark:ring-0"
                 >
                     <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white">
                         {title}
@@ -75,7 +79,7 @@ export default function AuthLayout({
                     <p className="mt-2 text-center text-gray-600 dark:text-gray-300">
                         {description}
                     </p>
-                    
+
                     <br />
 
                     {children}
