@@ -17,7 +17,7 @@ export default function Welcome() {
     return (
         <>
             <Head title="LockBox" />
-            <div className="min-h-screen bg-white dark:bg-[#00033D] transition-colors duration-300 overflow-hidden">
+            <div className="font-sans min-h-screen bg-white dark:bg-[#00033D] transition-colors duration-300 overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <div
                         className="absolute right-[-500px] top-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full"

@@ -10,9 +10,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-    --font-sans:
-        'Outfit',
-        'Bitcount Single',
+    --font-sans: 'Outfit', 'Bitcount Single';
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
