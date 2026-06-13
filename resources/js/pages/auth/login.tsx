@@ -43,6 +43,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                     tabIndex={1}
                                     autoComplete="email"
                                     placeholder="email@example.com"
+                                    className="h-12 rounded-xl"
                                 />
                                 <InputError message={errors.email} />
                             </div>
@@ -67,6 +68,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                     tabIndex={2}
                                     autoComplete="current-password"
                                     placeholder="Password"
+                                    className="h-12 rounded-xl"
                                 />
                                 <InputError message={errors.password} />
                             </div>
@@ -81,11 +83,20 @@ export default function Login({ status, canResetPassword }: Props) {
                             </div>
 
                             <Button
-                                type="submit"
-                                className="mt-4 w-full"
-                                tabIndex={4}
-                                disabled={processing}
-                                data-test="login-button"
+                                className="
+                                    w-full
+                                    h-12
+                                    rounded-xl
+                                    text-white
+                                    shadow-lg
+                                    transition-all
+                                    hover:scale-[1.01]
+                                    hover:shadow-xl
+                                "
+                                style={{
+                                    background:
+                                        'linear-gradient(135deg,#3366FF,#A894FF)',
+                                }}
                             >
                                 {processing && <Spinner />}
                                 Log in
