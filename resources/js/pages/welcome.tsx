@@ -32,6 +32,19 @@ export default function Welcome() {
                             `
                         }}
                     />
+
+                    {[1, 2, 3, 4, 5, 6].map((i) => (
+                        <div
+                            key={i}
+                            className="absolute right-[-450px] top-1/2 -translate-y-1/2 rounded-full border"
+                            style={{
+                                width: `${400 + i * 150}px`,
+                                height: `${400 + i * 150}px`,
+                                borderColor: 'rgba(151,125,255,.12)'
+                            }}
+                        />
+                    ))}
+                    
                 </div>
             </div>
         </>
