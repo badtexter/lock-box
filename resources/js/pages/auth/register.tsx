@@ -120,9 +120,23 @@ export default function Register({ passwordRules }: Props) {
 
                             <Button
                                 type="submit"
-                                className="mt-2 w-full"
                                 tabIndex={5}
                                 data-test="register-user-button"
+                                disabled={processing}
+                                className="
+                                    mt-2
+                                    w-full
+                                    h-12
+                                    rounded-xl
+                                    text-white
+                                    shadow-lg
+                                    transition-all
+                                    hover:brightness-110
+                                "
+                                style={{
+                                    background:
+                                        'linear-gradient(135deg,#2B5CFF,#977DFF)',
+                                }}
                             >
                                 {processing && <Spinner />}
                                 Create account
