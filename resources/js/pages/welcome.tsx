@@ -88,9 +88,148 @@ export default function Welcome() {
                             >
                                 Get Started
                             </Link>
+                    </div>
+                </nav>
+            </div>
+
+             {/* HERO */}
+                <section className="relative z-20 container mx-auto px-8 pt-20 pb-32">
+
+                    <div className="max-w-3xl">
+
+                        <div
+                            className="
+                                inline-flex
+                                items-center
+                                px-5 py-2
+                                rounded-full
+                                mb-8
+                            "
+                            style={{
+                                background: 'rgba(151,125,255,.08)',
+                                border: '1px solid rgba(151,125,255,.15)'
+                            }}
+                        >
+                            <span
+                                className="w-2 h-2 rounded-full mr-3"
+                                style={{
+                                    background: colors.light_purple
+                                }}
+                            />
+
+                            <span className="text-sm text-[#030812]/70 dark:text-white/70">
+                                Secure. Fast. Private.
+                            </span>
                         </div>
-                    </nav>    
-                </div>
+
+                        <br />
+                        <br />
+                        
+                        <h1
+                            className="
+                                text-6xl
+                                md:text-8xl
+                                font-bold
+                                leading-[0.95]
+                                tracking-tight
+                                text-[#030812]
+                                dark:text-white
+                            "
+                        >
+                            Secure your
+                            <br />
+                            passwords.
+                            <br />
+
+                            <span
+                                style={{
+                                    background: `linear-gradient(
+                                        135deg,
+                                        ${colors.lighter_blue},
+                                        ${colors.light_purple}
+                                    )`,
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent'
+                                }}
+                            >
+                                Simplify your life.
+                            </span>
+                        </h1>
+
+                        <p
+                            className="
+                                mt-8
+                                text-xl
+                                max-w-xl
+                                leading-relaxed
+                                text-[#030812]/65
+                                dark:text-white/65
+                            "
+                        >
+                            LockBox is a secure password manager that
+                            stores your credentials safely and gives
+                            you instant access whenever you need them.
+                        </p>
+
+                        <div className="flex gap-5 mt-12">
+
+                            <Link
+                                href={register()}
+                                className="
+                                    px-8
+                                    py-4
+                                    rounded-2xl
+                                    text-white
+                                    font-semibold
+                                    transition
+                                    hover:scale-105
+                                "
+                                style={{
+                                    background: `linear-gradient(
+                                        135deg,
+                                        ${colors.lighter_blue},
+                                        ${colors.light_purple}
+                                    )`
+                                }}
+                            >
+                                Get Started Free
+                            </Link>
+
+                            <button
+                                className="
+                                    flex
+                                    items-center
+                                    gap-3
+                                    text-[#030812]
+                                    dark:text-white
+                                "
+                            >
+                                <div
+                                    className="
+                                        w-12
+                                        h-12
+                                        rounded-full
+                                        border
+                                        flex
+                                        items-center
+                                        justify-center
+                                    "
+                                    style={{
+                                        borderColor:
+                                            'rgba(151,125,255,.35)'
+                                    }}
+                                >
+                                    ▶
+                                </div>
+
+                                See how it works
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
             </div>
         </>
     );
