@@ -159,9 +159,6 @@ export default function Welcome() {
                             </span>
                         </div>
 
-                        <br />
-                        <br />
-
                         <h1
                             className="
                                 text-6xl
