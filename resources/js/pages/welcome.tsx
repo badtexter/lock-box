@@ -1,10 +1,9 @@
 import { Head, Link, usePage } from '@inertiajs/react';
-import { dashboard, login } from '@/routes';
+import { login } from '@/routes';
 import { register } from '@/routes';
 import { useEffect, useState } from 'react';
 
 export default function Welcome() {
-    const { auth } = usePage().props;
     const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
