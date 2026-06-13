@@ -111,7 +111,7 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                             }}
                         >
                             {processing && <Spinner />}
-                            Reset password
+                            Create new password
                         </Button>
                     </div>
                 )}
@@ -121,6 +121,6 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
 }
 
 ResetPassword.layout = {
-    title: 'Reset password',
-    description: 'Please enter your new password below',
+    title: 'Create a new password',
+    description: 'Choose a strong password to secure your LockBox account',
 };
