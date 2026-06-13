@@ -24,7 +24,7 @@ export default function AuthCardLayout({
     const toggle = () => updateAppearance(resolvedAppearance === 'dark' ? 'light' : 'dark');
 
     return (
-        <div>
+        <div className="min-h-screen h-screen overflow-hidden">
             <header className="w-full py-4 px-6 md:px-10 flex items-center justify-between">
                 <Link href={home()} className="flex items-center gap-2">
                     <span className="text-2xl font-extrabold">LockBox</span>
@@ -47,10 +47,10 @@ export default function AuthCardLayout({
                 </button>
             </header>
 
-            <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
-                <div className="flex w-full max-w-md flex-col gap-6">
+            <div className="flex h-full flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
+                <div className="flex w-full max-w-md flex-col gap-6 max-h-full overflow-auto">
                     <div className="flex flex-col gap-6">
-                        <Card className="rounded-xl">
+                        <Card className="rounded-xl max-h-[calc(100vh-8rem)] overflow-auto">
                             <CardHeader className="px-10 pt-8 pb-0 text-center">
                                 <CardTitle className="text-xl">{title}</CardTitle>
                                 <CardDescription>{description}</CardDescription>

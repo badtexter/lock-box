@@ -16,7 +16,7 @@ export default function AuthSimpleLayout({
     };
 
     return (
-        <div className="min-h-svh bg-background">
+        <div className="min-h-screen h-screen overflow-hidden bg-background">
             <header className="w-full py-4 px-6 md:px-10 flex items-center justify-between">
                 <Link href={home()} className="flex items-center gap-2">
                     <span className="text-2xl font-extrabold">LockBox</span>
@@ -39,8 +39,8 @@ export default function AuthSimpleLayout({
                 </button>
             </header>
 
-            <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
-                <div className="w-full max-w-sm">
+            <div className="flex h-full flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
+                <div className="w-full max-w-sm max-h-full overflow-auto">
                     <div className="flex flex-col gap-8">
                         <div className="flex flex-col items-center gap-4">
                             <div className="space-y-2 text-center">

@@ -17,7 +17,7 @@ export default function AuthLayout({
     const toggle = () => updateAppearance(resolvedAppearance === 'dark' ? 'light' : 'dark');
 
     return (
-        <div className="min-h-screen relative overflow-hidden bg-white dark:bg-[#00033D]">
+        <div className="min-h-screen h-screen relative overflow-hidden bg-white dark:bg-[#00033D]">
             <header className="relative z-30 w-full py-4 px-6 md:px-10 flex items-center justify-between">
                 <a href={home().url ?? '/'} className="flex items-center gap-2">
                     <span className="text-2xl font-extrabold">LockBox</span>
@@ -83,7 +83,7 @@ export default function AuthLayout({
             </div>
 
             {/* Content */}
-            <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
+            <div className="relative z-10 h-full flex items-center justify-center px-6">
 
                 <div
                     className="
@@ -91,6 +91,8 @@ export default function AuthLayout({
                         max-w-md
                         rounded-3xl
                         p-8
+                        max-h-[calc(100vh-6rem)]
+                        overflow-auto
                         backdrop-blur-xl
                         bg-white/80
                         dark:bg-white/5
