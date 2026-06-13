@@ -18,7 +18,10 @@ class AccountFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'platform' => $this->faker->word(),
+            'username' => $this->faker->userName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'password' => bcrypt('password'),
         ];
     }
 }
