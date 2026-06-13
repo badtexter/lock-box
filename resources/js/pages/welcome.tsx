@@ -16,6 +16,10 @@ export default function Welcome() {
 
     return (
         <>
+            <Head title="LockBox" />
+            <div className="min-h-screen bg-white dark:bg-[#00033D] transition-colors duration-300 overflow-hidden">
+
+            </div>
         </>
     );
 }
