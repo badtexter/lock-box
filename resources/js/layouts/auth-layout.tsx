@@ -1,5 +1,5 @@
 import AuthLayoutTemplate from '@/layouts/auth/auth-simple-layout';
-import AppLogoIcon from '@/components/app-logo-icon';
+// Logo icon removed — using text-only branding
 import { home } from '@/routes';
 import { useAppearance } from '@/hooks/use-appearance';
 
@@ -20,10 +20,7 @@ export default function AuthLayout({
         <div className="min-h-screen relative overflow-hidden bg-white dark:bg-[#00033D]">
             <header className="relative z-30 w-full py-4 px-6 md:px-10 flex items-center justify-between">
                 <a href={home().url ?? '/'} className="flex items-center gap-2">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-md">
-                        <AppLogoIcon className="h-9 w-9 fill-current text-[var(--foreground)] dark:text-white" />
-                    </div>
-                    <span className="font-medium hidden sm:inline">LockBox</span>
+                    <span className="text-2xl font-extrabold">LockBox</span>
                 </a>
 
                 <button
