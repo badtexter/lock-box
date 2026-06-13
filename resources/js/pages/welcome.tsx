@@ -44,7 +44,52 @@ export default function Welcome() {
                             }}
                         />
                     ))}
-                    
+
+                    {/* NAVBAR */}
+                <nav className="relative z-20 container mx-auto px-8 py-8 flex items-center justify-between">
+
+                    <div className="flex items-center gap-3">
+                        <span className="font-bold text-3xl text-[#030812] dark:text-white">
+                            LockBox
+                        </span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                            <Link
+                                href={login()}
+                                className="
+                                    px-6 py-3 rounded-full
+                                    border
+                                    border-[#0033FF]/30
+                                    text-[#030812]
+                                    dark:text-white
+                                    hover:bg-[#0033FF]/10
+                                    transition
+                                "
+                            >
+                                Login
+                            </Link>
+
+                            <Link
+                                href={register()}
+                                className="
+                                    px-6 py-3 rounded-full
+                                    text-white
+                                    font-medium
+                                    transition
+                                    hover:scale-105
+                                "
+                                style={{
+                                    background: `linear-gradient(
+                                        135deg,
+                                        ${colors.lighter_blue},
+                                        ${colors.light_purple}
+                                    )`
+                                }}
+                            >
+                                Get Started
+                            </Link>
+                        </div>
+                    </nav>    
                 </div>
             </div>
         </>
