@@ -12,6 +12,7 @@ LockBox is a secure password management application built with Laravel and React
 * Modern React-based user interface
 * Responsive design
 * CRUD operations for credential management
+* Two-factor authentication (2FA)
 
 ## Technologies
 
@@ -42,7 +43,6 @@ Developed as a portfolio project to showcase full-stack web development skills, 
 
 ## Future Improvements
 
-* Two-factor authentication (2FA)
 * Password breach monitoring
 * Secure password sharing
 * Browser extension integration
