@@ -18,7 +18,21 @@ export default function Welcome() {
         <>
             <Head title="LockBox" />
             <div className="min-h-screen bg-white dark:bg-[#00033D] transition-colors duration-300 overflow-hidden">
-
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <div
+                        className="absolute right-[-500px] top-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full"
+                        style={{
+                            background: `
+                                radial-gradient(
+                                    circle,
+                                    rgba(151,125,255,.45) 0%,
+                                    rgba(0,51,255,.25) 25%,
+                                    transparent 65%
+                                )
+                            `
+                        }}
+                    />
+                </div>
             </div>
         </>
     );
