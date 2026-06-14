@@ -23,4 +23,27 @@ class AccountController extends Controller
 
         return back();
     }
+
+    public function update(Request $request, Account $account)
+    {
+        $validated = $request->validate([
+            'platform' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'password' => ['required', 'string', 'max:255'],
+        ]);
+
+        $this->authorize('update', $account);
+        $account->update($validated);
+
+        return back();
+    }
+
+    public function destroy(Account $account)
+    {
+        $this->authorize('delete', $account);
+        $account->delete();
+
+        return back();
+    }
 }
