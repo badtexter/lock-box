@@ -1,4 +1,4 @@
-import { Head, router } from '@inertiajs/react';
+import { Head, router, usePage } from '@inertiajs/react';
 import { Eye, Copy, MoreVertical, Plus } from 'lucide-react';
 import { FormEvent, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -136,7 +136,8 @@ function PasswordCard({ item }: { item: PasswordItem }) {
 }
 
 export default function Dashboard() {
-    const items = sampleItems;
+    const page = usePage<any>();
+    const items = (page.props && page.props.accounts) ? page.props.accounts : sampleItems;
     const [isOpen, setIsOpen] = useState(false);
     const [formValues, setFormValues] = useState({
         platform: '',
@@ -197,27 +198,7 @@ export default function Dashboard() {
 
         if (!formValues.password) {
             errors.password = 'To pole jest wymagane.';
-        } else {
-            const missing: string[] = [];
-
-            if (formValues.password.length < 14) {
-                missing.push('co najmniej 14 znaków');
-            }
-
-            if (!/[A-Z]/.test(formValues.password)) {
-                missing.push('dużą literę');
-            }
-
-            if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(formValues.password)) {
-                missing.push('znak specjalny');
-            }
-
-            if (missing.length > 0) {
-                errors.password = `Hasło musi zawierać ${missing
-                    .join(', ')
-                    .replace(/, ([^,]+)$/, ' i $1')}.`;
-            }
-        }
+        } 
 
         setFormErrors(errors);
 
@@ -389,8 +370,16 @@ export default function Dashboard() {
                         </div>
                     ) : (
                         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                            {items.map((item) => (
-                                <PasswordCard key={item.id} item={item} />
+                            {items.map((item: any) => (
+                                <PasswordCard
+                                    key={item.id}
+                                    item={{
+                                        id: item.id,
+                                        platform: item.platform,
+                                        email: item.username ?? item.email ?? '',
+                                        password: '••••••••••',
+                                    }}
+                                />
                             ))}
                         </div>
                     )}
