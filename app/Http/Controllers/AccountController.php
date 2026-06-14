@@ -46,4 +46,11 @@ class AccountController extends Controller
 
         return back();
     }
+
+    public function show(Account $account)
+    {
+        $this->authorize('view', $account);
+
+        return response()->json($account);
+    }
 }
