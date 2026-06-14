@@ -137,7 +137,7 @@ export default function Dashboard() {
         <>
             <Head title="Dashboard" />
 
-            <div className="relative min-h-[calc(100vh-4rem)] overflow-hidden">
+            <div className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-[#F5F8FF] dark:bg-[#00033D]">
 
                 {/* Background */}
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
