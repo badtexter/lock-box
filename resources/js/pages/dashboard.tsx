@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 type PasswordItem = {
     id: number;
@@ -289,12 +291,90 @@ export default function Dashboard() {
                         <DialogTitle className="text-xl font-semibold">
                             Add New Password
                         </DialogTitle>
+                        <p className="text-sm text-slate-500 dark:text-white/50">
+                            Store a new credential securely in your vault.
+                        </p>
                     </DialogHeader>
-                    <div className="py-4">
-                        <p>Here you can add your password form</p>
+                    <div className="space-y-5 py-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="platform">Platform</Label>
+                            <Input
+                                id="platform"
+                                placeholder="GitHub"
+                                className="
+                                    h-12
+                                    rounded-xl
+                                    border-slate-200
+                                    bg-white
+                                    dark:border-white/10
+                                    dark:bg-white/[0.03]
+                                "
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="email">Email</Label>
+                            <Input
+                                id="email"
+                                placeholder="me@example.com"
+                                className="
+                                    h-12
+                                    rounded-xl
+                                    border-slate-200
+                                    bg-white
+                                    dark:border-white/10
+                                    dark:bg-white/[0.03]
+                                "
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="password">Password</Label>
+                            <Input
+                                id="password"
+                                type="password"
+                                placeholder="••••••••••••"
+                                className="
+                                    h-12
+                                    rounded-xl
+                                    border-slate-200
+                                    bg-white
+                                    dark:border-white/10
+                                    dark:bg-white/[0.03]
+                                "
+                            />
+                        </div>
                     </div>
-                </DialogContent>
-            </Dialog>
+
+                <div className="flex justify-end gap-3">
+
+                    <Button
+                        variant="ghost"
+                        onClick={() => setIsOpen(false)}
+                        className="rounded-xl"
+                    >
+                        Cancel
+                    </Button>
+
+                    <Button
+                        className="
+                            rounded-xl
+                            text-white
+                            shadow-lg
+                            transition-all
+                            hover:brightness-110
+                        "
+                        style={{
+                            background:
+                                'linear-gradient(135deg,#2B5CFF,#977DFF)',
+                        }}
+                    >
+                        Save Password
+                    </Button>
+
+                </div>
+            </DialogContent>
+        </Dialog>
         </>
     );
 }
