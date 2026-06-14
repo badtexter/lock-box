@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 
 type PasswordItem = {
     id: number;
@@ -14,27 +15,6 @@ type PasswordItem = {
     email: string;
     password: string;
 };
-
-const sampleItems: PasswordItem[] = [
-    {
-        id: 1,
-        platform: 'GitHub',
-        email: 'me@example.com',
-        password: '••••••••••',
-    },
-    {
-        id: 2,
-        platform: 'Google',
-        email: 'me+work@example.com',
-        password: '••••••••••',
-    },
-    {
-        id: 3,
-        platform: 'Discord',
-        email: 'discord@example.com',
-        password: '••••••••••',
-    },
-];
 
 function PasswordCard({ item }: { item: PasswordItem }) {
     return (
@@ -77,7 +57,15 @@ function PasswordCard({ item }: { item: PasswordItem }) {
                     {item.platform[0]}
                 </div>
 
-                <MoreVertical className="h-4 w-4 text-slate-400 opacity-0 transition group-hover:opacity-100" />
+                <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <MoreVertical />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem onSelect={() => openEditModal(item.id)}>Edit</DropdownMenuItem>
+                        <DropdownMenuItem onSelect={() => handleDelete(item.id)}>Delete</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
 
             <div className="mt-5">
@@ -137,7 +125,7 @@ function PasswordCard({ item }: { item: PasswordItem }) {
 
 export default function Dashboard() {
     const page = usePage<any>();
-    const items = (page.props && page.props.accounts) ? page.props.accounts : sampleItems;
+    const items = (page.props && page.props.accounts) ? page.props.accounts : [];
     const [isOpen, setIsOpen] = useState(false);
     const [formValues, setFormValues] = useState({
         platform: '',
