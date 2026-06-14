@@ -15,5 +15,11 @@ class Account extends Model
         'username',
         'email',
         'password',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }
