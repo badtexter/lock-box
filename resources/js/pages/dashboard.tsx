@@ -1,5 +1,5 @@
 import { Head, router, usePage } from '@inertiajs/react';
-import { Eye, Copy, MoreVertical, Plus } from 'lucide-react';
+import { Copy, Eye, MoreVertical, Plus, RefreshCw } from 'lucide-react';
 import { FormEvent, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
@@ -148,6 +148,39 @@ export default function Dashboard() {
     const [revealedPasswords, setRevealedPasswords] = useState<Record<number, string>>({});
     const [visibleIds, setVisibleIds] = useState<Record<number, boolean>>({});
     const [editingId, setEditingId] = useState<number | null>(null);
+
+    const generatePassword = () => {
+        const uppercase = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+        const lowercase = 'abcdefghijkmnopqrstuvwxyz';
+        const numbers = '23456789';
+        const symbols = '!@#$%^&*_-+=?';
+        const allCharacters = uppercase + lowercase + numbers + symbols;
+        const getRandomCharacter = (characters: string) => {
+            const randomValues = new Uint32Array(1);
+            crypto.getRandomValues(randomValues);
+
+            return characters[randomValues[0] % characters.length];
+        };
+        const requiredCharacters = [
+            getRandomCharacter(uppercase),
+            getRandomCharacter(lowercase),
+            getRandomCharacter(numbers),
+            getRandomCharacter(symbols),
+        ];
+        const remainingCharacters = Array.from({ length: 16 }, () => getRandomCharacter(allCharacters));
+        const password = [...requiredCharacters, ...remainingCharacters]
+            .sort(() => {
+                const randomValues = new Uint32Array(1);
+                crypto.getRandomValues(randomValues);
+
+                return randomValues[0] / 2 ** 32 - 0.5;
+            })
+            .join('');
+
+        setFormValues((previous) => ({ ...previous, password }));
+        setFormErrors((previous) => ({ ...previous, password: undefined }));
+        toast.success('Wygenerowano haslo');
+    };
 
     const fetchReveal = async (id: number) => {
         if (revealedPasswords[id]) return revealedPasswords[id];
@@ -547,11 +580,22 @@ export default function Dashboard() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="password">Password</Label>
+                            <div className="flex items-center justify-between gap-3">
+                                <Label htmlFor="password">Password</Label>
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    onClick={generatePassword}
+                                    className="h-9 rounded-lg px-3 text-sm"
+                                >
+                                    <RefreshCw className="mr-2 h-4 w-4" />
+                                    Generate
+                                </Button>
+                            </div>
                             <Input
                                 id="password"
                                 name="password"
-                                type="password"
+                                type="text"
                                 value={formValues.password}
                                 onChange={(event) =>
                                     setFormValues((previous) => ({
@@ -559,13 +603,14 @@ export default function Dashboard() {
                                         password: event.target.value,
                                     }))
                                 }
-                                placeholder="••••••••••••"
+                                placeholder="Generated or custom password"
                                 required
                                 className="
                                     h-12
                                     rounded-xl
                                     border-slate-200
                                     bg-white
+                                    font-mono
                                     dark:border-white/10
                                     dark:bg-white/[0.03]
                                 "
