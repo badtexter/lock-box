@@ -21,7 +21,8 @@ class AccountFactory extends Factory
             'platform' => $this->faker->word(),
             'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => bcrypt('password'),
+            'password' => encrypt($this->faker->password(16)),
+            'user_id' => \App\Models\User::factory(),
         ];
     }
 }
