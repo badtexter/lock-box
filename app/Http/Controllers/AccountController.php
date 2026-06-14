@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Services\PasswordCipher;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -16,7 +17,7 @@ class AccountController extends Controller
             'password' => ['required', 'string', 'max:255'],
         ]);
 
-        $validated['password'] = encrypt($validated['password']);
+        $validated['password'] = PasswordCipher::encrypt($validated['password']);
         $validated['user_id'] = $request->user()->id;
 
         Account::create($validated);
@@ -34,7 +35,7 @@ class AccountController extends Controller
         ]);
 
         $this->authorize('update', $account);
-        $validated['password'] = encrypt($validated['password']);
+        $validated['password'] = PasswordCipher::encrypt($validated['password']);
         $account->update($validated);
 
         return back();
@@ -64,7 +65,9 @@ class AccountController extends Controller
         $this->authorize('view', $account);
 
         try {
-            $password = decrypt($account->password);
+            $password = PasswordCipher::isEncrypted($account->password)
+                ? PasswordCipher::decrypt($account->password)
+                : decrypt($account->password);
         } catch (\Throwable $e) {
             return response()->json(['message' => 'Unable to reveal password.'], 400);
         }
