@@ -20,7 +20,7 @@ LockBox is a secure password management application built with Laravel and React
 
 * Laravel
 * PHP
-* MySQL
+* SQLite
 * Laravel Authentication
 
 ### Frontend
