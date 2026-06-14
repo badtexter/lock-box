@@ -1,5 +1,5 @@
 import { Head, router, usePage } from '@inertiajs/react';
-import { Copy, Eye, MoreVertical, Plus, RefreshCw } from 'lucide-react';
+import { Copy, Eye, MoreVertical, Plus, RefreshCw, Search } from 'lucide-react';
 import { FormEvent, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
@@ -134,6 +134,7 @@ export default function Dashboard() {
     const page = usePage<any>();
     const items = (page.props && page.props.accounts) ? page.props.accounts : [];
     const [isOpen, setIsOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
     const [formValues, setFormValues] = useState({
         platform: '',
         email: '',
@@ -148,6 +149,33 @@ export default function Dashboard() {
     const [revealedPasswords, setRevealedPasswords] = useState<Record<number, string>>({});
     const [visibleIds, setVisibleIds] = useState<Record<number, boolean>>({});
     const [editingId, setEditingId] = useState<number | null>(null);
+    const [masterPrompt, setMasterPrompt] = useState<{
+        action: 'copy' | 'reveal' | null;
+        accountId: number | null;
+        password: string;
+        error?: string;
+        loading: boolean;
+    }>({
+        action: null,
+        accountId: null,
+        password: '',
+        loading: false,
+    });
+
+    const filteredItems = useMemo(() => {
+        const query = searchTerm.trim().toLowerCase();
+
+        if (!query) {
+            return items;
+        }
+
+        return items.filter((item: any) => {
+            const platform = String(item.platform ?? '').toLowerCase();
+            const email = String(item.username ?? item.email ?? '').toLowerCase();
+
+            return platform.includes(query) || email.includes(query);
+        });
+    }, [items, searchTerm]);
 
     const generatePassword = () => {
         const uppercase = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
@@ -182,21 +210,25 @@ export default function Dashboard() {
         toast.success('Wygenerowano haslo');
     };
 
-    const fetchReveal = async (id: number) => {
-        if (revealedPasswords[id]) return revealedPasswords[id];
-
+    const fetchReveal = async (id: number, masterPassword: string) => {
         const tokenMeta = document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement | null;
         const res = await fetch(`/accounts/${id}/reveal`, {
+            method: 'POST',
             credentials: 'same-origin',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-CSRF-TOKEN': tokenMeta?.content ?? '',
                 'Accept': 'application/json',
+                'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ master_password: masterPassword }),
         });
 
         if (!res.ok) {
-            toast.error('Nie można odsłonić hasła');
+            const data = await res.json().catch(() => null);
+            const message = data?.errors?.master_password?.[0] ?? data?.message ?? 'Nie można odsłonić hasła';
+
+            toast.error(message);
             return null;
         }
 
@@ -205,16 +237,67 @@ export default function Dashboard() {
         return data.password;
     };
 
-    const handleCopy = async (id: number) => {
-        const pwd = await fetchReveal(id);
-        if (!pwd) return;
+    const requestMasterPassword = (id: number, action: 'copy' | 'reveal') => {
+        setMasterPrompt({
+            action,
+            accountId: id,
+            password: '',
+            loading: false,
+        });
+    };
 
-        try {
-            await navigator.clipboard.writeText(pwd);
-            toast.success('Skopiowano hasło');
-        } catch (e) {
-            toast.error('Nie udało się skopiować');
+    const closeMasterPrompt = () => {
+        if (masterPrompt.loading) return;
+
+        setMasterPrompt({
+            action: null,
+            accountId: null,
+            password: '',
+            loading: false,
+        });
+    };
+
+    const confirmMasterPassword = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if (!masterPrompt.accountId || !masterPrompt.action) return;
+
+        if (!masterPrompt.password) {
+            setMasterPrompt((previous) => ({ ...previous, error: 'Podaj hasło główne.' }));
+            return;
         }
+
+        setMasterPrompt((previous) => ({ ...previous, error: undefined, loading: true }));
+        const pwd = await fetchReveal(masterPrompt.accountId, masterPrompt.password);
+
+        if (!pwd) {
+            setMasterPrompt((previous) => ({ ...previous, loading: false }));
+            return;
+        }
+
+        if (masterPrompt.action === 'copy') {
+            try {
+                await navigator.clipboard.writeText(pwd);
+                toast.success('Skopiowano hasło');
+            } catch (e) {
+                toast.error('Nie udało się skopiować');
+            }
+        } else {
+            const accountId = masterPrompt.accountId;
+            setVisibleIds((p) => ({ ...p, [accountId]: true }));
+            setTimeout(() => setVisibleIds((p) => ({ ...p, [accountId]: false })), 10000);
+        }
+
+        setMasterPrompt({
+            action: null,
+            accountId: null,
+            password: '',
+            loading: false,
+        });
+    };
+
+    const handleCopy = async (id: number) => {
+        requestMasterPassword(id, 'copy');
     };
 
     const handleToggleReveal = async (id: number) => {
@@ -223,10 +306,7 @@ export default function Dashboard() {
             return;
         }
 
-        const pwd = await fetchReveal(id);
-        if (!pwd) return;
-        setVisibleIds((p) => ({ ...p, [id]: true }));
-        setTimeout(() => setVisibleIds((p) => ({ ...p, [id]: false })), 10000);
+        requestMasterPassword(id, 'reveal');
     };
 
     const handleDelete = (id: number) => {
@@ -438,7 +518,24 @@ export default function Dashboard() {
                     </div>
 
                     {/* Actions */}
-                    <div className="mb-8 flex justify-end">
+                    <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                        <div className="relative w-full md:max-w-md">
+                            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                            <Input
+                                value={searchTerm}
+                                onChange={(event) => setSearchTerm(event.target.value)}
+                                placeholder="Search platform or email"
+                                className="
+                                    h-12
+                                    rounded-xl
+                                    border-slate-200
+                                    bg-white/80
+                                    pl-11
+                                    dark:border-white/10
+                                    dark:bg-white/[0.03]
+                                "
+                            />
+                        </div>
 
                         <Button
                             onClick={() => setIsOpen(true)}
@@ -481,9 +578,26 @@ export default function Dashboard() {
                                 Your vault is empty. Add your first credential to get started.
                             </p>
                         </div>
+                    ) : filteredItems.length === 0 ? (
+                        <div
+                            className="
+                                rounded-[2rem]
+                                border
+                                border-white/10
+                                bg-white/60
+                                dark:bg-white/[0.03]
+                                p-10
+                                text-center
+                                backdrop-blur-xl
+                            "
+                        >
+                            <p className="text-sm text-slate-500 dark:text-white/50">
+                                No credentials match your search.
+                            </p>
+                        </div>
                     ) : (
                         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                            {items.map((item: any) => (
+                            {filteredItems.map((item: any) => (
                                 <PasswordCard
                                     key={item.id}
                                     item={{
@@ -651,6 +765,86 @@ export default function Dashboard() {
                                 }}
                             >
                                 Save Password
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
+
+            <Dialog open={!!masterPrompt.action} onOpenChange={(open) => !open && closeMasterPrompt()}>
+                <DialogContent className="
+                    max-w-md
+                    border-slate-200/70
+                    bg-white/95
+                    dark:border-white/10
+                    dark:bg-[#07103d]/95
+                    backdrop-blur-2xl
+                ">
+                    <DialogHeader className="space-y-4">
+                        <DialogTitle className="text-xl font-semibold">
+                            Confirm master password
+                        </DialogTitle>
+                        <p className="text-sm text-slate-500 dark:text-white/50">
+                            Enter your account password to continue.
+                        </p>
+                    </DialogHeader>
+
+                    <form onSubmit={confirmMasterPassword} className="space-y-5 py-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="master-password">Master password</Label>
+                            <Input
+                                id="master-password"
+                                name="master_password"
+                                type="password"
+                                value={masterPrompt.password}
+                                onChange={(event) =>
+                                    setMasterPrompt((previous) => ({
+                                        ...previous,
+                                        password: event.target.value,
+                                        error: undefined,
+                                    }))
+                                }
+                                autoFocus
+                                disabled={masterPrompt.loading}
+                                className="
+                                    h-12
+                                    rounded-xl
+                                    border-slate-200
+                                    bg-white
+                                    dark:border-white/10
+                                    dark:bg-white/[0.03]
+                                "
+                            />
+                            <InputError message={masterPrompt.error} />
+                        </div>
+
+                        <DialogFooter className="justify-end gap-3">
+                            <Button
+                                variant="ghost"
+                                onClick={closeMasterPrompt}
+                                className="rounded-xl"
+                                type="button"
+                                disabled={masterPrompt.loading}
+                            >
+                                Cancel
+                            </Button>
+
+                            <Button
+                                type="submit"
+                                disabled={masterPrompt.loading}
+                                className="
+                                    rounded-xl
+                                    text-white
+                                    shadow-lg
+                                    transition-all
+                                    hover:brightness-110
+                                "
+                                style={{
+                                    background:
+                                        'linear-gradient(135deg,#2B5CFF,#977DFF)',
+                                }}
+                            >
+                                {masterPrompt.loading ? 'Confirming...' : 'Confirm'}
                             </Button>
                         </DialogFooter>
                     </form>
