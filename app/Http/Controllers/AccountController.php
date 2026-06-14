@@ -13,11 +13,11 @@ class AccountController extends Controller
             'platform' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
-            // Passwords are required, but they are not validated. I want to encourage users to use strong passwords, 
-            // but I don't want to force them to use a specific format. 
-            // I want to allow users to use any password they want.
             'password' => ['required', 'string', 'max:255'],
         ]);
+
+        $validated['password'] = encrypt($validated['password']);
+        $validated['user_id'] = $request->user()->id;
 
         Account::create($validated);
 
@@ -34,6 +34,7 @@ class AccountController extends Controller
         ]);
 
         $this->authorize('update', $account);
+        $validated['password'] = encrypt($validated['password']);
         $account->update($validated);
 
         return back();
@@ -51,6 +52,23 @@ class AccountController extends Controller
     {
         $this->authorize('view', $account);
 
-        return response()->json($account);
+        // Don't expose encrypted password in show response
+        $data = $account->toArray();
+        unset($data['password']);
+
+        return response()->json($data);
+    }
+
+    public function reveal(Account $account)
+    {
+        $this->authorize('view', $account);
+
+        try {
+            $password = decrypt($account->password);
+        } catch (\Throwable $e) {
+            return response()->json(['message' => 'Unable to reveal password.'], 400);
+        }
+
+        return response()->json(['password' => $password]);
     }
 }
