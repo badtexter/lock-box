@@ -1,9 +1,10 @@
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { Eye, Copy, MoreVertical, Plus } from 'lucide-react';
-import { useState } from 'react';
+import { FormEvent, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
@@ -137,6 +138,119 @@ function PasswordCard({ item }: { item: PasswordItem }) {
 export default function Dashboard() {
     const items = sampleItems;
     const [isOpen, setIsOpen] = useState(false);
+    const [formValues, setFormValues] = useState({
+        platform: '',
+        email: '',
+        password: '',
+    });
+    const [formErrors, setFormErrors] = useState<{
+        platform?: string;
+        email?: string;
+        password?: string;
+    }>({});
+
+    const passwordStrengthHint = useMemo(() => {
+        const missing: string[] = [];
+
+        if (formValues.password.length > 0 && formValues.password.length < 14) {
+            missing.push('co najmniej 14 znaków');
+        }
+
+        if (formValues.password.length > 0 && !/[A-Z]/.test(formValues.password)) {
+            missing.push('dużą literę');
+        }
+
+        if (
+            formValues.password.length > 0 &&
+            !/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(formValues.password)
+        ) {
+            missing.push('znak specjalny');
+        }
+
+        if (!formValues.password) {
+            return '';
+        }
+
+        return missing.length > 0
+            ? `Hasło będzie silniejsze jeśli dodasz ${missing
+                  .join(', ')
+                  .replace(/, ([^,]+)$/, ' i $1')}.`
+            : 'Hasło wygląda dobrze.';
+    }, [formValues.password]);
+
+    const validateForm = () => {
+        const errors: {
+            platform?: string;
+            email?: string;
+            password?: string;
+        } = {};
+
+        if (!formValues.platform.trim()) {
+            errors.platform = 'To pole jest wymagane.';
+        }
+
+        if (!formValues.email.trim()) {
+            errors.email = 'To pole jest wymagane.';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formValues.email)) {
+            errors.email = 'Wprowadź poprawny adres e-mail.';
+        }
+
+        if (!formValues.password) {
+            errors.password = 'To pole jest wymagane.';
+        } else {
+            const missing: string[] = [];
+
+            if (formValues.password.length < 14) {
+                missing.push('co najmniej 14 znaków');
+            }
+
+            if (!/[A-Z]/.test(formValues.password)) {
+                missing.push('dużą literę');
+            }
+
+            if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(formValues.password)) {
+                missing.push('znak specjalny');
+            }
+
+            if (missing.length > 0) {
+                errors.password = `Hasło musi zawierać ${missing
+                    .join(', ')
+                    .replace(/, ([^,]+)$/, ' i $1')}.`;
+            }
+        }
+
+        setFormErrors(errors);
+
+        return Object.keys(errors).length === 0;
+    };
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
+
+        router.post('/accounts',
+            {
+                platform: formValues.platform,
+                email: formValues.email,
+                password: formValues.password,
+                username: formValues.email,
+            },
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setIsOpen(false);
+                    setFormValues({ platform: '', email: '', password: '' });
+                    setFormErrors({});
+                },
+                onError: (errors) => {
+                    setFormErrors(errors as typeof formErrors);
+                },
+            }
+        );
+    };
 
     return (
         <>
@@ -303,12 +417,21 @@ export default function Dashboard() {
                             Store a new credential securely in your vault.
                         </p>
                     </DialogHeader>
-                    <div className="space-y-5 py-4">
+                    <form onSubmit={handleSubmit} className="space-y-5 py-4">
                         <div className="space-y-2">
                             <Label htmlFor="platform">Platform</Label>
                             <Input
                                 id="platform"
+                                name="platform"
+                                value={formValues.platform}
+                                onChange={(event) =>
+                                    setFormValues((previous) => ({
+                                        ...previous,
+                                        platform: event.target.value,
+                                    }))
+                                }
                                 placeholder="GitHub"
+                                required
                                 className="
                                     h-12
                                     rounded-xl
@@ -318,13 +441,24 @@ export default function Dashboard() {
                                     dark:bg-white/[0.03]
                                 "
                             />
+                            <InputError message={formErrors.platform} />
                         </div>
 
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
                             <Input
                                 id="email"
+                                name="email"
+                                type="email"
+                                value={formValues.email}
+                                onChange={(event) =>
+                                    setFormValues((previous) => ({
+                                        ...previous,
+                                        email: event.target.value,
+                                    }))
+                                }
                                 placeholder="me@example.com"
+                                required
                                 className="
                                     h-12
                                     rounded-xl
@@ -334,14 +468,24 @@ export default function Dashboard() {
                                     dark:bg-white/[0.03]
                                 "
                             />
+                            <InputError message={formErrors.email} />
                         </div>
 
                         <div className="space-y-2">
                             <Label htmlFor="password">Password</Label>
                             <Input
                                 id="password"
+                                name="password"
                                 type="password"
+                                value={formValues.password}
+                                onChange={(event) =>
+                                    setFormValues((previous) => ({
+                                        ...previous,
+                                        password: event.target.value,
+                                    }))
+                                }
                                 placeholder="••••••••••••"
+                                required
                                 className="
                                     h-12
                                     rounded-xl
@@ -351,38 +495,47 @@ export default function Dashboard() {
                                     dark:bg-white/[0.03]
                                 "
                             />
+                            <InputError message={formErrors.password} />
+                            {passwordStrengthHint ? (
+                                <p className="text-sm text-slate-500 dark:text-white/50">
+                                    {passwordStrengthHint}
+                                </p>
+                            ) : null}
                         </div>
-                    </div>
 
-                <div className="flex justify-end gap-3">
+                            <DialogFooter className="justify-end gap-3">
+                            <Button
+                                variant="ghost"
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    setFormErrors({});
+                                }}
+                                className="rounded-xl"
+                                type="button"
+                            >
+                                Cancel
+                            </Button>
 
-                    <Button
-                        variant="ghost"
-                        onClick={() => setIsOpen(false)}
-                        className="rounded-xl"
-                    >
-                        Cancel
-                    </Button>
-
-                    <Button
-                        className="
-                            rounded-xl
-                            text-white
-                            shadow-lg
-                            transition-all
-                            hover:brightness-110
-                        "
-                        style={{
-                            background:
-                                'linear-gradient(135deg,#2B5CFF,#977DFF)',
-                        }}
-                    >
-                        Save Password
-                    </Button>
-
-                </div>
-            </DialogContent>
-        </Dialog>
+                            <Button
+                                type="submit"
+                                className="
+                                    rounded-xl
+                                    text-white
+                                    shadow-lg
+                                    transition-all
+                                    hover:brightness-110
+                                "
+                                style={{
+                                    background:
+                                        'linear-gradient(135deg,#2B5CFF,#977DFF)',
+                                }}
+                            >
+                                Save Password
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </>
     );
 }
