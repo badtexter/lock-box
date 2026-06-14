@@ -13,15 +13,10 @@ class AccountController extends Controller
             'platform' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
-            'password' => [
-                'required',
-                'string',
-                'min:14',
-                'regex:/[A-Z]/',
-                'regex:/[!@#$%^&*()_+\-=[\]{};\'":\\|,.<>\/?]/',
-            ],
-        ], [
-            'password.regex' => 'Hasło musi zawierać dużą literę i znak specjalny.',
+            // Passwords are required, but they are not validated. I want to encourage users to use strong passwords, 
+            // but I don't want to force them to use a specific format. 
+            // I want to allow users to use any password they want.
+            'password' => ['required', 'string', 'max:255'],
         ]);
 
         Account::create($validated);
