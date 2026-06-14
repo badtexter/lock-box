@@ -7,7 +7,8 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { toast } from 'sonner';
 
 type PasswordItem = {
     id: number;
@@ -16,9 +17,25 @@ type PasswordItem = {
     password: string;
 };
 
-function PasswordCard({ item }: { item: PasswordItem }) {
+function PasswordCard({
+    item,
+    revealed,
+    visible,
+    onCopy,
+    onToggleReveal,
+    onEdit,
+    onDelete,
+}: {
+    item: PasswordItem;
+    revealed?: string | null;
+    visible?: boolean;
+    onCopy?: (id: number) => void;
+    onToggleReveal?: (id: number) => void;
+    onEdit?: (id: number) => void;
+    onDelete?: (id: number) => void;
+}) {
     return (
-        <button
+        <div
             className="
                 group
                 w-full
@@ -62,8 +79,8 @@ function PasswordCard({ item }: { item: PasswordItem }) {
                         <MoreVertical />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem onSelect={() => openEditModal(item.id)}>Edit</DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => handleDelete(item.id)}>Delete</DropdownMenuItem>
+                        <DropdownMenuItem onSelect={() => onEdit?.(item.id)}>Edit</DropdownMenuItem>
+                        <DropdownMenuItem variant="destructive" onSelect={() => onDelete?.(item.id)}>Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
@@ -92,34 +109,24 @@ function PasswordCard({ item }: { item: PasswordItem }) {
                         dark:text-white/50
                     "
                 >
-                    ••••••••••
+                    {visible ? revealed ?? '••••••••••' : '••••••••••'}
                 </span>
 
                 <div className="flex items-center gap-1">
-                    <div
-                        className="
-                            rounded-lg
-                            p-2
-                            text-slate-500
-                            dark:text-white/50
-                        "
-                    >
-                        <Copy className="h-4 w-4" />
+                    <div className="rounded-lg p-2 text-slate-500 dark:text-white/50">
+                        <button onClick={() => onCopy?.(item.id)} aria-label="Copy">
+                            <Copy className="h-4 w-4" />
+                        </button>
                     </div>
 
-                    <div
-                        className="
-                            rounded-lg
-                            p-2
-                            text-slate-500
-                            dark:text-white/50
-                        "
-                    >
-                        <Eye className="h-4 w-4" />
+                    <div className="rounded-lg p-2 text-slate-500 dark:text-white/50">
+                        <button onClick={() => onToggleReveal?.(item.id)} aria-label="Reveal">
+                            <Eye className="h-4 w-4" />
+                        </button>
                     </div>
                 </div>
             </div>
-        </button>
+        </div>
     );
 }
 
@@ -137,6 +144,77 @@ export default function Dashboard() {
         email?: string;
         password?: string;
     }>({});
+
+    const [revealedPasswords, setRevealedPasswords] = useState<Record<number, string>>({});
+    const [visibleIds, setVisibleIds] = useState<Record<number, boolean>>({});
+    const [editingId, setEditingId] = useState<number | null>(null);
+
+    const fetchReveal = async (id: number) => {
+        if (revealedPasswords[id]) return revealedPasswords[id];
+
+        const tokenMeta = document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement | null;
+        const res = await fetch(`/accounts/${id}/reveal`, {
+            credentials: 'same-origin',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': tokenMeta?.content ?? '',
+                'Accept': 'application/json',
+            },
+        });
+
+        if (!res.ok) {
+            toast.error('Nie można odsłonić hasła');
+            return null;
+        }
+
+        const data = await res.json();
+        setRevealedPasswords((p) => ({ ...p, [id]: data.password }));
+        return data.password;
+    };
+
+    const handleCopy = async (id: number) => {
+        const pwd = await fetchReveal(id);
+        if (!pwd) return;
+
+        try {
+            await navigator.clipboard.writeText(pwd);
+            toast.success('Skopiowano hasło');
+        } catch (e) {
+            toast.error('Nie udało się skopiować');
+        }
+    };
+
+    const handleToggleReveal = async (id: number) => {
+        if (visibleIds[id]) {
+            setVisibleIds((p) => ({ ...p, [id]: false }));
+            return;
+        }
+
+        const pwd = await fetchReveal(id);
+        if (!pwd) return;
+        setVisibleIds((p) => ({ ...p, [id]: true }));
+        setTimeout(() => setVisibleIds((p) => ({ ...p, [id]: false })), 10000);
+    };
+
+    const handleDelete = (id: number) => {
+        if (!confirm('Usuń ten wpis?')) return;
+
+        router.delete(`/accounts/${id}`, {
+            onSuccess: () => {
+                toast.success('Usunięto');
+                router.reload();
+            },
+            onError: () => toast.error('Błąd usuwania'),
+        });
+    };
+
+    const openEditModal = (id: number) => {
+        const acc = items.find((a: any) => a.id === id);
+        if (!acc) return;
+        setEditingId(id);
+        setFormValues({ platform: acc.platform, email: acc.username ?? acc.email ?? '', password: '' });
+        setIsOpen(true);
+    };
 
     const passwordStrengthHint = useMemo(() => {
         const missing: string[] = [];
@@ -200,25 +278,39 @@ export default function Dashboard() {
             return;
         }
 
-        router.post('/accounts',
-            {
-                platform: formValues.platform,
-                email: formValues.email,
-                password: formValues.password,
-                username: formValues.email,
-            },
-            {
+        const payload = {
+            platform: formValues.platform,
+            email: formValues.email,
+            password: formValues.password,
+            username: formValues.email,
+        };
+
+        if (editingId) {
+            router.put(`/accounts/${editingId}`, payload, {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setIsOpen(false);
+                    setEditingId(null);
+                    setFormValues({ platform: '', email: '', password: '' });
+                    setFormErrors({});
+                    toast.success('Updated');
+                    router.reload();
+                },
+                onError: (errors) => setFormErrors(errors as typeof formErrors),
+            });
+        } else {
+            router.post('/accounts', payload, {
                 preserveScroll: true,
                 onSuccess: () => {
                     setIsOpen(false);
                     setFormValues({ platform: '', email: '', password: '' });
                     setFormErrors({});
+                    toast.success('Saved');
+                    router.reload();
                 },
-                onError: (errors) => {
-                    setFormErrors(errors as typeof formErrors);
-                },
-            }
-        );
+                onError: (errors) => setFormErrors(errors as typeof formErrors),
+            });
+        }
     };
 
     return (
@@ -367,6 +459,12 @@ export default function Dashboard() {
                                         email: item.username ?? item.email ?? '',
                                         password: '••••••••••',
                                     }}
+                                    revealed={revealedPasswords[item.id]}
+                                    visible={!!visibleIds[item.id]}
+                                    onCopy={handleCopy}
+                                    onToggleReveal={handleToggleReveal}
+                                    onEdit={openEditModal}
+                                    onDelete={handleDelete}
                                 />
                             ))}
                         </div>
