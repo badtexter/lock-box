@@ -1,7 +1,9 @@
 import { Head } from '@inertiajs/react';
 import { Eye, Copy, MoreVertical, Plus } from 'lucide-react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 type PasswordItem = {
     id: number;
@@ -132,6 +134,7 @@ function PasswordCard({ item }: { item: PasswordItem }) {
 
 export default function Dashboard() {
     const items = sampleItems;
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
@@ -228,6 +231,7 @@ export default function Dashboard() {
                     <div className="mb-8 flex justify-end">
 
                         <Button
+                            onClick={() => setIsOpen(true)}
                             className="
                                 h-12
                                 rounded-xl
@@ -277,6 +281,17 @@ export default function Dashboard() {
 
                 </div>
             </div>
+
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Add New Password</DialogTitle>
+                    </DialogHeader>
+                    <div className="py-4">
+                        <p>Here you can add your password form</p>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </>
     );
 }
