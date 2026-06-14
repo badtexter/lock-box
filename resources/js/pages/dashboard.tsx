@@ -286,7 +286,15 @@ export default function Dashboard() {
 
             { /* Add new Password Dialog */ }
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent className=" max-w-xl border-slate-200/70 bg-white/95 backdrop-blur-2xl dark:border-white/10 dark:bg-[#07103d]/95 shadow-2xl">
+                <DialogContent className="
+                    overflow-hidden
+                    max-w-xl
+                    border-slate-200/70
+                    bg-white/95
+                    dark:border-white/10
+                    dark:bg-[#07103d]/95
+                    backdrop-blur-2xl
+                ">
                     <DialogHeader className="space-y-4">
                         <DialogTitle className="text-xl font-semibold">
                             Add New Password
