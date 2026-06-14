@@ -282,10 +282,13 @@ export default function Dashboard() {
                 </div>
             </div>
 
+            { /* Add new Password Dialog */ }
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Add New Password</DialogTitle>
+                <DialogContent className=" max-w-xl border-slate-200/70 bg-white/95 backdrop-blur-2xl dark:border-white/10 dark:bg-[#07103d]/95 shadow-2xl">
+                    <DialogHeader className="space-y-4">
+                        <DialogTitle className="text-xl font-semibold">
+                            Add New Password
+                        </DialogTitle>
                     </DialogHeader>
                     <div className="py-4">
                         <p>Here you can add your password form</p>
