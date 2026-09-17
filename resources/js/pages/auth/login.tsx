@@ -83,16 +83,7 @@ export default function Login({ status, canResetPassword }: Props) {
                             </div>
 
                             <Button
-                                className="
-                                    w-full
-                                    h-12
-                                    rounded-xl
-                                    text-white
-                                    shadow-lg
-                                    transition-all
-                                    hover:scale-[1.01]
-                                    hover:shadow-xl
-                                "
+                                className="h-12 w-full rounded-xl text-white shadow-lg transition-all hover:scale-[1.01] hover:shadow-xl"
                                 style={{
                                     background:
                                         'linear-gradient(135deg,#3366FF,#A894FF)',

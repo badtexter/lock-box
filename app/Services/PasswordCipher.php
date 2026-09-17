@@ -7,8 +7,11 @@ use InvalidArgumentException;
 class PasswordCipher
 {
     private const PREFIX = 'CPF1:';
+
     private const ALPHABET = '0123456789ABCDEF';
+
     private const CAESAR_SHIFT = 3;
+
     private const PLAYFAIR_KEY = 'CYBERSECURITY2026';
 
     public static function encrypt(string $password): string

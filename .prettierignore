@@ -1,2 +1,8 @@
+node_modules/
+vendor/
+public/build/
+storage/
+bootstrap/cache/
+.phpunit.cache/
 resources/js/components/ui/*
 resources/views/mail/*

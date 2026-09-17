@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Services\PasswordCipher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class AccountController extends Controller
 {
@@ -60,9 +62,19 @@ class AccountController extends Controller
         return response()->json($data);
     }
 
-    public function reveal(Account $account)
+    public function reveal(Request $request, Account $account)
     {
         $this->authorize('view', $account);
+
+        $validated = $request->validate([
+            'master_password' => ['required', 'string'],
+        ]);
+
+        if (! Hash::check($validated['master_password'], $request->user()->password)) {
+            throw ValidationException::withMessages([
+                'master_password' => 'Podane haslo glowne jest nieprawidlowe.',
+            ]);
+        }
 
         try {
             $password = PasswordCipher::isEncrypted($account->password)
