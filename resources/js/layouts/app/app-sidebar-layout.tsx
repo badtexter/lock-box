@@ -9,7 +9,7 @@ export default function AppSidebarLayout({
     return (
         <div className="flex min-h-screen flex-col bg-background">
             {/* Navbar */}
-            <AppHeader breadcrumbs={breadcrumbs} />
+            <AppHeader />
 
             {/* Main Content */}
             <div className="flex-1 overflow-x-hidden">{children}</div>
