@@ -37,13 +37,7 @@ export default function Register({ passwordRules }: Props) {
                                     autoComplete="name"
                                     name="name"
                                     placeholder="Full name"
-                                    className="
-                                        h-12
-                                        rounded-xl
-                                        border-white/10
-                                        bg-white/5
-                                        backdrop-blur-sm
-                                    "
+                                    className="h-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm"
                                 />
                                 <InputError
                                     message={errors.name}
@@ -61,13 +55,7 @@ export default function Register({ passwordRules }: Props) {
                                     autoComplete="email"
                                     name="email"
                                     placeholder="email@example.com"
-                                    className="
-                                        h-12
-                                        rounded-xl
-                                        border-white/10
-                                        bg-white/5
-                                        backdrop-blur-sm
-                                    "
+                                    className="h-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm"
                                 />
                                 <InputError message={errors.email} />
                             </div>
@@ -81,13 +69,7 @@ export default function Register({ passwordRules }: Props) {
                                     autoComplete="new-password"
                                     name="password"
                                     placeholder="Password"
-                                    className="
-                                        h-12
-                                        rounded-xl
-                                        border-white/10
-                                        bg-white/5
-                                        backdrop-blur-sm
-                                    "
+                                    className="h-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm"
                                     passwordrules={passwordRules}
                                 />
                                 <InputError message={errors.password} />
@@ -104,13 +86,7 @@ export default function Register({ passwordRules }: Props) {
                                     autoComplete="new-password"
                                     name="password_confirmation"
                                     placeholder="Confirm password"
-                                    className="
-                                        h-12
-                                        rounded-xl
-                                        border-white/10
-                                        bg-white/5
-                                        backdrop-blur-sm
-                                    "
+                                    className="h-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm"
                                     passwordrules={passwordRules}
                                 />
                                 <InputError
@@ -123,16 +99,7 @@ export default function Register({ passwordRules }: Props) {
                                 tabIndex={5}
                                 data-test="register-user-button"
                                 disabled={processing}
-                                className="
-                                    mt-2
-                                    w-full
-                                    h-12
-                                    rounded-xl
-                                    text-white
-                                    shadow-lg
-                                    transition-all
-                                    hover:brightness-110
-                                "
+                                className="mt-2 h-12 w-full rounded-xl text-white shadow-lg transition-all hover:brightness-110"
                                 style={{
                                     background:
                                         'linear-gradient(135deg,#2B5CFF,#977DFF)',
