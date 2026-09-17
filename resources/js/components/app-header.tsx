@@ -1,5 +1,11 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LogOut, Moon, Settings, Sparkles, User } from 'lucide-react';
+import {
+    LogOut,
+    Moon,
+    Settings,
+    Sparkles,
+    User,
+} from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,7 +17,11 @@ import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
 import { dashboard } from '@/routes';
 
-export function AppHeader() {
+type Props = {
+    breadcrumbs?: Array<{ label: string; href?: string }>;
+};
+
+export function AppHeader({ breadcrumbs = [] }: Props) {
     const page = usePage();
     const { auth } = page.props;
     const getInitials = useInitials();
