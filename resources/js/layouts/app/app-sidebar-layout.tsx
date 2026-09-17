@@ -7,14 +7,12 @@ export default function AppSidebarLayout({
     breadcrumbs = [],
 }: AppLayoutProps) {
     return (
-        <div className="flex flex-col min-h-screen bg-background">
+        <div className="flex min-h-screen flex-col bg-background">
             {/* Navbar */}
             <AppHeader breadcrumbs={breadcrumbs} />
-            
+
             {/* Main Content */}
-            <div className="flex-1 overflow-x-hidden">
-                {children}
-            </div>
+            <div className="flex-1 overflow-x-hidden">{children}</div>
         </div>
     );
 }

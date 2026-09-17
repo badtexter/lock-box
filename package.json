@@ -8,6 +8,8 @@
         "dev": "vite",
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
+        "format:php": "php vendor/bin/pint",
+        "format:all": "npm run format && npm run format:php",
         "lint": "eslint . --fix",
         "lint:check": "eslint .",
         "types:check": "tsc --noEmit"

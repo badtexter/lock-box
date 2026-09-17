@@ -3,12 +3,24 @@ import { Copy, Eye, MoreVertical, Plus, RefreshCw, Search } from 'lucide-react';
 import { FormEvent, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
+import PasswordInput from '@/components/password-input';
 
 type PasswordItem = {
     id: number;
@@ -35,42 +47,9 @@ function PasswordCard({
     onDelete?: (id: number) => void;
 }) {
     return (
-        <div
-            className="
-                group
-                w-full
-                rounded-3xl
-                border
-                border-slate-200/70
-                dark:border-white/10
-                bg-white/80
-                dark:bg-white/[0.03]
-                p-5
-                text-left
-                backdrop-blur-xl
-                transition-all
-                hover:-translate-y-1
-                hover:border-[#977DFF]/30
-                hover:bg-white
-                dark:hover:bg-white/[0.05]
-            "
-        >
+        <div className="group w-full rounded-3xl border border-slate-200/70 bg-white/80 p-5 text-left backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-[#977DFF]/30 hover:bg-white dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]">
             <div className="flex items-start justify-between">
-                <div
-                    className="
-                        flex
-                        h-12
-                        w-12
-                        items-center
-                        justify-center
-                        rounded-2xl
-                        bg-gradient-to-br
-                        from-[#0033FF]
-                        to-[#977DFF]
-                        font-semibold
-                        text-white
-                    "
-                >
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0033FF] to-[#977DFF] font-semibold text-white">
                     {item.platform[0]}
                 </div>
 
@@ -79,8 +58,15 @@ function PasswordCard({
                         <MoreVertical />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem onSelect={() => onEdit?.(item.id)}>Edit</DropdownMenuItem>
-                        <DropdownMenuItem variant="destructive" onSelect={() => onDelete?.(item.id)}>Delete</DropdownMenuItem>
+                        <DropdownMenuItem onSelect={() => onEdit?.(item.id)}>
+                            Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                            variant="destructive"
+                            onSelect={() => onDelete?.(item.id)}
+                        >
+                            Delete
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
@@ -96,31 +82,25 @@ function PasswordCard({
             </div>
 
             <div className="mt-5 flex items-center justify-between">
-                <span
-                    className="
-                        rounded-lg
-                        bg-slate-100
-                        dark:bg-white/5
-                        px-3
-                        py-1.5
-                        font-mono
-                        text-sm
-                        text-slate-500
-                        dark:text-white/50
-                    "
-                >
-                    {visible ? revealed ?? '••••••••••' : '••••••••••'}
+                <span className="rounded-lg bg-slate-100 px-3 py-1.5 font-mono text-sm text-slate-500 dark:bg-white/5 dark:text-white/50">
+                    {visible ? (revealed ?? '••••••••••') : '••••••••••'}
                 </span>
 
                 <div className="flex items-center gap-1">
                     <div className="rounded-lg p-2 text-slate-500 dark:text-white/50">
-                        <button onClick={() => onCopy?.(item.id)} aria-label="Copy">
+                        <button
+                            onClick={() => onCopy?.(item.id)}
+                            aria-label="Copy"
+                        >
                             <Copy className="h-4 w-4" />
                         </button>
                     </div>
 
                     <div className="rounded-lg p-2 text-slate-500 dark:text-white/50">
-                        <button onClick={() => onToggleReveal?.(item.id)} aria-label="Reveal">
+                        <button
+                            onClick={() => onToggleReveal?.(item.id)}
+                            aria-label="Reveal"
+                        >
                             <Eye className="h-4 w-4" />
                         </button>
                     </div>
@@ -132,7 +112,7 @@ function PasswordCard({
 
 export default function Dashboard() {
     const page = usePage<any>();
-    const items = (page.props && page.props.accounts) ? page.props.accounts : [];
+    const items = page.props && page.props.accounts ? page.props.accounts : [];
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [formValues, setFormValues] = useState({
@@ -146,7 +126,9 @@ export default function Dashboard() {
         password?: string;
     }>({});
 
-    const [revealedPasswords, setRevealedPasswords] = useState<Record<number, string>>({});
+    const [revealedPasswords, setRevealedPasswords] = useState<
+        Record<number, string>
+    >({});
     const [visibleIds, setVisibleIds] = useState<Record<number, boolean>>({});
     const [editingId, setEditingId] = useState<number | null>(null);
     const [masterPrompt, setMasterPrompt] = useState<{
@@ -171,7 +153,9 @@ export default function Dashboard() {
 
         return items.filter((item: any) => {
             const platform = String(item.platform ?? '').toLowerCase();
-            const email = String(item.username ?? item.email ?? '').toLowerCase();
+            const email = String(
+                item.username ?? item.email ?? '',
+            ).toLowerCase();
 
             return platform.includes(query) || email.includes(query);
         });
@@ -195,7 +179,9 @@ export default function Dashboard() {
             getRandomCharacter(numbers),
             getRandomCharacter(symbols),
         ];
-        const remainingCharacters = Array.from({ length: 16 }, () => getRandomCharacter(allCharacters));
+        const remainingCharacters = Array.from({ length: 16 }, () =>
+            getRandomCharacter(allCharacters),
+        );
         const password = [...requiredCharacters, ...remainingCharacters]
             .sort(() => {
                 const randomValues = new Uint32Array(1);
@@ -211,14 +197,16 @@ export default function Dashboard() {
     };
 
     const fetchReveal = async (id: number, masterPassword: string) => {
-        const tokenMeta = document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement | null;
+        const tokenMeta = document.querySelector(
+            'meta[name="csrf-token"]',
+        ) as HTMLMetaElement | null;
         const res = await fetch(`/accounts/${id}/reveal`, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-CSRF-TOKEN': tokenMeta?.content ?? '',
-                'Accept': 'application/json',
+                Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ master_password: masterPassword }),
@@ -226,7 +214,10 @@ export default function Dashboard() {
 
         if (!res.ok) {
             const data = await res.json().catch(() => null);
-            const message = data?.errors?.master_password?.[0] ?? data?.message ?? 'Nie można odsłonić hasła';
+            const message =
+                data?.errors?.master_password?.[0] ??
+                data?.message ??
+                'Nie można odsłonić hasła';
 
             toast.error(message);
             return null;
@@ -263,12 +254,22 @@ export default function Dashboard() {
         if (!masterPrompt.accountId || !masterPrompt.action) return;
 
         if (!masterPrompt.password) {
-            setMasterPrompt((previous) => ({ ...previous, error: 'Podaj hasło główne.' }));
+            setMasterPrompt((previous) => ({
+                ...previous,
+                error: 'Podaj hasło główne.',
+            }));
             return;
         }
 
-        setMasterPrompt((previous) => ({ ...previous, error: undefined, loading: true }));
-        const pwd = await fetchReveal(masterPrompt.accountId, masterPrompt.password);
+        setMasterPrompt((previous) => ({
+            ...previous,
+            error: undefined,
+            loading: true,
+        }));
+        const pwd = await fetchReveal(
+            masterPrompt.accountId,
+            masterPrompt.password,
+        );
 
         if (!pwd) {
             setMasterPrompt((previous) => ({ ...previous, loading: false }));
@@ -285,7 +286,10 @@ export default function Dashboard() {
         } else {
             const accountId = masterPrompt.accountId;
             setVisibleIds((p) => ({ ...p, [accountId]: true }));
-            setTimeout(() => setVisibleIds((p) => ({ ...p, [accountId]: false })), 10000);
+            setTimeout(
+                () => setVisibleIds((p) => ({ ...p, [accountId]: false })),
+                10000,
+            );
         }
 
         setMasterPrompt({
@@ -325,7 +329,11 @@ export default function Dashboard() {
         const acc = items.find((a: any) => a.id === id);
         if (!acc) return;
         setEditingId(id);
-        setFormValues({ platform: acc.platform, email: acc.username ?? acc.email ?? '', password: '' });
+        setFormValues({
+            platform: acc.platform,
+            email: acc.username ?? acc.email ?? '',
+            password: '',
+        });
         setIsOpen(true);
     };
 
@@ -336,7 +344,10 @@ export default function Dashboard() {
             missing.push('co najmniej 14 znaków');
         }
 
-        if (formValues.password.length > 0 && !/[A-Z]/.test(formValues.password)) {
+        if (
+            formValues.password.length > 0 &&
+            !/[A-Z]/.test(formValues.password)
+        ) {
             missing.push('dużą literę');
         }
 
@@ -377,7 +388,7 @@ export default function Dashboard() {
 
         if (!formValues.password) {
             errors.password = 'To pole jest wymagane.';
-        } 
+        }
 
         setFormErrors(errors);
 
@@ -431,10 +442,8 @@ export default function Dashboard() {
             <Head title="Dashboard" />
 
             <div className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-[#F5F8FF] dark:bg-[#00033D]">
-
                 {/* Background */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
-
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
                     <div
                         className="absolute inset-0 opacity-40 dark:opacity-20"
                         style={{
@@ -449,14 +458,7 @@ export default function Dashboard() {
                     />
 
                     <div
-                        className="
-                            absolute
-                            right-[-250px]
-                            top-[-150px]
-                            h-[800px]
-                            w-[800px]
-                            rounded-full
-                        "
+                        className="absolute top-[-150px] right-[-250px] h-[800px] w-[800px] rounded-full"
                         style={{
                             background: `
                                 radial-gradient(
@@ -470,14 +472,7 @@ export default function Dashboard() {
                     />
 
                     <div
-                        className="
-                            absolute
-                            left-[-350px]
-                            bottom-[-300px]
-                            h-[900px]
-                            w-[900px]
-                            rounded-full
-                        "
+                        className="absolute bottom-[-300px] left-[-350px] h-[900px] w-[900px] rounded-full"
                         style={{
                             background: `
                                 radial-gradient(
@@ -488,66 +483,49 @@ export default function Dashboard() {
                             `,
                         }}
                     />
-
                 </div>
 
                 <div className="relative z-10 p-6 lg:p-10">
-
                     {/* Hero */}
                     <div className="mb-10">
-
-                        <p className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-[#977DFF]">
+                        <p className="mb-3 text-sm font-medium tracking-[0.25em] text-[#977DFF] uppercase">
                             LockBox Vault
                         </p>
 
-                        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-[#030812] dark:text-white">
+                        <h1 className="text-4xl font-semibold tracking-tight text-[#030812] md:text-5xl dark:text-white">
                             Manage your passwords
                             <br />
                             securely.
                         </h1>
 
                         <p className="mt-4 max-w-2xl text-slate-600 dark:text-white/60">
-                            Store, organize and access all your credentials from one secure place.
+                            Store, organize and access all your credentials from
+                            one secure place.
                         </p>
 
                         <div className="mt-6 flex items-center gap-6 text-sm text-slate-500 dark:text-white/50">
                             <span>{items.length} credentials stored</span>
                             <span>Protected by encryption</span>
                         </div>
-
                     </div>
 
                     {/* Actions */}
                     <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div className="relative w-full md:max-w-md">
-                            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                            <Search className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-400" />
                             <Input
                                 value={searchTerm}
-                                onChange={(event) => setSearchTerm(event.target.value)}
+                                onChange={(event) =>
+                                    setSearchTerm(event.target.value)
+                                }
                                 placeholder="Search platform or email"
-                                className="
-                                    h-12
-                                    rounded-xl
-                                    border-slate-200
-                                    bg-white/80
-                                    pl-11
-                                    dark:border-white/10
-                                    dark:bg-white/[0.03]
-                                "
+                                className="h-12 rounded-xl border-slate-200 bg-white/80 pl-11 dark:border-white/10 dark:bg-white/[0.03]"
                             />
                         </div>
 
                         <Button
                             onClick={() => setIsOpen(true)}
-                            className="
-                                h-12
-                                rounded-xl
-                                px-5
-                                text-white
-                                shadow-lg
-                                transition-all
-                                hover:brightness-110
-                            "
+                            className="h-12 rounded-xl px-5 text-white shadow-lg transition-all hover:brightness-110"
                             style={{
                                 background:
                                     'linear-gradient(135deg,#2B5CFF,#977DFF)',
@@ -556,41 +534,20 @@ export default function Dashboard() {
                             <Plus className="mr-2 h-4 w-4" />
                             Add Password
                         </Button>
-
                     </div>
 
                     {/* Content */}
                     {items.length === 0 ? (
-                        <div
-                            className="
-                                rounded-[2rem]
-                                border
-                                border-white/10
-                                bg-white/60
-                                dark:bg-white/[0.03]
-                                p-10
-                                backdrop-blur-xl
-                            "
-                        >
+                        <div className="rounded-[2rem] border border-white/10 bg-white/60 p-10 backdrop-blur-xl dark:bg-white/[0.03]">
                             <PlaceholderPattern className="mx-auto mb-6 h-40 w-full max-w-xl" />
 
                             <p className="text-center text-sm text-slate-500 dark:text-white/50">
-                                Your vault is empty. Add your first credential to get started.
+                                Your vault is empty. Add your first credential
+                                to get started.
                             </p>
                         </div>
                     ) : filteredItems.length === 0 ? (
-                        <div
-                            className="
-                                rounded-[2rem]
-                                border
-                                border-white/10
-                                bg-white/60
-                                dark:bg-white/[0.03]
-                                p-10
-                                text-center
-                                backdrop-blur-xl
-                            "
-                        >
+                        <div className="rounded-[2rem] border border-white/10 bg-white/60 p-10 text-center backdrop-blur-xl dark:bg-white/[0.03]">
                             <p className="text-sm text-slate-500 dark:text-white/50">
                                 No credentials match your search.
                             </p>
@@ -603,7 +560,8 @@ export default function Dashboard() {
                                     item={{
                                         id: item.id,
                                         platform: item.platform,
-                                        email: item.username ?? item.email ?? '',
+                                        email:
+                                            item.username ?? item.email ?? '',
                                         password: '••••••••••',
                                     }}
                                     revealed={revealedPasswords[item.id]}
@@ -616,21 +574,12 @@ export default function Dashboard() {
                             ))}
                         </div>
                     )}
-
                 </div>
             </div>
 
-            { /* Add new Password Dialog */ }
+            {/* Add new Password Dialog */}
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent className="
-                    overflow-hidden
-                    max-w-xl
-                    border-slate-200/70
-                    bg-white/95
-                    dark:border-white/10
-                    dark:bg-[#07103d]/95
-                    backdrop-blur-2xl
-                ">
+                <DialogContent className="max-w-xl overflow-hidden border-slate-200/70 bg-white/95 backdrop-blur-2xl dark:border-white/10 dark:bg-[#07103d]/95">
                     <DialogHeader className="space-y-4">
                         <DialogTitle className="text-xl font-semibold">
                             Add New Password
@@ -654,14 +603,7 @@ export default function Dashboard() {
                                 }
                                 placeholder="GitHub"
                                 required
-                                className="
-                                    h-12
-                                    rounded-xl
-                                    border-slate-200
-                                    bg-white
-                                    dark:border-white/10
-                                    dark:bg-white/[0.03]
-                                "
+                                className="h-12 rounded-xl border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03]"
                             />
                             <InputError message={formErrors.platform} />
                         </div>
@@ -681,14 +623,7 @@ export default function Dashboard() {
                                 }
                                 placeholder="me@example.com"
                                 required
-                                className="
-                                    h-12
-                                    rounded-xl
-                                    border-slate-200
-                                    bg-white
-                                    dark:border-white/10
-                                    dark:bg-white/[0.03]
-                                "
+                                className="h-12 rounded-xl border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03]"
                             />
                             <InputError message={formErrors.email} />
                         </div>
@@ -706,10 +641,9 @@ export default function Dashboard() {
                                     Generate
                                 </Button>
                             </div>
-                            <Input
+                            <PasswordInput
                                 id="password"
                                 name="password"
-                                type="text"
                                 value={formValues.password}
                                 onChange={(event) =>
                                     setFormValues((previous) => ({
@@ -719,16 +653,11 @@ export default function Dashboard() {
                                 }
                                 placeholder="Generated or custom password"
                                 required
-                                className="
-                                    h-12
-                                    rounded-xl
-                                    border-slate-200
-                                    bg-white
-                                    font-mono
-                                    dark:border-white/10
-                                    dark:bg-white/[0.03]
-                                "
-                            />
+                                className="h-12 rounded-xl border-slate-200 bg-white font-mono dark:border-white/10 dark:bg-white/[0.03]"
+                            ></PasswordInput>
+                            {/* <Input
+                                
+                            /> */}
                             <InputError message={formErrors.password} />
                             {passwordStrengthHint ? (
                                 <p className="text-sm text-slate-500 dark:text-white/50">
@@ -737,7 +666,7 @@ export default function Dashboard() {
                             ) : null}
                         </div>
 
-                            <DialogFooter className="justify-end gap-3">
+                        <DialogFooter className="justify-end gap-3">
                             <Button
                                 variant="ghost"
                                 onClick={() => {
@@ -752,13 +681,7 @@ export default function Dashboard() {
 
                             <Button
                                 type="submit"
-                                className="
-                                    rounded-xl
-                                    text-white
-                                    shadow-lg
-                                    transition-all
-                                    hover:brightness-110
-                                "
+                                className="rounded-xl text-white shadow-lg transition-all hover:brightness-110"
                                 style={{
                                     background:
                                         'linear-gradient(135deg,#2B5CFF,#977DFF)',
@@ -771,15 +694,11 @@ export default function Dashboard() {
                 </DialogContent>
             </Dialog>
 
-            <Dialog open={!!masterPrompt.action} onOpenChange={(open) => !open && closeMasterPrompt()}>
-                <DialogContent className="
-                    max-w-md
-                    border-slate-200/70
-                    bg-white/95
-                    dark:border-white/10
-                    dark:bg-[#07103d]/95
-                    backdrop-blur-2xl
-                ">
+            <Dialog
+                open={!!masterPrompt.action}
+                onOpenChange={(open) => !open && closeMasterPrompt()}
+            >
+                <DialogContent className="max-w-md border-slate-200/70 bg-white/95 backdrop-blur-2xl dark:border-white/10 dark:bg-[#07103d]/95">
                     <DialogHeader className="space-y-4">
                         <DialogTitle className="text-xl font-semibold">
                             Confirm master password
@@ -789,9 +708,14 @@ export default function Dashboard() {
                         </p>
                     </DialogHeader>
 
-                    <form onSubmit={confirmMasterPassword} className="space-y-5 py-4">
+                    <form
+                        onSubmit={confirmMasterPassword}
+                        className="space-y-5 py-4"
+                    >
                         <div className="space-y-2">
-                            <Label htmlFor="master-password">Master password</Label>
+                            <Label htmlFor="master-password">
+                                Master password
+                            </Label>
                             <Input
                                 id="master-password"
                                 name="master_password"
@@ -806,14 +730,7 @@ export default function Dashboard() {
                                 }
                                 autoFocus
                                 disabled={masterPrompt.loading}
-                                className="
-                                    h-12
-                                    rounded-xl
-                                    border-slate-200
-                                    bg-white
-                                    dark:border-white/10
-                                    dark:bg-white/[0.03]
-                                "
+                                className="h-12 rounded-xl border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03]"
                             />
                             <InputError message={masterPrompt.error} />
                         </div>
@@ -832,19 +749,15 @@ export default function Dashboard() {
                             <Button
                                 type="submit"
                                 disabled={masterPrompt.loading}
-                                className="
-                                    rounded-xl
-                                    text-white
-                                    shadow-lg
-                                    transition-all
-                                    hover:brightness-110
-                                "
+                                className="rounded-xl text-white shadow-lg transition-all hover:brightness-110"
                                 style={{
                                     background:
                                         'linear-gradient(135deg,#2B5CFF,#977DFF)',
                                 }}
                             >
-                                {masterPrompt.loading ? 'Confirming...' : 'Confirm'}
+                                {masterPrompt.loading
+                                    ? 'Confirming...'
+                                    : 'Confirm'}
                             </Button>
                         </DialogFooter>
                     </form>
