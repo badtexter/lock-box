@@ -1,13 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import {
-    LayoutGrid,
-    LogOut,
-    Menu,
-    Moon,
-    Settings,
-    Sun,
-    User,
-} from 'lucide-react';
+import { LogOut, Moon, Settings, Sparkles, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,22 +7,11 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from '@/components/ui/sheet';
 import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
 import { dashboard } from '@/routes';
 
-type Props = {
-    breadcrumbs?: Array<{ label: string; href?: string }>;
-};
-
-export function AppHeader({ breadcrumbs = [] }: Props) {
+export function AppHeader() {
     const page = usePage();
     const { auth } = page.props;
     const getInitials = useInitials();
@@ -63,7 +44,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                             title="Toggle theme"
                         >
                             {appearance === 'light' ? (
-                                <Sun className="h-5 w-5 text-amber-500" />
+                                <Sparkles className="h-5 w-5 text-amber-500" />
                             ) : (
                                 <Moon className="h-5 w-5 text-white" />
                             )}
