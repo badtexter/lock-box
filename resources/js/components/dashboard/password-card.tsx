@@ -1,4 +1,4 @@
-import { Copy, Eye, MoreVertical } from 'lucide-react';
+import { Copy, Eye, MoreVertical, Pencil, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -28,6 +28,11 @@ export default function PasswordCard({
     onDelete,
 }: PasswordCardProps) {
     const displayEmail = item.username ?? item.email ?? '';
+    const addedOn = new Date(item.created_at).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    });
 
     return (
         <div className="group w-full rounded-3xl border border-slate-200/70 bg-white/80 p-5 text-left backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-[#977DFF]/30 hover:bg-white dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.05]">
@@ -49,12 +54,14 @@ export default function PasswordCard({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuItem onSelect={() => onEdit?.(item.id)}>
+                            <Pencil className="h-4 w-4" />
                             Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem
                             variant="destructive"
                             onSelect={() => onDelete?.(item.id)}
                         >
+                            <Trash2 className="h-4 w-4" />
                             Delete
                         </DropdownMenuItem>
                     </DropdownMenuContent>

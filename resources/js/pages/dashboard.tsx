@@ -98,7 +98,7 @@ export default function Dashboard() {
 
                     {/* Content */}
                     {items.length === 0 ? (
-                        <EmptyVault />
+                        <EmptyVault onAdd={() => setIsOpen(true)} />
                     ) : (
                         <PasswordGrid
                             items={items}

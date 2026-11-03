@@ -1,3 +1,4 @@
+import { SearchX } from 'lucide-react';
 import PasswordCard from '@/components/dashboard/password-card';
 import type { Account } from '@/types';
 
@@ -24,8 +25,9 @@ export default function PasswordGrid({
 }: PasswordGridProps) {
     if (items.length > 0 && filteredItems.length === 0) {
         return (
-            <div className="rounded-[2rem] border border-white/10 bg-white/60 p-10 text-center backdrop-blur-xl dark:bg-white/[0.03]">
-                <p className="text-sm text-slate-500 dark:text-white/50">
+            <div className="flex flex-col items-center rounded-[2rem] border border-slate-200/70 bg-white/60 p-10 text-center backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.03]">
+                <SearchX className="h-8 w-8 text-slate-400 dark:text-white/30" />
+                <p className="mt-3 text-sm text-slate-500 dark:text-white/50">
                     No credentials match your search.
                 </p>
             </div>
