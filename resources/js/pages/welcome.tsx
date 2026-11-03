@@ -18,11 +18,11 @@ export default function Welcome() {
     return (
         <>
             <Head title="LockBox" />
-            <div className="min-h-svh bg-background">
+            <div className="brand-bg min-h-svh">
                 {/* NAV */}
                 <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
                     <span className="flex items-center gap-2.5 text-foreground">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-[4px] bg-primary text-[11px] font-semibold text-primary-foreground">
+                        <span className="brand-gradient flex h-6 w-6 items-center justify-center rounded-[4px] text-[11px] font-semibold text-white">
                             L
                         </span>
                         <span className="text-[15px] font-medium tracking-tight">
@@ -119,11 +119,12 @@ export default function Welcome() {
                             <span className="text-sm font-medium text-foreground">
                                 Password
                             </span>
-                            <div className="mt-2 flex items-center justify-between gap-3 rounded-[6px] border border-border bg-muted px-3 py-2.5">
-                                {' '}
-                                {/* taste-skill-ignore: data-ui fragment, keeps its own border */}
-                                <span className="font-mono text-sm tracking-[0.1em] text-foreground">
-                                    {/* taste-skill-ignore: a password field, not prose */}
+                            <div
+                                className="mt-2 flex items-center justify-between gap-3 rounded-[6px] border border-border bg-muted px-3 py-2.5" // taste-skill-ignore: data-ui fragment, keeps its own border
+                            >
+                                <span
+                                    className="font-mono text-sm tracking-[0.1em] text-foreground" // taste-skill-ignore: a password field, not prose
+                                >
                                     ••••••••••••
                                 </span>
                                 <div className="flex shrink-0 gap-1">
@@ -147,13 +148,11 @@ export default function Welcome() {
 
                         <div className="mt-10 grid gap-10 sm:grid-cols-2">
                             {/* Generator — a real fragment of the add-password form */}
-                            <div
-                                className="fade-in-up"
-                                style={{ animationDelay: '0ms' }}
-                            >
+                            <div>
                                 <div
                                     data-ui
-                                    className="rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    className="fade-in-up min-h-[13rem] rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    style={{ animationDelay: '0ms' }}
                                 >
                                     <div className="flex items-center justify-between">
                                         <span className="text-sm font-medium text-foreground">
@@ -164,11 +163,12 @@ export default function Welcome() {
                                             Generate
                                         </span>
                                     </div>
-                                    <div className="mt-2 rounded-[6px] border border-border bg-muted px-3 py-2.5">
-                                        {' '}
-                                        {/* taste-skill-ignore: data-ui fragment, keeps its own border */}
-                                        <span className="font-mono text-sm tracking-[0.1em] text-foreground">
-                                            {/* taste-skill-ignore: a password field, not prose */}
+                                    <div
+                                        className="mt-2 rounded-[6px] border border-border bg-muted px-3 py-2.5" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    >
+                                        <span
+                                            className="font-mono text-sm tracking-[0.1em] text-foreground" // taste-skill-ignore: a password field, not prose
+                                        >
                                             f4!xQ9r@mZ2k
                                         </span>
                                     </div>
@@ -176,10 +176,16 @@ export default function Welcome() {
                                         Looks good.
                                     </p>
                                 </div>
-                                <h3 className="mt-4 text-base font-medium text-foreground">
+                                <h3
+                                    className="fade-in-up mt-4 text-base font-medium text-foreground"
+                                    style={{ animationDelay: '60ms' }}
+                                >
                                     A generator that means it
                                 </h3>
-                                <p className="mt-2 text-base text-foreground">
+                                <p
+                                    className="fade-in-up mt-2 text-base text-foreground"
+                                    style={{ animationDelay: '120ms' }}
+                                >
                                     Fourteen characters minimum, upper and lower
                                     case, a number and a symbol, built in — no
                                     reused passwords.
@@ -187,13 +193,11 @@ export default function Welcome() {
                             </div>
 
                             {/* Search — a real fragment of the vault list */}
-                            <div
-                                className="fade-in-up"
-                                style={{ animationDelay: '80ms' }}
-                            >
+                            <div>
                                 <div
                                     data-ui
-                                    className="rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    className="fade-in-up min-h-[13rem] rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    style={{ animationDelay: '80ms' }}
                                 >
                                     <div className="relative">
                                         <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -220,23 +224,27 @@ export default function Welcome() {
                                         </span>
                                     </div>
                                 </div>
-                                <h3 className="mt-4 text-base font-medium text-foreground">
+                                <h3
+                                    className="fade-in-up mt-4 text-base font-medium text-foreground"
+                                    style={{ animationDelay: '140ms' }}
+                                >
                                     Find it in one search
                                 </h3>
-                                <p className="mt-2 text-base text-foreground">
+                                <p
+                                    className="fade-in-up mt-2 text-base text-foreground"
+                                    style={{ animationDelay: '200ms' }}
+                                >
                                     Every entry is searchable by platform or
                                     email the moment you start typing.
                                 </p>
                             </div>
 
                             {/* 2FA & passkeys — a real fragment of the security settings */}
-                            <div
-                                className="fade-in-up"
-                                style={{ animationDelay: '160ms' }}
-                            >
+                            <div>
                                 <div
                                     data-ui
-                                    className="rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    className="fade-in-up min-h-[13rem] rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    style={{ animationDelay: '160ms' }}
                                 >
                                     <div className="flex items-center justify-between">
                                         <span className="text-sm font-medium text-foreground">
@@ -249,7 +257,9 @@ export default function Welcome() {
                                     <p className="mt-1.5 text-xs text-muted-foreground">
                                         Recovery codes generated
                                     </p>
-                                    <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+                                    <div
+                                        className="mt-3 flex items-center justify-between border-t border-border pt-3" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    >
                                         <span className="flex items-center gap-2 text-sm font-medium text-foreground">
                                             <Shield className="h-4 w-4 text-muted-foreground" />
                                             Passkeys
@@ -259,10 +269,16 @@ export default function Welcome() {
                                         </span>
                                     </div>
                                 </div>
-                                <h3 className="mt-4 text-base font-medium text-foreground">
+                                <h3
+                                    className="fade-in-up mt-4 text-base font-medium text-foreground"
+                                    style={{ animationDelay: '220ms' }}
+                                >
                                     2FA and passkeys
                                 </h3>
-                                <p className="mt-2 text-base text-foreground">
+                                <p
+                                    className="fade-in-up mt-2 text-base text-foreground"
+                                    style={{ animationDelay: '280ms' }}
+                                >
                                     Time-based codes with recovery codes, or
                                     sign in with a passkey instead of typing
                                     anything.
@@ -270,13 +286,11 @@ export default function Welcome() {
                             </div>
 
                             {/* Encryption — a real fragment of the vault, locked */}
-                            <div
-                                className="fade-in-up"
-                                style={{ animationDelay: '240ms' }}
-                            >
+                            <div>
                                 <div
                                     data-ui
-                                    className="rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    className="fade-in-up min-h-[13rem] rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    style={{ animationDelay: '240ms' }}
                                 >
                                     <div className="flex items-center gap-3 rounded-[6px] px-2.5 py-2">
                                         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] bg-secondary text-secondary-foreground">
@@ -295,10 +309,16 @@ export default function Welcome() {
                                         AES-256, decrypted only in your browser
                                     </p>
                                 </div>
-                                <h3 className="mt-4 text-base font-medium text-foreground">
+                                <h3
+                                    className="fade-in-up mt-4 text-base font-medium text-foreground"
+                                    style={{ animationDelay: '300ms' }}
+                                >
                                     One encrypted vault
                                 </h3>
-                                <p className="mt-2 text-base text-foreground">
+                                <p
+                                    className="fade-in-up mt-2 text-base text-foreground"
+                                    style={{ animationDelay: '360ms' }}
+                                >
                                     Every credential is encrypted at rest.
                                     Nothing is stored or read in plain text,
                                     including by you.

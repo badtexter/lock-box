@@ -33,7 +33,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                                     autoComplete="off"
                                     autoFocus
                                     placeholder="email@example.com"
-                                    className="h-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm"
+                                    className="h-10 rounded-[6px]"
                                 />
 
                                 <InputError message={errors.email} />
@@ -43,11 +43,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                                 <Button
                                     disabled={processing}
                                     data-test="email-password-reset-link-button"
-                                    className="h-12 w-full rounded-xl text-white shadow-lg transition-all hover:brightness-110"
-                                    style={{
-                                        background:
-                                            'linear-gradient(135deg,#2B5CFF,#977DFF)',
-                                    }}
+                                    className="h-10 w-full rounded-[6px] font-medium"
                                 >
                                     {processing && (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />

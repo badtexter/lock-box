@@ -43,7 +43,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                     tabIndex={1}
                                     autoComplete="email"
                                     placeholder="email@example.com"
-                                    className="h-12 rounded-xl"
+                                    className="h-10 rounded-[6px]"
                                 />
                                 <InputError message={errors.email} />
                             </div>
@@ -68,7 +68,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                     tabIndex={2}
                                     autoComplete="current-password"
                                     placeholder="Password"
-                                    className="h-12 rounded-xl"
+                                    className="h-10 rounded-[6px]"
                                 />
                                 <InputError message={errors.password} />
                             </div>
@@ -82,13 +82,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                 <Label htmlFor="remember">Remember me</Label>
                             </div>
 
-                            <Button
-                                className="h-12 w-full rounded-xl text-white shadow-lg transition-all hover:scale-[1.01] hover:shadow-xl"
-                                style={{
-                                    background:
-                                        'linear-gradient(135deg,#3366FF,#A894FF)',
-                                }}
-                            >
+                            <Button className="h-10 w-full rounded-[6px] font-medium">
                                 {processing && <Spinner />}
                                 Log in
                             </Button>

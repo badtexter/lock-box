@@ -1,7 +1,6 @@
-import AuthLayoutTemplate from '@/layouts/auth/auth-simple-layout';
-// Logo icon removed — using text-only branding
-import { home } from '@/routes';
+import { Copy, Eye, Moon, Sun } from 'lucide-react';
 import { useAppearance } from '@/hooks/use-appearance';
+import { home } from '@/routes';
 
 export default function AuthLayout({
     title = '',
@@ -18,86 +17,101 @@ export default function AuthLayout({
         updateAppearance(resolvedAppearance === 'dark' ? 'light' : 'dark');
 
     return (
-        <div className="relative h-screen min-h-screen overflow-hidden bg-white dark:bg-[#00033D]">
-            <header className="relative z-30 flex w-full items-center justify-between px-6 py-4 md:px-10">
-                <a href={home().url ?? '/'} className="flex items-center gap-2">
-                    <span className="text-2xl font-extrabold">LockBox</span>
+        <div className="grid min-h-svh lg:grid-cols-2">
+            {/* LEFT — the colour */}
+            <div className="brand-gradient-soft relative hidden flex-col justify-between p-10 lg:flex">
+                <a
+                    href={home().url ?? '/'}
+                    className="flex items-center gap-2.5 text-white"
+                >
+                    <span className="flex h-6 w-6 items-center justify-center rounded-[4px] bg-white/15 text-[11px] font-semibold">
+                        L
+                    </span>
+                    <span className="text-[15px] font-medium tracking-tight">
+                        LockBox
+                    </span>
                 </a>
 
+                <div>
+                    <h2 className="max-w-sm text-3xl font-semibold tracking-tight text-white">
+                        One encrypted vault for every password.
+                    </h2>
+                    <p className="mt-3 max-w-sm text-sm text-white/80">
+                        Stored encrypted, generated strong, and out of your way.
+                    </p>
+
+                    {/* A real fragment of the product, at true size */}
+                    <div
+                        data-ui
+                        className="mt-8 w-full max-w-sm rounded-lg bg-white p-4" // taste-skill-ignore: data-ui fragment, keeps its own surface
+                    >
+                        <div className="flex items-center gap-3 rounded-[6px] px-2.5 py-2">
+                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] bg-slate-100 text-sm font-medium text-slate-900">
+                                G
+                            </div>
+                            <div className="min-w-0 flex-1">
+                                <div className="text-sm font-medium text-slate-900">
+                                    GitHub
+                                </div>
+                                <div className="truncate text-xs text-slate-500">
+                                    dev@lockbox.io
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mt-2 flex items-center justify-between gap-3 rounded-[6px] bg-slate-100 px-3 py-2.5">
+                            <span
+                                className="font-mono text-sm tracking-[0.1em] text-slate-700" // taste-skill-ignore: a password field, not prose
+                            >
+                                ••••••••••••
+                            </span>
+                            <div className="flex shrink-0 gap-1">
+                                <Copy className="h-4 w-4 text-slate-400" />
+                                <Eye className="h-4 w-4 text-slate-400" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p className="text-xs text-white/65">
+                    Encrypted at rest. Decrypted only in your browser.
+                </p>
+            </div>
+
+            {/* RIGHT — the form */}
+            <div className="relative flex items-center justify-center bg-background px-6 py-12">
                 <button
                     onClick={toggle}
-                    className="rounded-lg p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
+                    className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-[6px] hover:bg-accent lg:top-6 lg:right-6"
                     aria-label="Toggle theme"
                 >
                     {resolvedAppearance === 'dark' ? (
-                        <svg
-                            className="h-6 w-6 text-yellow-500"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.12-2.12a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414l2.12 2.12a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM9 4a1 1 0 100-2 1 1 0 000 2zm0 12a1 1 0 100 2 1 1 0 000-2z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
+                        <Sun className="h-4 w-4 text-muted-foreground" />
                     ) : (
-                        <svg
-                            className="h-6 w-6 text-gray-700"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                        </svg>
+                        <Moon className="h-4 w-4 text-muted-foreground" />
                     )}
                 </button>
-            </header>
 
-            {/* Background */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div
-                        key={i}
-                        className="absolute rounded-full border"
-                        style={{
-                            width: `${350 + i * 140}px`,
-                            height: `${350 + i * 140}px`,
-                            right: '-350px',
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            borderColor: 'rgba(151,125,255,0.12)',
-                        }}
-                    />
-                ))}
+                <div className="w-full max-w-sm">
+                    <a
+                        href={home().url ?? '/'}
+                        className="mb-8 flex items-center gap-2.5 text-foreground lg:hidden"
+                    >
+                        <span className="brand-gradient flex h-6 w-6 items-center justify-center rounded-[4px] text-[11px] font-semibold text-white">
+                            L
+                        </span>
+                        <span className="text-[15px] font-medium tracking-tight">
+                            LockBox
+                        </span>
+                    </a>
 
-                <div
-                    className="absolute top-1/2 right-[-300px] h-[900px] w-[900px] -translate-y-1/2 rounded-full"
-                    style={{
-                        background: `
-                            radial-gradient(
-                                circle,
-                                rgba(151,125,255,.55),
-                                rgba(0,51,255,.25),
-                                transparent 70%
-                            )
-                        `,
-                    }}
-                />
-            </div>
-
-            {/* Content */}
-            <div className="relative z-10 flex h-full items-center justify-center px-6">
-                <div className="max-h-[calc(100vh-6rem)] w-full max-w-md overflow-auto rounded-3xl border border-gray-200 bg-white/80 p-8 shadow-lg ring-1 ring-black/5 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:shadow-none dark:ring-0">
-                    <h1 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
+                    <h1 className="text-2xl font-semibold tracking-tight text-foreground">
                         {title}
                     </h1>
-                    <p className="mt-2 text-center text-gray-600 dark:text-gray-300">
+                    <p className="mt-2 text-sm text-muted-foreground">
                         {description}
                     </p>
 
-                    <br />
-
-                    {children}
+                    <div className="mt-6">{children}</div>
                 </div>
             </div>
         </div>

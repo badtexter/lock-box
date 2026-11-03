@@ -18,15 +18,15 @@ export function AppHeader() {
     const { appearance, updateAppearance } = useAppearance();
 
     return (
-        <div className="sticky top-0 z-50 border-b border-border bg-card">
-            <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+        <div className="sticky top-3 z-50 mx-auto mt-3 w-full max-w-md px-4">
+            <div className="flex h-12 items-center justify-between rounded-full border border-border bg-card px-4 shadow-sm">
                 {/* LEFT - BRAND */}
                 <Link
                     href={dashboard()}
                     prefetch
                     className="flex items-center gap-2.5 text-foreground"
                 >
-                    <span className="flex h-6 w-6 items-center justify-center rounded-[4px] bg-primary text-[11px] font-semibold text-primary-foreground">
+                    <span className="brand-gradient flex h-6 w-6 items-center justify-center rounded-[4px] text-[11px] font-semibold text-white">
                         L
                     </span>
                     <span className="text-[15px] font-medium tracking-tight">

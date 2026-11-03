@@ -91,7 +91,7 @@ export default function Dashboard() {
         <>
             <Head title="Dashboard" />
 
-            <div className="min-h-[calc(100vh-3.5rem)]">
+            <div className="min-h-[calc(100vh-3.75rem)]">
                 <div className="mx-auto max-w-6xl px-6 py-8">
                     <DashboardHero
                         itemCount={items.length}

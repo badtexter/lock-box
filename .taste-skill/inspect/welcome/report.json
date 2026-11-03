@@ -1,8 +1,9 @@
 {
  "url": "http://localhost/",
- "at": "2026-11-03T17:08:47.040Z",
+ "at": "2026-11-03T20:19:55.118Z",
  "allow": [
-  "mono"
+  "mono",
+  "gradient"
  ],
  "viewports": [
   {
@@ -11,12 +12,12 @@
    "load": "load",
    "screens": 2,
    "filled": [
-    0.53,
-    0.81
+    1,
+    1
    ],
    "motion": {
-    "elements": 8,
-    "css": 8,
+    "elements": 16,
+    "css": 16,
     "transitions": 0,
     "scripted": 0,
     "videos": 0,
@@ -28,9 +29,9 @@
      "h": 900
     },
     "page": {
-     "height": 1436,
-     "screens": 1.6,
-     "words": 149,
+     "height": 1644,
+     "screens": 1.8,
+     "words": 166,
      "img": 0,
      "video": 0,
      "canvas": 0,
@@ -42,7 +43,7 @@
      "uiAbuse": false,
      "realPictures": 0,
      "videoCount": 0,
-     "uiPictures": 0,
+     "uiPictures": 5,
      "pictureSamples": [],
      "blendText": 0,
      "sideScrollers": 0,
@@ -114,12 +115,12 @@
      "families": [
       {
        "family": "Geist",
-       "share": 0.97,
+       "share": 0.98,
        "mono": false
       },
       {
        "family": "Geist Mono",
-       "share": 0.03,
+       "share": 0.02,
        "mono": true
       }
      ],
@@ -141,7 +142,7 @@
       "leading": 1.5,
       "weight": 400,
       "tracking": 0,
-      "contrast": 18
+      "contrast": null
      },
      "measureChars": 59,
      "max": {
@@ -150,8 +151,8 @@
       "font": "Geist",
       "text": "One encrypted vault for every password."
      },
-     "monoShare": 0.03,
-     "monoProseShare": 0.03,
+     "monoShare": 0.02,
+     "monoProseShare": 0.02,
      "monoFamilies": [
       "Geist Mono"
      ],
@@ -169,40 +170,36 @@
     "eyebrows": [],
     "numbered": [],
     "color": {
-     "bodyBg": "#f2f4f7",
+     "bodyBg": "#eaedf8",
      "bodyBgHsl": {
-      "h": 216,
-      "s": 0.24,
-      "l": 0.96
+      "h": 227,
+      "s": 0.5,
+      "l": 0.95
      },
      "dark": false,
      "sectionBgs": [
       {
-       "color": "#f2f4f7",
+       "color": "#eaedf8",
        "top": 0,
        "hsl": {
-        "h": 216,
-        "s": 0.24,
-        "l": 0.96
+        "h": 227,
+        "s": 0.5,
+        "l": 0.95
        }
       }
      ],
      "textColors": [
       {
-       "color": "#0a0a0a",
-       "share": 0.81
+       "color": "#030812",
+       "share": 0.75
       },
       {
-       "color": "#5f6368",
-       "share": 0.12
+       "color": "#5b6178",
+       "share": 0.2
       },
       {
        "color": "#ffffff",
        "share": 0.05
-      },
-      {
-       "color": "#141414",
-       "share": 0.01
       },
       {
        "color": "#04250e",
@@ -210,11 +207,11 @@
       }
      ],
      "button": {
-      "bg": "#141414",
+      "bg": "#0033ff",
       "hsl": {
-       "h": 0,
-       "s": 0,
-       "l": 0.08
+       "h": 228,
+       "s": 1,
+       "l": 0.5
       },
       "fg": "#ffffff"
      },
@@ -239,16 +236,18 @@
      "shadowStatic": 0,
      "shadowOverlay": 0,
      "shadowSamples": [],
-     "gradients": 0,
+     "gradients": 1,
      "scrims": 0,
-     "gradientSamples": [],
+     "gradientSamples": [
+      "div.brand-bg.min-h-svh → radial-gradient(70% 60% at 10% -10%, rgba(0, 51, 255, 0.18), rgba(0, 0, 0, 0) 62%), radial-gradient(65% 55% at"
+     ],
      "gradientText": 0,
      "hairlines": 0,
      "hairlineSamples": [],
      "outlinedBoxes": 0,
      "dashed": 0,
      "blurred": 0,
-     "roundedBoxes": 4,
+     "roundedBoxes": 5,
      "boxRadius": 8,
      "squareMedia": 0,
      "roundedMedia": 0,
@@ -274,7 +273,7 @@
      "w": 1440,
      "h": 900
     },
-    "pageH": 1436,
+    "pageH": 1644,
     "margins": {
      "left": 232,
      "right": 244
@@ -285,18 +284,18 @@
       "tag": "section",
       "top": 76,
       "height": 468,
-      "words": 29,
+      "words": 33,
       "media": 0,
-      "middle": 115,
+      "middle": 123,
       "heading": {
        "text": "One encrypted vault for every password.",
        "size": 48,
        "tag": "h1"
       },
       "left": 232,
-      "right": 478,
+      "right": 470,
       "textLeft": 232,
-      "textRight": 478,
+      "textRight": 470,
       "fullBleed": false,
       "footer": false,
       "hero": true,
@@ -307,8 +306,8 @@
       "sel": "section.bg-muted/40",
       "tag": "section",
       "top": 544,
-      "height": 640,
-      "words": 97,
+      "height": 848,
+      "words": 109,
       "media": 0,
       "middle": 48,
       "heading": {
@@ -329,7 +328,7 @@
      {
       "sel": "section.mx-auto.max-w-5xl",
       "tag": "section",
-      "top": 1184,
+      "top": 1392,
       "height": 168,
       "words": 6,
       "media": 0,
@@ -375,12 +374,12 @@
     "stage": false,
     "explains": true,
     "slivers": [],
-    "voidShare": 0.23,
+    "voidShare": 0.25,
     "voidBox": {
      "x": 1020,
      "y": 120,
      "w": 420,
-     "h": 720
+     "h": 780
     }
    },
    "app": null,
@@ -392,12 +391,12 @@
    "load": "load",
    "screens": 2,
    "filled": [
-    0.53,
-    0.7
+    1,
+    1
    ],
    "motion": {
-    "elements": 8,
-    "css": 8,
+    "elements": 16,
+    "css": 16,
     "transitions": 0,
     "scripted": 0,
     "videos": 0,
@@ -409,9 +408,9 @@
      "h": 1024
     },
     "page": {
-     "height": 1574,
-     "screens": 1.5,
-     "words": 149,
+     "height": 1856,
+     "screens": 1.8,
+     "words": 166,
      "img": 0,
      "video": 0,
      "canvas": 0,
@@ -423,7 +422,7 @@
      "uiAbuse": false,
      "realPictures": 0,
      "videoCount": 0,
-     "uiPictures": 0,
+     "uiPictures": 5,
      "pictureSamples": [],
      "blendText": 0,
      "sideScrollers": 0,
@@ -495,12 +494,12 @@
      "families": [
       {
        "family": "Geist",
-       "share": 0.97,
+       "share": 0.98,
        "mono": false
       },
       {
        "family": "Geist Mono",
-       "share": 0.03,
+       "share": 0.02,
        "mono": true
       }
      ],
@@ -522,7 +521,7 @@
       "leading": 1.5,
       "weight": 400,
       "tracking": 0,
-      "contrast": 18
+      "contrast": null
      },
      "measureChars": 43,
      "max": {
@@ -531,8 +530,8 @@
       "font": "Geist",
       "text": "One encrypted vault for every password."
      },
-     "monoShare": 0.03,
-     "monoProseShare": 0.03,
+     "monoShare": 0.02,
+     "monoProseShare": 0.02,
      "monoFamilies": [
       "Geist Mono"
      ],
@@ -550,40 +549,36 @@
     "eyebrows": [],
     "numbered": [],
     "color": {
-     "bodyBg": "#f2f4f7",
+     "bodyBg": "#eaedf8",
      "bodyBgHsl": {
-      "h": 216,
-      "s": 0.24,
-      "l": 0.96
+      "h": 227,
+      "s": 0.5,
+      "l": 0.95
      },
      "dark": false,
      "sectionBgs": [
       {
-       "color": "#f2f4f7",
+       "color": "#eaedf8",
        "top": 0,
        "hsl": {
-        "h": 216,
-        "s": 0.24,
-        "l": 0.96
+        "h": 227,
+        "s": 0.5,
+        "l": 0.95
        }
       }
      ],
      "textColors": [
       {
-       "color": "#0a0a0a",
-       "share": 0.81
+       "color": "#030812",
+       "share": 0.75
       },
       {
-       "color": "#5f6368",
-       "share": 0.12
+       "color": "#5b6178",
+       "share": 0.2
       },
       {
        "color": "#ffffff",
        "share": 0.05
-      },
-      {
-       "color": "#141414",
-       "share": 0.01
       },
       {
        "color": "#04250e",
@@ -591,11 +586,11 @@
       }
      ],
      "button": {
-      "bg": "#141414",
+      "bg": "#0033ff",
       "hsl": {
-       "h": 0,
-       "s": 0,
-       "l": 0.08
+       "h": 228,
+       "s": 1,
+       "l": 0.5
       },
       "fg": "#ffffff"
      },
@@ -620,16 +615,18 @@
      "shadowStatic": 0,
      "shadowOverlay": 0,
      "shadowSamples": [],
-     "gradients": 0,
+     "gradients": 1,
      "scrims": 0,
-     "gradientSamples": [],
+     "gradientSamples": [
+      "div.brand-bg.min-h-svh → radial-gradient(70% 60% at 10% -10%, rgba(0, 51, 255, 0.18), rgba(0, 0, 0, 0) 62%), radial-gradient(65% 55% at"
+     ],
      "gradientText": 0,
      "hairlines": 0,
      "hairlineSamples": [],
      "outlinedBoxes": 0,
      "dashed": 0,
      "blurred": 0,
-     "roundedBoxes": 4,
+     "roundedBoxes": 5,
      "boxRadius": 8,
      "squareMedia": 0,
      "roundedMedia": 0,
@@ -655,7 +652,7 @@
      "w": 768,
      "h": 1024
     },
-    "pageH": 1574,
+    "pageH": 1856,
     "margins": {
      "left": 24,
      "right": 31
@@ -665,8 +662,8 @@
       "sel": "section.mx-auto.grid",
       "tag": "section",
       "top": 76,
-      "height": 580,
-      "words": 29,
+      "height": 632,
+      "words": 33,
       "media": 0,
       "middle": 0,
       "heading": {
@@ -687,9 +684,9 @@
      {
       "sel": "section.bg-muted/40",
       "tag": "section",
-      "top": 656,
-      "height": 666,
-      "words": 97,
+      "top": 708,
+      "height": 896,
+      "words": 109,
       "media": 0,
       "middle": 48,
       "heading": {
@@ -710,7 +707,7 @@
      {
       "sel": "section.mx-auto.max-w-5xl",
       "tag": "section",
-      "top": 1322,
+      "top": 1604,
       "height": 168,
       "words": 6,
       "media": 0,
@@ -766,15 +763,16 @@
    "width": 390,
    "height": 844,
    "load": "load",
-   "screens": 3,
+   "screens": 4,
    "filled": [
-    0.49,
     1,
-    0.8
+    1,
+    1,
+    1
    ],
    "motion": {
-    "elements": 8,
-    "css": 8,
+    "elements": 16,
+    "css": 16,
     "transitions": 0,
     "scripted": 0,
     "videos": 0,
@@ -786,9 +784,9 @@
      "h": 844
     },
     "page": {
-     "height": 2178,
-     "screens": 2.6,
-     "words": 149,
+     "height": 2668,
+     "screens": 3.2,
+     "words": 166,
      "img": 0,
      "video": 0,
      "canvas": 0,
@@ -800,7 +798,7 @@
      "uiAbuse": false,
      "realPictures": 0,
      "videoCount": 0,
-     "uiPictures": 0,
+     "uiPictures": 5,
      "pictureSamples": [],
      "blendText": 0,
      "sideScrollers": 0,
@@ -875,7 +873,7 @@
       "align": "left",
       "position": "center",
       "widthRatio": 0.88,
-      "top": 788,
+      "top": 840,
       "tag": "h2",
       "kind": "heading"
      },
@@ -896,7 +894,7 @@
       "align": "left",
       "position": "left",
       "widthRatio": 0.46,
-      "top": 1934,
+      "top": 2424,
       "tag": "h2",
       "kind": "heading"
      }
@@ -914,12 +912,12 @@
      "families": [
       {
        "family": "Geist",
-       "share": 0.97,
+       "share": 0.98,
        "mono": false
       },
       {
        "family": "Geist Mono",
-       "share": 0.03,
+       "share": 0.02,
        "mono": true
       }
      ],
@@ -941,7 +939,7 @@
       "leading": 1.5,
       "weight": 400,
       "tracking": 0,
-      "contrast": 18
+      "contrast": null
      },
      "measureChars": 43,
      "max": {
@@ -950,8 +948,8 @@
       "font": "Geist",
       "text": "One encrypted vault for every password."
      },
-     "monoShare": 0.03,
-     "monoProseShare": 0.03,
+     "monoShare": 0.02,
+     "monoProseShare": 0.02,
      "monoFamilies": [
       "Geist Mono"
      ],
@@ -969,40 +967,36 @@
     "eyebrows": [],
     "numbered": [],
     "color": {
-     "bodyBg": "#f2f4f7",
+     "bodyBg": "#eaedf8",
      "bodyBgHsl": {
-      "h": 216,
-      "s": 0.24,
-      "l": 0.96
+      "h": 227,
+      "s": 0.5,
+      "l": 0.95
      },
      "dark": false,
      "sectionBgs": [
       {
-       "color": "#f2f4f7",
+       "color": "#eaedf8",
        "top": 0,
        "hsl": {
-        "h": 216,
-        "s": 0.24,
-        "l": 0.96
+        "h": 227,
+        "s": 0.5,
+        "l": 0.95
        }
       }
      ],
      "textColors": [
       {
-       "color": "#0a0a0a",
-       "share": 0.81
+       "color": "#030812",
+       "share": 0.75
       },
       {
-       "color": "#5f6368",
-       "share": 0.12
+       "color": "#5b6178",
+       "share": 0.2
       },
       {
        "color": "#ffffff",
        "share": 0.05
-      },
-      {
-       "color": "#141414",
-       "share": 0.01
       },
       {
        "color": "#04250e",
@@ -1010,11 +1004,11 @@
       }
      ],
      "button": {
-      "bg": "#141414",
+      "bg": "#0033ff",
       "hsl": {
-       "h": 0,
-       "s": 0,
-       "l": 0.08
+       "h": 228,
+       "s": 1,
+       "l": 0.5
       },
       "fg": "#ffffff"
      },
@@ -1039,16 +1033,18 @@
      "shadowStatic": 0,
      "shadowOverlay": 0,
      "shadowSamples": [],
-     "gradients": 0,
+     "gradients": 1,
      "scrims": 0,
-     "gradientSamples": [],
+     "gradientSamples": [
+      "div.brand-bg.min-h-svh → radial-gradient(70% 60% at 10% -10%, rgba(0, 51, 255, 0.18), rgba(0, 0, 0, 0) 62%), radial-gradient(65% 55% at"
+     ],
      "gradientText": 0,
      "hairlines": 0,
      "hairlineSamples": [],
      "outlinedBoxes": 0,
      "dashed": 0,
      "blurred": 0,
-     "roundedBoxes": 4,
+     "roundedBoxes": 5,
      "boxRadius": 8,
      "squareMedia": 0,
      "roundedMedia": 0,
@@ -1074,7 +1070,7 @@
      "w": 390,
      "h": 844
     },
-    "pageH": 2178,
+    "pageH": 2668,
     "margins": {
      "left": 24,
      "right": 26
@@ -1084,8 +1080,8 @@
       "sel": "section.mx-auto.grid",
       "tag": "section",
       "top": 76,
-      "height": 648,
-      "words": 29,
+      "height": 700,
+      "words": 33,
       "media": 0,
       "middle": 0,
       "heading": {
@@ -1106,9 +1102,9 @@
      {
       "sel": "section.bg-muted/40",
       "tag": "section",
-      "top": 724,
-      "height": 1146,
-      "words": 97,
+      "top": 776,
+      "height": 1584,
+      "words": 109,
       "media": 0,
       "middle": 0,
       "heading": {
@@ -1129,7 +1125,7 @@
      {
       "sel": "section.mx-auto.max-w-5xl",
       "tag": "section",
-      "top": 1870,
+      "top": 2360,
       "height": 224,
       "words": 6,
       "media": 0,
@@ -1180,11 +1176,11 @@
  ],
  "findings": [
   {
-   "level": "FAIL",
-   "id": "few-pictures",
+   "level": "WARN",
+   "id": "no-real-pictures",
    "width": 1440,
-   "message": "Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
-   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+   "message": "Only 0 real photograph(s) or clip(s); the rest are interface fragments.",
+   "fix": "Add two or more real pictures of the customer's world from scripts/assets.mjs, not stock of people at laptops."
   },
   {
    "level": "WARN",
@@ -1192,24 +1188,6 @@
    "width": 1440,
    "message": "No video anywhere on the page.",
    "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
-  },
-  {
-   "level": "WARN",
-   "id": "dev-server",
-   "width": 1440,
-   "message": "This page is served by a development server (Vite, webpack or Next in dev mode).",
-   "fix": "Run the last gate on the production build too (vite build && vite preview, next build && next start, or the built index.html): minifiers and bundlers change the CSS a visitor receives.",
-   "alsoAt": [
-    768,
-    390
-   ]
-  },
-  {
-   "level": "WARN",
-   "id": "still-page",
-   "width": 1440,
-   "message": "Little motion: 8 element(s) moved while the page loaded and scrolled.",
-   "fix": "Give every section an entrance for its parts (not one fade of the whole block) and add one moving picture: a looping clip or a slow move on a photograph."
   }
  ],
  "images": [
