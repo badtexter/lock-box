@@ -83,6 +83,11 @@ export default function Dashboard() {
         form.resetForm();
     };
 
+    const handleAdd = () => {
+        form.resetForm();
+        setIsOpen(true);
+    };
+
     return (
         <>
             <Head title="Dashboard" />
@@ -96,11 +101,11 @@ export default function Dashboard() {
                     <DashboardHero
                         itemCount={items.length}
                         latestPlatform={latest?.platform}
-                        onAdd={() => setIsOpen(true)}
+                        onAdd={handleAdd}
                     />
 
                     {items.length === 0 ? (
-                        <EmptyVault onAdd={() => setIsOpen(true)} />
+                        <EmptyVault onAdd={handleAdd} />
                     ) : (
                         <div className="flex flex-wrap items-start gap-5">
                             <PasswordSidebar
@@ -132,7 +137,9 @@ export default function Dashboard() {
 
             <AccountFormDialog
                 open={isOpen}
-                onOpenChange={setIsOpen}
+                onOpenChange={(open) =>
+                    open ? setIsOpen(true) : handleCancel()
+                }
                 formValues={form.formValues}
                 formErrors={form.formErrors}
                 editingId={form.editingId}
