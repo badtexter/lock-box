@@ -1,4 +1,5 @@
 import { Copy, Eye, MoreVertical } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -36,8 +37,15 @@ export default function PasswordCard({
                 </div>
 
                 <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        <MoreVertical />
+                    <DropdownMenuTrigger asChild>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-white/50 dark:hover:bg-white/10 dark:hover:text-white"
+                            aria-label="More options"
+                        >
+                            <MoreVertical className="h-4 w-4" />
+                        </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuItem onSelect={() => onEdit?.(item.id)}>
@@ -69,23 +77,25 @@ export default function PasswordCard({
                 </span>
 
                 <div className="flex items-center gap-1">
-                    <div className="rounded-lg p-2 text-slate-500 dark:text-white/50">
-                        <button
-                            onClick={() => onCopy?.(item.id)}
-                            aria-label="Copy"
-                        >
-                            <Copy className="h-4 w-4" />
-                        </button>
-                    </div>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        className="rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-white/50 dark:hover:bg-white/10 dark:hover:text-white"
+                        onClick={() => onCopy?.(item.id)}
+                        aria-label="Copy"
+                    >
+                        <Copy className="h-4 w-4" />
+                    </Button>
 
-                    <div className="rounded-lg p-2 text-slate-500 dark:text-white/50">
-                        <button
-                            onClick={() => onToggleReveal?.(item.id)}
-                            aria-label="Reveal"
-                        >
-                            <Eye className="h-4 w-4" />
-                        </button>
-                    </div>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        className="rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-white/50 dark:hover:bg-white/10 dark:hover:text-white"
+                        onClick={() => onToggleReveal?.(item.id)}
+                        aria-label="Reveal"
+                    >
+                        <Eye className="h-4 w-4" />
+                    </Button>
                 </div>
             </div>
         </div>

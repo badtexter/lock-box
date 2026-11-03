@@ -1,3 +1,6 @@
+import { KeyRound, ShieldCheck } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+
 type DashboardHeroProps = {
     itemCount: number;
 };
@@ -20,9 +23,22 @@ export default function DashboardHero({ itemCount }: DashboardHeroProps) {
                 place.
             </p>
 
-            <div className="mt-6 flex items-center gap-6 text-sm text-slate-500 dark:text-white/50">
-                <span>{itemCount} credentials stored</span>
-                <span>Protected by encryption</span>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Badge
+                    variant="outline"
+                    className="gap-1.5 rounded-full border-slate-200 bg-white/80 px-3 py-1.5 text-slate-600 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.03] dark:text-white/60"
+                >
+                    <KeyRound className="h-3.5 w-3.5 text-[#2B5CFF] dark:text-[#977DFF]" />
+                    {itemCount} credentials stored
+                </Badge>
+
+                <Badge
+                    variant="outline"
+                    className="gap-1.5 rounded-full border-slate-200 bg-white/80 px-3 py-1.5 text-slate-600 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.03] dark:text-white/60"
+                >
+                    <ShieldCheck className="h-3.5 w-3.5 text-[#2B5CFF] dark:text-[#977DFF]" />
+                    Protected by encryption
+                </Badge>
             </div>
         </div>
     );
