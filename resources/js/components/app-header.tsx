@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LogOut, Moon, Settings, Sparkles, User } from 'lucide-react';
+import { LogOut, Moon, Settings, Sun, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,7 +20,7 @@ export function AppHeader() {
     return (
         <>
             <div className="sticky top-3 z-50 mx-auto mt-3 w-full max-w-md px-4">
-                <div className="flex h-11 items-center justify-between rounded-full border border-black/10 bg-[#030812]/95 px-3 shadow-lg shadow-black/20 backdrop-blur-2xl dark:border-white/10 dark:bg-white/95 dark:shadow-slate-900/10">
+                <div className="flex h-11 items-center justify-between rounded-full border border-white/10 bg-neutral-900/95 px-3 shadow-lg shadow-black/20 backdrop-blur-2xl dark:border-black/10 dark:bg-white/95 dark:shadow-slate-900/10">
                     {/* LEFT - BRAND */}
                     <Link
                         href={dashboard()}
@@ -36,7 +36,7 @@ export function AppHeader() {
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8"
+                            className="h-8 w-8 hover:bg-white/10 dark:hover:bg-black/5"
                             onClick={() =>
                                 updateAppearance(
                                     appearance === 'light' ? 'dark' : 'light',
@@ -45,7 +45,7 @@ export function AppHeader() {
                             title="Toggle theme"
                         >
                             {appearance === 'light' ? (
-                                <Sparkles className="h-4 w-4 text-amber-500" />
+                                <Sun className="h-4 w-4 text-amber-400" />
                             ) : (
                                 <Moon className="h-4 w-4 text-white dark:text-[#030812]" />
                             )}
@@ -57,7 +57,7 @@ export function AppHeader() {
                                 <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-8 w-8 rounded-full"
+                                    className="h-8 w-8 rounded-full hover:bg-white/10 dark:hover:bg-black/5"
                                 >
                                     <Avatar className="h-7 w-7">
                                         <AvatarImage
