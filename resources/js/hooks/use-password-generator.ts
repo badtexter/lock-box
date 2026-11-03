@@ -33,7 +33,7 @@ export function usePasswordGenerator() {
             .sort(() => secureRandom(2) - 0.5)
             .join('');
 
-        toast.success('Wygenerowano hasło');
+        toast.success('Password generated');
 
         return password;
     };

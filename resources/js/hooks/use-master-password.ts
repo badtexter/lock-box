@@ -36,7 +36,7 @@ async function fetchRevealedPassword(
         const message =
             data?.errors?.master_password?.[0] ??
             data?.message ??
-            'Nie można odsłonić hasła';
+            'Unable to reveal password';
         toast.error(message);
         return null;
     }
@@ -82,7 +82,7 @@ export function useMasterPassword() {
             if (!password) {
                 setPrompt((prev) => ({
                     ...prev,
-                    error: 'Podaj hasło główne.',
+                    error: 'Enter your master password.',
                 }));
                 return;
             }
@@ -105,9 +105,9 @@ export function useMasterPassword() {
             if (action === 'copy') {
                 try {
                     await navigator.clipboard.writeText(pwd);
-                    toast.success('Skopiowano hasło');
+                    toast.success('Password copied');
                 } catch {
-                    toast.error('Nie udało się skopiować');
+                    toast.error('Failed to copy');
                 }
             } else {
                 setVisibleIds((prev) => ({ ...prev, [accountId]: true }));

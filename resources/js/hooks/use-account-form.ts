@@ -44,17 +44,17 @@ export function useAccountForm(onClose: () => void) {
         const errors: AccountFormErrors = {};
 
         if (!formValues.platform.trim()) {
-            errors.platform = 'To pole jest wymagane.';
+            errors.platform = 'This field is required.';
         }
 
         if (!formValues.email.trim()) {
-            errors.email = 'To pole jest wymagane.';
+            errors.email = 'This field is required.';
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formValues.email)) {
-            errors.email = 'Wprowadź poprawny adres e-mail.';
+            errors.email = 'Enter a valid email address.';
         }
 
         if (!formValues.password) {
-            errors.password = 'To pole jest wymagane.';
+            errors.password = 'This field is required.';
         }
 
         setFormErrors(errors);

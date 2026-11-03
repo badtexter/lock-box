@@ -7,21 +7,21 @@ export function usePasswordStrength(password: string): string {
         const missing: string[] = [];
 
         if (password.length < 14) {
-            missing.push('co najmniej 14 znaków');
+            missing.push('at least 14 characters');
         }
 
         if (!/[A-Z]/.test(password)) {
-            missing.push('dużą literę');
+            missing.push('an uppercase letter');
         }
 
         if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
-            missing.push('znak specjalny');
+            missing.push('a special character');
         }
 
-        if (missing.length === 0) return 'Hasło wygląda dobrze.';
+        if (missing.length === 0) return 'Looks good.';
 
-        const joined = missing.join(', ').replace(/, ([^,]+)$/, ' i $1');
+        const joined = missing.join(', ').replace(/, ([^,]+)$/, ' and $1');
 
-        return `Hasło będzie silniejsze jeśli dodasz ${joined}.`;
+        return `Add ${joined} to make it stronger.`;
     }, [password]);
 }
