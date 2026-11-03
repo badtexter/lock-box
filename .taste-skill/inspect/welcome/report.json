@@ -1,0 +1,1244 @@
+{
+ "url": "http://localhost/",
+ "at": "2026-11-03T17:08:47.040Z",
+ "allow": [
+  "mono"
+ ],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.53,
+    0.81
+   ],
+   "motion": {
+    "elements": 8,
+    "css": 8,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 1436,
+     "screens": 1.6,
+     "words": 149,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 7,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 5,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "One encrypted vault for every password.",
+     "words": 6,
+     "chars": 39,
+     "lines": 2,
+     "size": 48,
+     "vw": 3.3,
+     "font": "Geist",
+     "weight": 600,
+     "tracking": -0.025,
+     "leading": 1,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.32,
+     "top": 188,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "One encrypted vault for every password.",
+     "words": 6,
+     "lines": 2,
+     "size": 48,
+     "font": "Geist"
+    },
+    "headings": [
+     {
+      "text": "One encrypted vault for every password.",
+      "words": 6,
+      "chars": 39,
+      "lines": 2,
+      "size": 48,
+      "vw": 3.3,
+      "font": "Geist",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.32,
+      "top": 188,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Geist",
+       "share": 0.97,
+       "mono": false
+      },
+      {
+       "family": "Geist Mono",
+       "share": 0.03,
+       "mono": true
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      11,
+      14,
+      15,
+      16,
+      18,
+      24,
+      48
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Geist",
+      "size": 16,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 18
+     },
+     "measureChars": 59,
+     "max": {
+      "size": 48,
+      "vw": 3.3,
+      "font": "Geist",
+      "text": "One encrypted vault for every password."
+     },
+     "monoShare": 0.03,
+     "monoProseShare": 0.03,
+     "monoFamilies": [
+      "Geist Mono"
+     ],
+     "monoSamples": [
+      "••••••••••••",
+      "f4!xQ9r@mZ2k"
+     ],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f2f4f7",
+     "bodyBgHsl": {
+      "h": 216,
+      "s": 0.24,
+      "l": 0.96
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f2f4f7",
+       "top": 0,
+       "hsl": {
+        "h": 216,
+        "s": 0.24,
+        "l": 0.96
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#0a0a0a",
+       "share": 0.81
+      },
+      {
+       "color": "#5f6368",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.05
+      },
+      {
+       "color": "#141414",
+       "share": 0.01
+      },
+      {
+       "color": "#04250e",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#141414",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 0.08
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 3,
+     "radius": 6,
+     "height": 40,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Get started",
+      "Create your vault",
+      "Log in"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 4,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": false,
+     "height": 76,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "geist mono"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 1436,
+    "margins": {
+     "left": 232,
+     "right": 244
+    },
+    "sections": [
+     {
+      "sel": "section.mx-auto.grid",
+      "tag": "section",
+      "top": 76,
+      "height": 468,
+      "words": 29,
+      "media": 0,
+      "middle": 115,
+      "heading": {
+       "text": "One encrypted vault for every password.",
+       "size": 48,
+       "tag": "h1"
+      },
+      "left": 232,
+      "right": 478,
+      "textLeft": 232,
+      "textRight": 478,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-muted/40",
+      "tag": "section",
+      "top": 544,
+      "height": 640,
+      "words": 97,
+      "media": 0,
+      "middle": 48,
+      "heading": {
+       "text": "What it does",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 232,
+      "right": 233,
+      "textLeft": 232,
+      "textRight": 233,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.mx-auto.max-w-5xl",
+      "tag": "section",
+      "top": 1184,
+      "height": 168,
+      "words": 6,
+      "media": 0,
+      "middle": 663,
+      "heading": {
+       "text": "Start your vault.",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 232,
+      "right": 252,
+      "textLeft": 232,
+      "textRight": 252,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "One encrypted vault for every password.",
+      "size": 48,
+      "top": 188,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 232,
+      "n": 8
+     },
+     {
+      "x": 740,
+      "n": 4
+     }
+    ],
+    "leftBlocks": 12,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.23,
+    "voidBox": {
+     "x": 1020,
+     "y": 120,
+     "w": 420,
+     "h": 720
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.53,
+    0.7
+   ],
+   "motion": {
+    "elements": 8,
+    "css": 8,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 1574,
+     "screens": 1.5,
+     "words": 149,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 7,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 5,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "One encrypted vault for every password.",
+     "words": 6,
+     "chars": 39,
+     "lines": 1,
+     "size": 36,
+     "vw": 4.7,
+     "font": "Geist",
+     "weight": 600,
+     "tracking": -0.025,
+     "leading": 1.11,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.94,
+     "top": 156,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "One encrypted vault for every password.",
+     "words": 6,
+     "lines": 1,
+     "size": 36,
+     "font": "Geist"
+    },
+    "headings": [
+     {
+      "text": "One encrypted vault for every password.",
+      "words": 6,
+      "chars": 39,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Geist",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 156,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Geist",
+       "share": 0.97,
+       "mono": false
+      },
+      {
+       "family": "Geist Mono",
+       "share": 0.03,
+       "mono": true
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      11,
+      14,
+      15,
+      16,
+      18,
+      24,
+      36
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Geist",
+      "size": 16,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 18
+     },
+     "measureChars": 43,
+     "max": {
+      "size": 36,
+      "vw": 4.7,
+      "font": "Geist",
+      "text": "One encrypted vault for every password."
+     },
+     "monoShare": 0.03,
+     "monoProseShare": 0.03,
+     "monoFamilies": [
+      "Geist Mono"
+     ],
+     "monoSamples": [
+      "••••••••••••",
+      "f4!xQ9r@mZ2k"
+     ],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f2f4f7",
+     "bodyBgHsl": {
+      "h": 216,
+      "s": 0.24,
+      "l": 0.96
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f2f4f7",
+       "top": 0,
+       "hsl": {
+        "h": 216,
+        "s": 0.24,
+        "l": 0.96
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#0a0a0a",
+       "share": 0.81
+      },
+      {
+       "color": "#5f6368",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.05
+      },
+      {
+       "color": "#141414",
+       "share": 0.01
+      },
+      {
+       "color": "#04250e",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#141414",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 0.08
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 3,
+     "radius": 6,
+     "height": 40,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Get started",
+      "Create your vault",
+      "Log in"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 4,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": false,
+     "height": 76,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "geist mono"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 1574,
+    "margins": {
+     "left": 24,
+     "right": 31
+    },
+    "sections": [
+     {
+      "sel": "section.mx-auto.grid",
+      "tag": "section",
+      "top": 76,
+      "height": 580,
+      "words": 29,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "One encrypted vault for every password.",
+       "size": 36,
+       "tag": "h1"
+      },
+      "left": 24,
+      "right": 66,
+      "textLeft": 24,
+      "textRight": 66,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-muted/40",
+      "tag": "section",
+      "top": 656,
+      "height": 666,
+      "words": 97,
+      "media": 0,
+      "middle": 48,
+      "heading": {
+       "text": "What it does",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 26,
+      "textLeft": 24,
+      "textRight": 26,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.mx-auto.max-w-5xl",
+      "tag": "section",
+      "top": 1322,
+      "height": 168,
+      "words": 6,
+      "media": 0,
+      "middle": 407,
+      "heading": {
+       "text": "Start your vault.",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 44,
+      "textLeft": 24,
+      "textRight": 44,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "One encrypted vault for every password.",
+      "size": 36,
+      "top": 156,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 24,
+      "n": 8
+     },
+     {
+      "x": 404,
+      "n": 4
+     }
+    ],
+    "leftBlocks": 12,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.49,
+    1,
+    0.8
+   ],
+   "motion": {
+    "elements": 8,
+    "css": 8,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 2178,
+     "screens": 2.6,
+     "words": 149,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 7,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 5,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "One encrypted vault for every password.",
+     "words": 6,
+     "chars": 39,
+     "lines": 2,
+     "size": 36,
+     "vw": 9.2,
+     "font": "Geist",
+     "weight": 600,
+     "tracking": -0.025,
+     "leading": 1.11,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.88,
+     "top": 156,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "One encrypted vault for every password.",
+     "words": 6,
+     "lines": 2,
+     "size": 36,
+     "font": "Geist"
+    },
+    "headings": [
+     {
+      "text": "One encrypted vault for every password.",
+      "words": 6,
+      "chars": 39,
+      "lines": 2,
+      "size": 36,
+      "vw": 9.2,
+      "font": "Geist",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 156,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "What it does",
+      "words": 3,
+      "chars": 12,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Geist",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 788,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Start your vault.",
+      "words": 3,
+      "chars": 17,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Geist",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.46,
+      "top": 1934,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 3,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Geist",
+       "share": 0.97,
+       "mono": false
+      },
+      {
+       "family": "Geist Mono",
+       "share": 0.03,
+       "mono": true
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      11,
+      14,
+      15,
+      16,
+      18,
+      24,
+      36
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Geist",
+      "size": 16,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 18
+     },
+     "measureChars": 43,
+     "max": {
+      "size": 36,
+      "vw": 9.2,
+      "font": "Geist",
+      "text": "One encrypted vault for every password."
+     },
+     "monoShare": 0.03,
+     "monoProseShare": 0.03,
+     "monoFamilies": [
+      "Geist Mono"
+     ],
+     "monoSamples": [
+      "••••••••••••",
+      "f4!xQ9r@mZ2k"
+     ],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f2f4f7",
+     "bodyBgHsl": {
+      "h": 216,
+      "s": 0.24,
+      "l": 0.96
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f2f4f7",
+       "top": 0,
+       "hsl": {
+        "h": 216,
+        "s": 0.24,
+        "l": 0.96
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#0a0a0a",
+       "share": 0.81
+      },
+      {
+       "color": "#5f6368",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.05
+      },
+      {
+       "color": "#141414",
+       "share": 0.01
+      },
+      {
+       "color": "#04250e",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#141414",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 0.08
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 3,
+     "radius": 6,
+     "height": 40,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Get started",
+      "Create your vault",
+      "Log in"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 4,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": false,
+     "height": 76,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "geist mono"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 2178,
+    "margins": {
+     "left": 24,
+     "right": 26
+    },
+    "sections": [
+     {
+      "sel": "section.mx-auto.grid",
+      "tag": "section",
+      "top": 76,
+      "height": 648,
+      "words": 29,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "One encrypted vault for every password.",
+       "size": 36,
+       "tag": "h1"
+      },
+      "left": 24,
+      "right": 25,
+      "textLeft": 24,
+      "textRight": 25,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.bg-muted/40",
+      "tag": "section",
+      "top": 724,
+      "height": 1146,
+      "words": 97,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "What it does",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 28,
+      "textLeft": 24,
+      "textRight": 28,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.mx-auto.max-w-5xl",
+      "tag": "section",
+      "top": 1870,
+      "height": 224,
+      "words": 6,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Start your vault.",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 186,
+      "textLeft": 24,
+      "textRight": 186,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "One encrypted vault for every password.",
+      "size": 36,
+      "top": 156,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 24,
+      "n": 12
+     }
+    ],
+    "leftBlocks": 12,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "dev-server",
+   "width": 1440,
+   "message": "This page is served by a development server (Vite, webpack or Next in dev mode).",
+   "fix": "Run the last gate on the production build too (vite build && vite preview, next build && next start, or the built index.html): minifiers and bundlers change the CSS a visitor receives.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Little motion: 8 element(s) moved while the page loaded and scrolled.",
+   "fix": "Give every section an entrance for its parts (not one fade of the whole block) and add one moving picture: a looping clip or a slow move on a photograph."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/Users/klaudiapabin/projekty/lock-box/.taste-skill/inspect/welcome/desktop-fold.jpg",
+   "pages": [
+    "/Users/klaudiapabin/projekty/lock-box/.taste-skill/inspect/welcome/desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/Users/klaudiapabin/projekty/lock-box/.taste-skill/inspect/welcome/tablet-fold.jpg",
+   "pages": [
+    "/Users/klaudiapabin/projekty/lock-box/.taste-skill/inspect/welcome/tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/Users/klaudiapabin/projekty/lock-box/.taste-skill/inspect/welcome/mobile-fold.jpg",
+   "pages": [
+    "/Users/klaudiapabin/projekty/lock-box/.taste-skill/inspect/welcome/mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}
