@@ -51,7 +51,7 @@ export default function Profile({
 
                                 <Input
                                     id="name"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 h-12 w-full rounded-xl border-slate-300 bg-white dark:border-white/10 dark:bg-white/[0.03]"
                                     defaultValue={auth.user.name}
                                     name="name"
                                     required
@@ -71,7 +71,7 @@ export default function Profile({
                                 <Input
                                     id="email"
                                     type="email"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 h-12 w-full rounded-xl border-slate-300 bg-white dark:border-white/10 dark:bg-white/[0.03]"
                                     defaultValue={auth.user.email}
                                     name="email"
                                     required
@@ -114,6 +114,11 @@ export default function Profile({
                                 <Button
                                     disabled={processing}
                                     data-test="update-profile-button"
+                                    className="rounded-full px-6 font-semibold text-white shadow-[0_10px_25px_rgba(43,92,255,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(43,92,255,0.45)]"
+                                    style={{
+                                        background:
+                                            'linear-gradient(135deg,#2B5CFF,#8A5CFF)',
+                                    }}
                                 >
                                     Save
                                 </Button>

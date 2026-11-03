@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { LogOut, Moon, Settings, Sun, User } from 'lucide-react';
+import { LogOut, Moon, Settings, Sun } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -85,15 +85,6 @@ export function AppHeader() {
                                         {(auth.user as any)?.email}
                                     </p>
                                 </div>
-
-                                {/* PROFILE - not active yet*/}
-                                <Link
-                                    href="/profile"
-                                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-[#030812] transition hover:bg-white/60 dark:text-white dark:hover:bg-white/10"
-                                >
-                                    <User className="h-4 w-4" />
-                                    Profile
-                                </Link>
 
                                 {/* SETTINGS */}
                                 <Link
