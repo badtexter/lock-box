@@ -45,14 +45,14 @@ export default function Dashboard() {
     };
 
     const handleDelete = (id: number) => {
-        if (!confirm('Usuń ten wpis?')) return;
+        if (!confirm('Delete this entry?')) return;
 
         router.delete(`/accounts/${id}`, {
             onSuccess: () => {
-                toast.success('Usunięto');
+                toast.success('Deleted');
                 router.reload();
             },
-            onError: () => toast.error('Błąd usuwania'),
+            onError: () => toast.error('Failed to delete'),
         });
     };
 
