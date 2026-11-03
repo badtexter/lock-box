@@ -71,10 +71,12 @@ export default function Dashboard() {
         <>
             <Head title="Dashboard" />
 
-            <div className="relative min-h-[calc(100vh-3.5rem)] overflow-hidden bg-[#F5F8FF] dark:bg-[#00033D]">
+            <div className="fixed inset-0 z-0 overflow-hidden bg-[#F5F8FF] dark:bg-[#00033D]">
                 <DashboardBackground />
+            </div>
 
-                <div className="relative z-10 mx-auto max-w-7xl p-6 lg:p-10">
+            <div className="relative z-10 min-h-[calc(100vh-3.5rem)]">
+                <div className="mx-auto max-w-7xl p-6 lg:p-10">
                     <DashboardHero itemCount={items.length} />
 
                     {/* Search + Add */}
