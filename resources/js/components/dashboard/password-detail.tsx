@@ -29,17 +29,17 @@ export default function PasswordDetail({
     });
 
     return (
-        <div className="min-w-0 flex-[999_1_560px] rounded-3xl border border-slate-300/70 bg-white/95 p-8 shadow-xl shadow-slate-900/10 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
+        <div className="min-w-0 flex-[999_1_560px] rounded-lg border border-border bg-card p-6">
             <div className="flex flex-wrap items-start justify-between gap-4">
-                <div className="flex min-w-0 items-center gap-4">
-                    <div className="flex h-15 w-15 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0033FF] to-[#977DFF] text-2xl font-bold text-white shadow-lg shadow-[#0033FF]/25">
+                <div className="flex min-w-0 items-center gap-3">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[6px] bg-secondary text-lg font-medium text-secondary-foreground">
                         {account.platform[0]}
                     </div>
                     <div className="min-w-0">
-                        <h2 className="truncate font-display text-xl font-bold text-[#030812] dark:text-white">
+                        <h2 className="truncate text-lg font-semibold text-foreground">
                             {account.platform}
                         </h2>
-                        <p className="truncate text-sm text-slate-500 dark:text-white/50">
+                        <p className="truncate text-sm text-muted-foreground">
                             {email}
                         </p>
                     </div>
@@ -49,7 +49,7 @@ export default function PasswordDetail({
                     <Button
                         variant="outline"
                         size="icon"
-                        className="rounded-xl border-slate-300 dark:border-white/10"
+                        className="rounded-[6px]"
                         onClick={() => onEdit(account.id)}
                         aria-label="Edit"
                     >
@@ -58,7 +58,7 @@ export default function PasswordDetail({
                     <Button
                         variant="outline"
                         size="icon"
-                        className="rounded-xl border-red-200 text-red-500 hover:bg-red-50 dark:border-red-500/20"
+                        className="rounded-[6px] border-[#ffedea] text-[#c4242a] hover:bg-[#ffedea] dark:border-[#2c1a20] dark:text-[#e5566f] dark:hover:bg-[#2c1a20]"
                         onClick={() => onDelete(account.id)}
                         aria-label="Delete"
                     >
@@ -67,12 +67,12 @@ export default function PasswordDetail({
                 </div>
             </div>
 
-            <div className="mt-7 border-t border-slate-200 pt-6 dark:border-white/10">
-                <span className="text-xs font-bold tracking-wide text-slate-500 uppercase dark:text-white/50">
+            <div className="mt-6 border-t border-border pt-5">
+                <span className="text-sm font-medium text-foreground">
                     Password
                 </span>
-                <div className="mt-2 flex items-center justify-between gap-3 rounded-2xl border border-slate-300/80 bg-slate-100 px-4 py-3.5 dark:border-white/10 dark:bg-white/5">
-                    <span className="font-mono text-sm tracking-[0.2em] text-slate-700 dark:text-white/70">
+                <div className="mt-2 flex items-center justify-between gap-3 rounded-[6px] border border-border bg-muted px-3 py-2.5">
+                    <span className="font-mono text-sm tracking-[0.1em] text-foreground">{/* taste-skill-ignore: a password field, not prose */}
                         {visible
                             ? (revealed ?? '••••••••••••')
                             : '••••••••••••'}
@@ -81,7 +81,7 @@ export default function PasswordDetail({
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="rounded-lg text-slate-600 hover:bg-slate-200 dark:text-white/60 dark:hover:bg-white/10"
+                            className="h-8 w-8 rounded-[6px]"
                             onClick={() => onCopy(account.id)}
                             aria-label="Copy password"
                         >
@@ -90,7 +90,7 @@ export default function PasswordDetail({
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="rounded-lg text-slate-600 hover:bg-slate-200 dark:text-white/60 dark:hover:bg-white/10"
+                            className="h-8 w-8 rounded-[6px]"
                             onClick={() => onToggleReveal(account.id)}
                             aria-label="Reveal password"
                         >
@@ -100,7 +100,7 @@ export default function PasswordDetail({
                 </div>
             </div>
 
-            <p className="mt-5 text-xs text-slate-400 dark:text-white/30">
+            <p className="mt-4 text-xs text-muted-foreground">
                 Added {addedOn}
             </p>
         </div>

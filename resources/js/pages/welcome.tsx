@@ -1,210 +1,185 @@
-import { Head, Link, usePage } from '@inertiajs/react';
-import { login } from '@/routes';
-import { register } from '@/routes';
-import { useEffect, useState } from 'react';
+import { Head, Link } from '@inertiajs/react';
+import { Copy, Eye, KeyRound, Moon, Sun } from 'lucide-react';
+import { useAppearance } from '@/hooks/use-appearance';
+import { login, register } from '@/routes';
+
+const FEATURES = [
+    {
+        name: 'One encrypted vault',
+        detail: 'Every credential is encrypted at rest. Nothing is stored or read in plain text, including by you.',
+    },
+    {
+        name: 'A generator that means it',
+        detail: 'Fourteen characters minimum, upper and lower case, a number and a symbol, built in — no reused passwords.',
+    },
+    {
+        name: '2FA and passkeys',
+        detail: 'Time-based codes with recovery codes, or sign in with a passkey instead of typing anything.',
+    },
+    {
+        name: 'Find it in one search',
+        detail: 'Every entry is searchable by platform or email the moment you start typing.',
+    },
+];
 
 export default function Welcome() {
-    const [isDark, setIsDark] = useState(false);
-
-    useEffect(() => {
-        const isDarkMode =
-            localStorage.getItem('darkMode') === 'true' ||
-            (!localStorage.getItem('darkMode') &&
-                window.matchMedia('(prefers-color-scheme: dark)').matches);
-        setIsDark(isDarkMode);
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }, []);
-
-    const toggleTheme = () => {
-        const newDarkMode = !isDark;
-        setIsDark(newDarkMode);
-        localStorage.setItem('darkMode', String(newDarkMode));
-        if (newDarkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    };
-
-    const colors = {
-        dark_blue: '#00033D',
-        lighter_blue: '#0033FF',
-        light_purple: '#977DFF',
-        grey: '#EAEDF8',
-        white: '#FFFFFF',
-        black: '#030812',
-    };
+    const { resolvedAppearance, updateAppearance } = useAppearance();
 
     return (
         <>
             <Head title="LockBox" />
-            <div className="min-h-screen overflow-hidden bg-white font-sans transition-colors duration-300 dark:bg-[#00033D]">
-                {/* NAVBAR */}
-                <nav className="relative z-20 container mx-auto flex items-center justify-between px-8 py-8">
-                    <div className="flex items-center gap-3">
-                        <span className="font-display text-3xl font-bold text-[#030812] dark:text-white">
+            <div className="bg-background min-h-svh">
+                {/* NAV */}
+                <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+                    <span className="text-foreground flex items-center gap-2.5">
+                        <span className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded-[4px] text-[11px] font-semibold">
+                            L
+                        </span>
+                        <span className="text-[15px] font-medium tracking-tight">
                             LockBox
                         </span>
-                    </div>
-                    <div className="flex items-center gap-4">
+                    </span>
+                    <div className="flex items-center gap-2">
                         <button
-                            onClick={toggleTheme}
-                            className="rounded-lg p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
+                            type="button"
+                            onClick={() =>
+                                updateAppearance(
+                                    resolvedAppearance === 'light'
+                                        ? 'dark'
+                                        : 'light',
+                                )
+                            }
+                            className="hover:bg-accent flex h-8 w-8 items-center justify-center rounded-[6px]"
                             aria-label="Toggle theme"
                         >
-                            {isDark ? (
-                                <svg
-                                    className="h-6 w-6 text-yellow-500"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.12-2.12a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414l2.12 2.12a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM9 4a1 1 0 100-2 1 1 0 000 2zm0 12a1 1 0 100 2 1 1 0 000-2z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
+                            {resolvedAppearance === 'light' ? (
+                                <Sun className="text-muted-foreground h-4 w-4" />
                             ) : (
-                                <svg
-                                    className="h-6 w-6 text-gray-700"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                                </svg>
+                                <Moon className="text-muted-foreground h-4 w-4" />
                             )}
                         </button>
                         <Link
                             href={login().url}
-                            className="rounded-full border border-[#0033FF]/30 px-6 py-3 text-[#030812] transition hover:bg-[#0033FF]/10 dark:text-white"
+                            className="text-foreground hover:bg-accent rounded-[6px] px-3 py-2 text-sm font-medium"
                         >
-                            Login
+                            Log in
                         </Link>
                         <Link
                             href={register().url}
-                            className="rounded-full px-6 py-3 font-medium text-white transition hover:scale-105"
-                            style={{
-                                background: `linear-gradient(
-                                    135deg,
-                                    ${colors.lighter_blue},
-                                    ${colors.light_purple}
-                                )`,
-                            }}
+                            className="bg-primary text-primary-foreground rounded-[6px] px-4 py-2 text-sm font-medium"
                         >
-                            Get Started
+                            Get started
                         </Link>
                     </div>
                 </nav>
 
-                <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                    <div
-                        className="absolute top-1/2 right-[-500px] h-[1200px] w-[1200px] -translate-y-1/2 rounded-full"
-                        style={{
-                            background: `
-                                radial-gradient(
-                                    circle,
-                                    rgba(151,125,255,.45) 0%,
-                                    rgba(0,51,255,.25) 25%,
-                                    transparent 65%
-                                )
-                            `,
-                        }}
-                    />
-
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                        <div
-                            key={i}
-                            className="absolute top-1/2 right-[-450px] -translate-y-1/2 rounded-full border"
-                            style={{
-                                width: `${400 + i * 150}px`,
-                                height: `${400 + i * 150}px`,
-                                borderColor: 'rgba(151,125,255,.12)',
-                            }}
-                        />
-                    ))}
-                </div>
-
                 {/* HERO */}
-                <section className="relative z-20 container mx-auto px-8 pt-20 pb-32">
-                    <div className="max-w-3xl">
-                        <div
-                            className="mb-8 inline-flex items-center rounded-full px-5 py-2"
-                            style={{
-                                background: 'rgba(151,125,255,.08)',
-                                border: '1px solid rgba(151,125,255,.15)',
-                            }}
-                        >
-                            <span
-                                className="mr-3 h-2 w-2 rounded-full"
-                                style={{
-                                    background: colors.light_purple,
-                                }}
-                            />
-
-                            <span className="text-sm text-[#030812]/70 dark:text-white/70">
-                                Secure. Fast. Private.
-                            </span>
-                        </div>
-
-                        <h1 className="font-display text-6xl leading-[0.95] font-bold tracking-tight text-[#030812] md:text-8xl dark:text-white">
-                            Secure your
-                            <br />
-                            passwords.
-                            <br />
-                            <span
-                                style={{
-                                    background: `linear-gradient(
-                                        135deg,
-                                        ${colors.lighter_blue},
-                                        ${colors.light_purple}
-                                    )`,
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                }}
-                            >
-                                Simplify your life.
-                            </span>
+                <section className="mx-auto grid max-w-5xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">
+                    <div>
+                        <h1 className="text-foreground text-4xl font-semibold tracking-tight lg:text-5xl">
+                            One encrypted vault for every password.
                         </h1>
-
-                        <p className="mt-8 max-w-xl text-xl leading-relaxed text-[#030812]/65 dark:text-white/65">
-                            LockBox is a secure password manager that stores
-                            your credentials safely and gives you instant access
-                            whenever you need them.
+                        <p className="text-muted-foreground mt-5 max-w-md text-lg">
+                            LockBox stores your credentials encrypted, generates
+                            strong ones for you, and gets out of the way.
                         </p>
-
-                        <div className="mt-12 flex gap-5">
+                        <div className="mt-8 flex items-center gap-3">
                             <Link
                                 href={register()}
-                                className="rounded-2xl px-8 py-4 font-semibold text-white transition hover:scale-105"
-                                style={{
-                                    background: `linear-gradient(
-                                        135deg,
-                                        ${colors.lighter_blue},
-                                        ${colors.light_purple}
-                                    )`,
-                                }}
+                                className="bg-primary text-primary-foreground rounded-[6px] px-5 py-2.5 text-sm font-medium"
                             >
-                                Get Started Free
+                                Create your vault
                             </Link>
+                            <Link
+                                href={login().url}
+                                className="bg-secondary text-secondary-foreground rounded-[6px] px-5 py-2.5 text-sm font-medium"
+                            >
+                                Log in
+                            </Link>
+                        </div>
+                    </div>
 
-                            <button className="flex items-center gap-3 text-[#030812] dark:text-white">
-                                <div
-                                    className="flex h-12 w-12 items-center justify-center rounded-full border"
-                                    style={{
-                                        borderColor: 'rgba(151,125,255,.35)',
-                                    }}
-                                >
-                                    ▶
+                    {/* A real fragment of the product, at true size */}
+                    <div
+                        data-ui
+                        className="border-border bg-card mx-auto w-full max-w-sm rounded-lg border p-4" // taste-skill-ignore: data-ui fragment, keeps its own border
+                    >
+                        <div className="flex items-center gap-3 rounded-[6px] px-2.5 py-2">
+                            <div className="bg-secondary text-secondary-foreground flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] text-sm font-medium">
+                                G
+                            </div>
+                            <div className="min-w-0 flex-1">
+                                <div className="text-foreground text-sm font-medium">
+                                    GitHub
                                 </div>
-                                See how it works
-                            </button>
+                                <div className="text-muted-foreground truncate text-xs">
+                                    dev@example.com
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-3 pt-3">
+                            <span className="text-foreground text-sm font-medium">
+                                Password
+                            </span>
+                            <div className="bg-muted border-border mt-2 flex items-center justify-between gap-3 rounded-[6px] border px-3 py-2.5"> {/* taste-skill-ignore: data-ui fragment, keeps its own border */}
+                                <span className="text-foreground font-mono text-sm tracking-[0.1em]">{/* taste-skill-ignore: a password field, not prose */}
+                                    ••••••••••••
+                                </span>
+                                <div className="flex shrink-0 gap-1">
+                                    <Copy className="text-muted-foreground h-4 w-4" />
+                                    <Eye className="text-muted-foreground h-4 w-4" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
+
+                {/* FEATURES — a tone step marks the section instead of a rule */}
+                <section className="bg-muted/40">
+                    <div className="mx-auto max-w-5xl px-6 py-16">
+                        <h2 className="text-foreground text-2xl font-semibold tracking-tight">
+                            What it does
+                        </h2>
+                        <div className="mt-8 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+                            {FEATURES.map((feature) => (
+                                <div key={feature.name}>
+                                    <h3 className="text-foreground flex items-center gap-2 text-base font-medium">
+                                        <KeyRound className="text-muted-foreground h-4 w-4" />
+                                        {feature.name}
+                                    </h3>
+                                    <p className="text-muted-foreground mt-2 text-sm">
+                                        {feature.detail}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* CTA */}
+                <section className="mx-auto max-w-5xl px-6 py-16">
+                    <div className="flex flex-wrap items-center justify-between gap-6">
+                        <h2 className="text-foreground text-2xl font-semibold tracking-tight">
+                            Start your vault.
+                        </h2>
+                        <Link
+                            href={register()}
+                            className="bg-primary text-primary-foreground rounded-[6px] px-5 py-2.5 text-sm font-medium"
+                        >
+                            Create your vault
+                        </Link>
+                    </div>
+                </section>
+
+                {/* FOOTER — a tone step closes the page */}
+                <footer className="bg-muted/40">
+                    <div className="mx-auto max-w-5xl px-6 py-8">
+                        <p className="text-muted-foreground text-sm">
+                            LockBox — a self-hosted password manager.
+                        </p>
+                    </div>
+                </footer>
             </div>
         </>
     );

@@ -10,27 +10,26 @@ const GHOST_ROWS = [0, 1, 2, 3];
 
 export default function EmptyVault({ onAdd }: EmptyVaultProps) {
     return (
-        <div className="mx-auto max-w-xl rounded-3xl border border-slate-300/70 bg-white/95 p-6 shadow-xl shadow-slate-900/10 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
-            <div className="relative mb-4">
-                <Search className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-300 dark:text-white/20" />
+        <div className="mx-auto max-w-xl rounded-lg border border-border bg-card p-5">
+            <div className="relative mb-3">
+                <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                     disabled
                     placeholder="Search platform or email"
-                    className="h-12 rounded-xl border-slate-200 bg-slate-50 pl-11 dark:border-white/10 dark:bg-white/[0.02]"
+                    className="h-10 rounded-[6px] bg-muted pl-9"
                 />
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
                 {GHOST_ROWS.map((row) => (
                     <div
                         key={row}
-                        className="flex animate-pulse items-center gap-4 rounded-2xl px-4 py-3.5"
-                        style={{ animationDelay: `${row * 200}ms` }}
+                        className="flex items-center gap-3 rounded-[6px] px-2.5 py-2"
                     >
-                        <div className="h-11 w-11 shrink-0 rounded-xl bg-slate-200 dark:bg-white/10" />
-                        <div className="min-w-0 flex-1 space-y-2">
-                            <div className="h-3.5 w-2/5 rounded-full bg-slate-200 dark:bg-white/10" />
-                            <div className="h-3 w-3/5 rounded-full bg-slate-100 dark:bg-white/5" />
+                        <div className="h-9 w-9 shrink-0 rounded-[6px] bg-muted" />
+                        <div className="min-w-0 flex-1 space-y-1.5">
+                            <div className="h-3 w-2/5 rounded-[2px] bg-muted" />
+                            <div className="h-2.5 w-3/5 rounded-[2px] bg-muted" />
                         </div>
                     </div>
                 ))}
@@ -38,12 +37,9 @@ export default function EmptyVault({ onAdd }: EmptyVaultProps) {
 
             <Button
                 onClick={onAdd}
-                className="mt-4 h-14 w-full justify-center gap-2 rounded-2xl text-base font-semibold text-white shadow-lg transition-all hover:brightness-110"
-                style={{
-                    background: 'linear-gradient(135deg,#2B5CFF,#8A5CFF)',
-                }}
+                className="mt-3 h-10 w-full justify-center gap-2 rounded-[6px] text-sm font-medium"
             >
-                <Plus className="h-5 w-5" />
+                <Plus className="h-4 w-4" />
                 Add your first password
             </Button>
         </div>

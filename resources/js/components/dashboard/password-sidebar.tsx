@@ -20,27 +20,27 @@ export default function PasswordSidebar({
     onSelect,
 }: PasswordSidebarProps) {
     return (
-        <div className="min-w-[280px] flex-[1_1_320px] rounded-3xl border border-slate-300/70 bg-white/95 p-4 shadow-xl shadow-slate-900/10 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
-            <div className="relative mb-3">
+        <div className="min-w-[280px] flex-[1_1_320px] rounded-lg border border-border bg-card p-3">
+            <div className="relative mb-2">
                 <label htmlFor="password-search" className="sr-only">
                     Search
                 </label>
-                <Search className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                     id="password-search"
                     value={searchTerm}
                     onChange={(e) => onSearchChange(e.target.value)}
                     placeholder="Search platform or email"
-                    className="h-11 rounded-xl border-slate-300 bg-white pl-10 dark:border-white/10 dark:bg-white/[0.03]"
+                    className="h-9 rounded-[6px] pl-9"
                 />
             </div>
 
             {items.length > 0 && filteredItems.length === 0 ? (
-                <p className="px-2 py-6 text-center text-sm text-slate-500 dark:text-white/50">
+                <p className="px-2 py-6 text-center text-sm text-muted-foreground">
                     No credentials match your search.
                 </p>
             ) : (
-                <div className="space-y-1">
+                <div className="space-y-0.5">
                     {filteredItems.map((item) => {
                         const isSelected = item.id === selectedId;
                         const email = item.username ?? item.email ?? '';
@@ -51,20 +51,20 @@ export default function PasswordSidebar({
                                 type="button"
                                 onClick={() => onSelect(item.id)}
                                 aria-current={isSelected}
-                                className={`flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-[#977DFF]/10 ${
+                                className={`flex w-full items-center gap-3 rounded-[6px] px-2.5 py-2 text-left transition-colors ${
                                     isSelected
-                                        ? 'bg-[#977DFF]/20 shadow-[inset_3px_0_0_0_#6D3FFF]'
-                                        : ''
+                                        ? 'bg-secondary'
+                                        : 'hover:bg-accent'
                                 }`}
                             >
-                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#0033FF] to-[#977DFF] text-sm font-bold text-white">
+                                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] bg-secondary text-sm font-medium text-secondary-foreground">
                                     {item.platform[0]}
                                 </div>
                                 <div className="min-w-0">
-                                    <div className="truncate text-sm font-semibold text-[#030812] dark:text-white">
+                                    <div className="truncate text-sm font-medium text-foreground">
                                         {item.platform}
                                     </div>
-                                    <div className="truncate text-xs text-slate-500 dark:text-white/50">
+                                    <div className="truncate text-xs text-muted-foreground">
                                         {email}
                                     </div>
                                 </div>

@@ -1,5 +1,4 @@
-import { Clock, KeyRound, Plus } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 type DashboardHeroProps = {
@@ -16,45 +15,22 @@ export default function DashboardHero({
     return (
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
-                <p className="mb-1 text-xs font-bold tracking-[0.25em] text-[#6D3FFF] uppercase dark:text-[#977DFF]">
-                    LockBox Vault
-                </p>
-
-                <h1 className="font-display text-3xl font-bold tracking-tight text-[#030812] dark:text-white">
+                <h1 className="text-2xl font-semibold tracking-tight text-foreground">
                     Your passwords
                 </h1>
-
-                <div className="mt-3 flex flex-wrap items-center gap-2.5">
-                    <Badge
-                        variant="outline"
-                        className="gap-1.5 rounded-full border-slate-300/80 bg-white px-3 py-1.5 font-semibold text-slate-700 shadow-sm dark:border-white/10 dark:bg-white/[0.05] dark:text-white/70"
-                    >
-                        <KeyRound className="h-3.5 w-3.5 text-[#2B5CFF] dark:text-[#977DFF]" />
-                        {itemCount}{' '}
-                        {itemCount === 1 ? 'credential' : 'credentials'} stored
-                    </Badge>
-
-                    {latestPlatform ? (
-                        <Badge
-                            variant="outline"
-                            className="gap-1.5 rounded-full border-slate-300/80 bg-white px-3 py-1.5 font-semibold text-slate-700 shadow-sm dark:border-white/10 dark:bg-white/[0.05] dark:text-white/70"
-                        >
-                            <Clock className="h-3.5 w-3.5 text-[#2B5CFF] dark:text-[#977DFF]" />
-                            Latest: {latestPlatform}
-                        </Badge>
-                    ) : null}
-                </div>
+                <p className="mt-1 text-sm text-muted-foreground">
+                    {itemCount} {itemCount === 1 ? 'credential' : 'credentials'}{' '}
+                    stored
+                    {latestPlatform ? ` · latest: ${latestPlatform}` : ''}
+                </p>
             </div>
 
             <Button
                 onClick={onAdd}
-                className="h-[46px] rounded-full px-6 font-semibold text-white shadow-[0_10px_25px_rgba(43,92,255,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(43,92,255,0.45)]"
-                style={{
-                    background: 'linear-gradient(135deg,#2B5CFF,#8A5CFF)',
-                }}
+                className="h-9 rounded-[6px] px-4 text-sm font-medium"
             >
-                <Plus className="mr-2 h-4 w-4" />
-                Add Password
+                <Plus className="mr-1.5 h-4 w-4" />
+                Add password
             </Button>
         </div>
     );

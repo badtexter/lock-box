@@ -2,7 +2,6 @@ import { Head, router, usePage } from '@inertiajs/react';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import AccountFormDialog from '@/components/dashboard/account-form-dialog';
-import DashboardBackground from '@/components/dashboard/dashboard-background';
 import DashboardHero from '@/components/dashboard/dashboard-hero';
 import EmptyVault from '@/components/dashboard/empty-vault';
 import MasterPasswordDialog from '@/components/dashboard/master-password-dialog';
@@ -92,12 +91,8 @@ export default function Dashboard() {
         <>
             <Head title="Dashboard" />
 
-            <div className="fixed inset-0 z-0 overflow-hidden bg-[#F5F8FF] dark:bg-[#00033D]">
-                <DashboardBackground />
-            </div>
-
-            <div className="relative z-10 min-h-[calc(100vh-3.5rem)]">
-                <div className="mx-auto max-w-7xl p-6 lg:p-10">
+            <div className="min-h-[calc(100vh-3.5rem)]">
+                <div className="mx-auto max-w-6xl px-6 py-8">
                     <DashboardHero
                         itemCount={items.length}
                         latestPlatform={latest?.platform}
