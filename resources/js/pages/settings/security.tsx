@@ -67,7 +67,7 @@ export default function Security(props: Props) {
                                     id="current_password"
                                     ref={currentPasswordInput}
                                     name="current_password"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 h-10 w-full rounded-[6px]"
                                     autoComplete="current-password"
                                     placeholder="Current password"
                                 />
@@ -82,7 +82,7 @@ export default function Security(props: Props) {
                                     id="password"
                                     ref={passwordInput}
                                     name="password"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 h-10 w-full rounded-[6px]"
                                     autoComplete="new-password"
                                     placeholder="New password"
                                     passwordrules={props.passwordRules}
@@ -99,7 +99,7 @@ export default function Security(props: Props) {
                                 <PasswordInput
                                     id="password_confirmation"
                                     name="password_confirmation"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 h-10 w-full rounded-[6px]"
                                     autoComplete="new-password"
                                     placeholder="Confirm password"
                                     passwordrules={props.passwordRules}
@@ -114,6 +114,7 @@ export default function Security(props: Props) {
                                 <Button
                                     disabled={processing}
                                     data-test="update-password-button"
+                                    className="rounded-[6px] px-5 font-medium"
                                 >
                                     Save
                                 </Button>

@@ -1,4 +1,5 @@
-import { FormEvent, useCallback, useRef, useState } from 'react';
+import type { FormEvent } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import type { MasterPromptState } from '@/types';
 
@@ -36,12 +37,14 @@ async function fetchRevealedPassword(
         const message =
             data?.errors?.master_password?.[0] ??
             data?.message ??
-            'Nie można odsłonić hasła';
+            'Unable to reveal password';
         toast.error(message);
+
         return null;
     }
 
     const data = await res.json();
+
     return data.password;
 }
 
@@ -67,7 +70,10 @@ export function useMasterPassword() {
 
     const closePrompt = useCallback(() => {
         setPrompt((prev) => {
-            if (prev.loading) return prev;
+            if (prev.loading) {
+                return prev;
+            }
+
             return INITIAL_STATE;
         });
     }, []);
@@ -77,13 +83,17 @@ export function useMasterPassword() {
             event.preventDefault();
 
             const { accountId, action, password } = prompt;
-            if (!accountId || !action) return;
+
+            if (!accountId || !action) {
+                return;
+            }
 
             if (!password) {
                 setPrompt((prev) => ({
                     ...prev,
-                    error: 'Podaj hasło główne.',
+                    error: 'Enter your master password.',
                 }));
+
                 return;
             }
 
@@ -97,6 +107,7 @@ export function useMasterPassword() {
 
             if (!pwd) {
                 setPrompt((prev) => ({ ...prev, loading: false }));
+
                 return;
             }
 
@@ -105,9 +116,9 @@ export function useMasterPassword() {
             if (action === 'copy') {
                 try {
                     await navigator.clipboard.writeText(pwd);
-                    toast.success('Skopiowano hasło');
+                    toast.success('Password copied');
                 } catch {
-                    toast.error('Nie udało się skopiować');
+                    toast.error('Failed to copy');
                 }
             } else {
                 setVisibleIds((prev) => ({ ...prev, [accountId]: true }));
@@ -140,12 +151,15 @@ export function useMasterPassword() {
         (id: number) => {
             if (visibleIds[id]) {
                 setVisibleIds((prev) => ({ ...prev, [id]: false }));
+
                 if (timersRef.current[id]) {
                     clearTimeout(timersRef.current[id]);
                     delete timersRef.current[id];
                 }
+
                 return;
             }
+
             requestMasterPassword(id, 'reveal');
         },
         [visibleIds, requestMasterPassword],

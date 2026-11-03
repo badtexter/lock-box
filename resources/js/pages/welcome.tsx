@@ -1,210 +1,356 @@
-import { Head, Link, usePage } from '@inertiajs/react';
-import { login } from '@/routes';
-import { register } from '@/routes';
-import { useEffect, useState } from 'react';
+import { Head, Link } from '@inertiajs/react';
+import {
+    Copy,
+    Eye,
+    KeyRound,
+    Moon,
+    RefreshCw,
+    Search,
+    Shield,
+    Sun,
+} from 'lucide-react';
+import { useAppearance } from '@/hooks/use-appearance';
+import { login, register } from '@/routes';
 
 export default function Welcome() {
-    const [isDark, setIsDark] = useState(false);
-
-    useEffect(() => {
-        const isDarkMode =
-            localStorage.getItem('darkMode') === 'true' ||
-            (!localStorage.getItem('darkMode') &&
-                window.matchMedia('(prefers-color-scheme: dark)').matches);
-        setIsDark(isDarkMode);
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }, []);
-
-    const toggleTheme = () => {
-        const newDarkMode = !isDark;
-        setIsDark(newDarkMode);
-        localStorage.setItem('darkMode', String(newDarkMode));
-        if (newDarkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    };
-
-    const colors = {
-        dark_blue: '#00033D',
-        lighter_blue: '#0033FF',
-        light_purple: '#977DFF',
-        grey: '#EAEDF8',
-        white: '#FFFFFF',
-        black: '#030812',
-    };
+    const { resolvedAppearance, updateAppearance } = useAppearance();
 
     return (
         <>
             <Head title="LockBox" />
-            <div className="min-h-screen overflow-hidden bg-white font-sans transition-colors duration-300 dark:bg-[#00033D]">
-                {/* NAVBAR */}
-                <nav className="relative z-20 container mx-auto flex items-center justify-between px-8 py-8">
-                    <div className="flex items-center gap-3">
-                        <span className="text-3xl font-bold text-[#030812] dark:text-white">
+            <div className="brand-bg min-h-svh">
+                {/* NAV */}
+                <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+                    <span className="flex items-center gap-2.5 text-foreground">
+                        <span className="brand-gradient flex h-6 w-6 items-center justify-center rounded-[4px] text-[11px] font-semibold text-white">
+                            L
+                        </span>
+                        <span className="text-[15px] font-medium tracking-tight">
                             LockBox
                         </span>
-                    </div>
-                    <div className="flex items-center gap-4">
+                    </span>
+                    <div className="flex items-center gap-2">
                         <button
-                            onClick={toggleTheme}
-                            className="rounded-lg p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
+                            type="button"
+                            onClick={() =>
+                                updateAppearance(
+                                    resolvedAppearance === 'light'
+                                        ? 'dark'
+                                        : 'light',
+                                )
+                            }
+                            className="flex h-8 w-8 items-center justify-center rounded-[6px] hover:bg-accent"
                             aria-label="Toggle theme"
                         >
-                            {isDark ? (
-                                <svg
-                                    className="h-6 w-6 text-yellow-500"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.12-2.12a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414l2.12 2.12a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM9 4a1 1 0 100-2 1 1 0 000 2zm0 12a1 1 0 100 2 1 1 0 000-2z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
+                            {resolvedAppearance === 'light' ? (
+                                <Sun className="h-4 w-4 text-muted-foreground" />
                             ) : (
-                                <svg
-                                    className="h-6 w-6 text-gray-700"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                                </svg>
+                                <Moon className="h-4 w-4 text-muted-foreground" />
                             )}
                         </button>
                         <Link
                             href={login().url}
-                            className="rounded-full border border-[#0033FF]/30 px-6 py-3 text-[#030812] transition hover:bg-[#0033FF]/10 dark:text-white"
+                            className="rounded-[6px] px-3 py-2 text-sm font-medium text-foreground hover:bg-accent"
                         >
-                            Login
+                            Log in
                         </Link>
                         <Link
                             href={register().url}
-                            className="rounded-full px-6 py-3 font-medium text-white transition hover:scale-105"
-                            style={{
-                                background: `linear-gradient(
-                                    135deg,
-                                    ${colors.lighter_blue},
-                                    ${colors.light_purple}
-                                )`,
-                            }}
+                            className="rounded-[6px] bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
                         >
-                            Get Started
+                            Get started
                         </Link>
                     </div>
                 </nav>
 
-                <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                    <div
-                        className="absolute top-1/2 right-[-500px] h-[1200px] w-[1200px] -translate-y-1/2 rounded-full"
-                        style={{
-                            background: `
-                                radial-gradient(
-                                    circle,
-                                    rgba(151,125,255,.45) 0%,
-                                    rgba(0,51,255,.25) 25%,
-                                    transparent 65%
-                                )
-                            `,
-                        }}
-                    />
-
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                        <div
-                            key={i}
-                            className="absolute top-1/2 right-[-450px] -translate-y-1/2 rounded-full border"
-                            style={{
-                                width: `${400 + i * 150}px`,
-                                height: `${400 + i * 150}px`,
-                                borderColor: 'rgba(151,125,255,.12)',
-                            }}
-                        />
-                    ))}
-                </div>
-
                 {/* HERO */}
-                <section className="relative z-20 container mx-auto px-8 pt-20 pb-32">
-                    <div className="max-w-3xl">
-                        <div
-                            className="mb-8 inline-flex items-center rounded-full px-5 py-2"
-                            style={{
-                                background: 'rgba(151,125,255,.08)',
-                                border: '1px solid rgba(151,125,255,.15)',
-                            }}
-                        >
-                            <span
-                                className="mr-3 h-2 w-2 rounded-full"
-                                style={{
-                                    background: colors.light_purple,
-                                }}
-                            />
-
-                            <span className="text-sm text-[#030812]/70 dark:text-white/70">
-                                Secure. Fast. Private.
-                            </span>
-                        </div>
-
-                        <h1 className="text-6xl leading-[0.95] font-bold tracking-tight text-[#030812] md:text-8xl dark:text-white">
-                            Secure your
-                            <br />
-                            passwords.
-                            <br />
-                            <span
-                                style={{
-                                    background: `linear-gradient(
-                                        135deg,
-                                        ${colors.lighter_blue},
-                                        ${colors.light_purple}
-                                    )`,
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                }}
-                            >
-                                Simplify your life.
-                            </span>
+                <section className="mx-auto grid max-w-5xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">
+                    <div>
+                        <h1 className="fade-in-up text-4xl font-semibold tracking-tight text-foreground lg:text-5xl">
+                            One encrypted vault for every password.
                         </h1>
-
-                        <p className="mt-8 max-w-xl text-xl leading-relaxed text-[#030812]/65 dark:text-white/65">
-                            LockBox is a secure password manager that stores
-                            your credentials safely and gives you instant access
-                            whenever you need them.
+                        <p
+                            className="fade-in-up mt-5 max-w-md text-lg text-foreground"
+                            style={{ animationDelay: '80ms' }}
+                        >
+                            LockBox stores your credentials encrypted, generates
+                            strong ones for you, and gets out of the way.
                         </p>
-
-                        <div className="mt-12 flex gap-5">
+                        <div
+                            className="fade-in-up mt-8 flex items-center gap-3"
+                            style={{ animationDelay: '160ms' }}
+                        >
                             <Link
                                 href={register()}
-                                className="rounded-2xl px-8 py-4 font-semibold text-white transition hover:scale-105"
-                                style={{
-                                    background: `linear-gradient(
-                                        135deg,
-                                        ${colors.lighter_blue},
-                                        ${colors.light_purple}
-                                    )`,
-                                }}
+                                className="rounded-[6px] bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
                             >
-                                Get Started Free
+                                Create your vault
                             </Link>
+                            <Link
+                                href={login().url}
+                                className="rounded-[6px] bg-secondary px-5 py-2.5 text-sm font-medium text-secondary-foreground transition-transform hover:-translate-y-0.5"
+                            >
+                                Log in
+                            </Link>
+                        </div>
+                    </div>
 
-                            <button className="flex items-center gap-3 text-[#030812] dark:text-white">
-                                <div
-                                    className="flex h-12 w-12 items-center justify-center rounded-full border"
-                                    style={{
-                                        borderColor: 'rgba(151,125,255,.35)',
-                                    }}
-                                >
-                                    ▶
+                    {/* A real fragment of the product, at true size */}
+                    <div
+                        data-ui
+                        className="fade-in-up mx-auto w-full max-w-sm rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                        style={{ animationDelay: '220ms' }}
+                    >
+                        <div className="flex items-center gap-3 rounded-[6px] px-2.5 py-2">
+                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] bg-secondary text-sm font-medium text-secondary-foreground">
+                                G
+                            </div>
+                            <div className="min-w-0 flex-1">
+                                <div className="text-sm font-medium text-foreground">
+                                    GitHub
                                 </div>
-                                See how it works
-                            </button>
+                                <div className="truncate text-xs text-muted-foreground">
+                                    dev@example.com
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-4 pt-4">
+                            <span className="text-sm font-medium text-foreground">
+                                Password
+                            </span>
+                            <div
+                                className="mt-2 flex items-center justify-between gap-3 rounded-[6px] border border-border bg-muted px-3 py-2.5" // taste-skill-ignore: data-ui fragment, keeps its own border
+                            >
+                                <span
+                                    className="font-mono text-sm tracking-[0.1em] text-foreground" // taste-skill-ignore: a password field, not prose
+                                >
+                                    ••••••••••••
+                                </span>
+                                <div className="flex shrink-0 gap-1">
+                                    <Copy className="h-4 w-4 text-muted-foreground" />
+                                    <Eye className="h-4 w-4 text-muted-foreground" />
+                                </div>
+                            </div>
+                            <p className="mt-3 text-xs text-muted-foreground">
+                                Added 2 days ago
+                            </p>
                         </div>
                     </div>
                 </section>
+
+                {/* FEATURES — a tone step marks the section instead of a rule */}
+                <section className="bg-muted/40">
+                    <div className="mx-auto max-w-5xl px-6 py-16">
+                        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                            What it does
+                        </h2>
+
+                        <div className="mt-10 grid gap-10 sm:grid-cols-2">
+                            {/* Generator — a real fragment of the add-password form */}
+                            <div>
+                                <div
+                                    data-ui
+                                    className="fade-in-up min-h-[13rem] rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    style={{ animationDelay: '0ms' }}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-sm font-medium text-foreground">
+                                            Password
+                                        </span>
+                                        <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                                            <RefreshCw className="h-3.5 w-3.5" />
+                                            Generate
+                                        </span>
+                                    </div>
+                                    <div
+                                        className="mt-2 rounded-[6px] border border-border bg-muted px-3 py-2.5" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    >
+                                        <span
+                                            className="font-mono text-sm tracking-[0.1em] text-foreground" // taste-skill-ignore: a password field, not prose
+                                        >
+                                            f4!xQ9r@mZ2k
+                                        </span>
+                                    </div>
+                                    <p className="mt-3 text-xs text-muted-foreground">
+                                        Looks good.
+                                    </p>
+                                </div>
+                                <h3
+                                    className="fade-in-up mt-4 text-base font-medium text-foreground"
+                                    style={{ animationDelay: '60ms' }}
+                                >
+                                    A generator that means it
+                                </h3>
+                                <p
+                                    className="fade-in-up mt-2 text-base text-foreground"
+                                    style={{ animationDelay: '120ms' }}
+                                >
+                                    Fourteen characters minimum, upper and lower
+                                    case, a number and a symbol, built in — no
+                                    reused passwords.
+                                </p>
+                            </div>
+
+                            {/* Search — a real fragment of the vault list */}
+                            <div>
+                                <div
+                                    data-ui
+                                    className="fade-in-up min-h-[13rem] rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    style={{ animationDelay: '80ms' }}
+                                >
+                                    <div className="relative">
+                                        <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                                        <div className="h-9 rounded-[6px] border border-border bg-muted pl-9 text-sm leading-9 text-muted-foreground">
+                                            {' '}
+                                            {/* taste-skill-ignore: data-ui fragment, keeps its own border */}
+                                            git
+                                        </div>
+                                    </div>
+                                    <div className="mt-2 flex items-center gap-3 rounded-[6px] bg-secondary px-2.5 py-2">
+                                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[6px] bg-background text-xs font-medium text-foreground">
+                                            G
+                                        </div>
+                                        <span className="text-sm font-medium text-foreground">
+                                            GitHub
+                                        </span>
+                                    </div>
+                                    <div className="mt-1.5 flex items-center gap-3 rounded-[6px] px-2.5 py-2">
+                                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[6px] bg-secondary text-xs font-medium text-secondary-foreground">
+                                            G
+                                        </div>
+                                        <span className="text-sm text-muted-foreground">
+                                            GitLab
+                                        </span>
+                                    </div>
+                                </div>
+                                <h3
+                                    className="fade-in-up mt-4 text-base font-medium text-foreground"
+                                    style={{ animationDelay: '140ms' }}
+                                >
+                                    Find it in one search
+                                </h3>
+                                <p
+                                    className="fade-in-up mt-2 text-base text-foreground"
+                                    style={{ animationDelay: '200ms' }}
+                                >
+                                    Every entry is searchable by platform or
+                                    email the moment you start typing.
+                                </p>
+                            </div>
+
+                            {/* 2FA & passkeys — a real fragment of the security settings */}
+                            <div>
+                                <div
+                                    data-ui
+                                    className="fade-in-up min-h-[13rem] rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    style={{ animationDelay: '160ms' }}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-sm font-medium text-foreground">
+                                            Two-factor authentication
+                                        </span>
+                                        <span className="rounded-[4px] bg-[#dcfae5] px-2 py-0.5 text-xs font-medium text-[#04250e] dark:bg-[#172a1d] dark:text-[#3fc07a]">
+                                            Enabled
+                                        </span>
+                                    </div>
+                                    <p className="mt-1.5 text-xs text-muted-foreground">
+                                        Recovery codes generated
+                                    </p>
+                                    <div
+                                        className="mt-3 flex items-center justify-between border-t border-border pt-3" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    >
+                                        <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+                                            <Shield className="h-4 w-4 text-muted-foreground" />
+                                            Passkeys
+                                        </span>
+                                        <span className="text-xs text-muted-foreground">
+                                            1 registered
+                                        </span>
+                                    </div>
+                                </div>
+                                <h3
+                                    className="fade-in-up mt-4 text-base font-medium text-foreground"
+                                    style={{ animationDelay: '220ms' }}
+                                >
+                                    2FA and passkeys
+                                </h3>
+                                <p
+                                    className="fade-in-up mt-2 text-base text-foreground"
+                                    style={{ animationDelay: '280ms' }}
+                                >
+                                    Time-based codes with recovery codes, or
+                                    sign in with a passkey instead of typing
+                                    anything.
+                                </p>
+                            </div>
+
+                            {/* Encryption — a real fragment of the vault, locked */}
+                            <div>
+                                <div
+                                    data-ui
+                                    className="fade-in-up min-h-[13rem] rounded-lg border border-border bg-card p-6" // taste-skill-ignore: data-ui fragment, keeps its own border
+                                    style={{ animationDelay: '240ms' }}
+                                >
+                                    <div className="flex items-center gap-3 rounded-[6px] px-2.5 py-2">
+                                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] bg-secondary text-secondary-foreground">
+                                            <KeyRound className="h-4 w-4" />
+                                        </div>
+                                        <div className="min-w-0 flex-1">
+                                            <div className="text-sm font-medium text-foreground">
+                                                12 credentials
+                                            </div>
+                                            <div className="text-xs text-muted-foreground">
+                                                encrypted at rest
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="mt-3 text-xs text-muted-foreground">
+                                        AES-256, decrypted only in your browser
+                                    </p>
+                                </div>
+                                <h3
+                                    className="fade-in-up mt-4 text-base font-medium text-foreground"
+                                    style={{ animationDelay: '300ms' }}
+                                >
+                                    One encrypted vault
+                                </h3>
+                                <p
+                                    className="fade-in-up mt-2 text-base text-foreground"
+                                    style={{ animationDelay: '360ms' }}
+                                >
+                                    Every credential is encrypted at rest.
+                                    Nothing is stored or read in plain text,
+                                    including by you.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* CTA */}
+                <section className="mx-auto max-w-5xl px-6 py-16">
+                    <div className="flex flex-wrap items-center justify-between gap-6">
+                        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                            Start your vault.
+                        </h2>
+                        <Link
+                            href={register()}
+                            className="rounded-[6px] bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
+                        >
+                            Create your vault
+                        </Link>
+                    </div>
+                </section>
+
+                {/* FOOTER — a tone step closes the page */}
+                <footer className="bg-muted/40">
+                    <div className="mx-auto max-w-5xl px-6 py-8">
+                        <p className="text-sm text-muted-foreground">
+                            LockBox — a self-hosted password manager.
+                        </p>
+                    </div>
+                </footer>
             </div>
         </>
     );

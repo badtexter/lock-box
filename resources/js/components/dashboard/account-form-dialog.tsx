@@ -1,5 +1,7 @@
 import { RefreshCw } from 'lucide-react';
-import { FormEvent } from 'react';
+import type { FormEvent } from 'react';
+import InputError from '@/components/input-error';
+import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -9,9 +11,7 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
-import PasswordInput from '@/components/password-input';
 import type { AccountFormErrors, AccountFormValues } from '@/types';
 
 type AccountFormDialogProps = {
@@ -49,16 +49,16 @@ export default function AccountFormDialog({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-xl overflow-hidden border-slate-200/70 bg-white/95 backdrop-blur-2xl dark:border-white/10 dark:bg-[#07103d]/95">
-                <DialogHeader className="space-y-4">
-                    <DialogTitle className="text-xl font-semibold">
+            <DialogContent className="max-w-xl overflow-hidden rounded-lg">
+                <DialogHeader className="space-y-3">
+                    <DialogTitle className="text-lg font-semibold">
                         {editingId ? 'Edit Password' : 'Add New Password'}
                     </DialogTitle>
-                    <p className="text-sm text-slate-500 dark:text-white/50">
+                    <p className="text-sm text-muted-foreground">
                         Store a new credential securely in your vault.
                     </p>
                 </DialogHeader>
-                <form onSubmit={onSubmit} className="space-y-5 py-4">
+                <form onSubmit={onSubmit} className="space-y-4 py-2">
                     <div className="space-y-2">
                         <Label htmlFor="platform">Platform</Label>
                         <Input
@@ -70,7 +70,7 @@ export default function AccountFormDialog({
                             }
                             placeholder="GitHub"
                             required
-                            className="h-12 rounded-xl border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03]"
+                            className="h-10 rounded-[6px]"
                         />
                         <InputError message={formErrors.platform} />
                     </div>
@@ -85,9 +85,9 @@ export default function AccountFormDialog({
                             onChange={(e) =>
                                 onFieldChange('email', e.target.value)
                             }
-                            placeholder="me@example.com"
+                            placeholder="me@example.com" // taste-skill-ignore: input format hint (IANA example domain), not displayed data
                             required
-                            className="h-12 rounded-xl border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03]"
+                            className="h-10 rounded-[6px]"
                         />
                         <InputError message={formErrors.email} />
                     </div>
@@ -99,7 +99,7 @@ export default function AccountFormDialog({
                                 type="button"
                                 variant="ghost"
                                 onClick={handleGenerate}
-                                className="h-9 rounded-lg px-3 text-sm"
+                                className="h-8 rounded-[6px] px-3 text-sm"
                             >
                                 <RefreshCw className="mr-2 h-4 w-4" />
                                 Generate
@@ -114,21 +114,21 @@ export default function AccountFormDialog({
                             }
                             placeholder="Generated or custom password"
                             required
-                            className="h-12 rounded-xl border-slate-200 bg-white font-mono dark:border-white/10 dark:bg-white/[0.03]"
+                            className="h-10 rounded-[6px] font-mono" // taste-skill-ignore: a password field, not prose
                         />
                         <InputError message={formErrors.password} />
                         {passwordStrengthHint ? (
-                            <p className="text-sm text-slate-500 dark:text-white/50">
+                            <p className="text-sm text-muted-foreground">
                                 {passwordStrengthHint}
                             </p>
                         ) : null}
                     </div>
 
-                    <DialogFooter className="justify-end gap-3">
+                    <DialogFooter className="justify-end gap-2">
                         <Button
                             variant="ghost"
                             onClick={onCancel}
-                            className="rounded-xl"
+                            className="rounded-[6px]"
                             type="button"
                         >
                             Cancel
@@ -136,11 +136,7 @@ export default function AccountFormDialog({
 
                         <Button
                             type="submit"
-                            className="rounded-xl text-white shadow-lg transition-all hover:brightness-110"
-                            style={{
-                                background:
-                                    'linear-gradient(135deg,#2B5CFF,#977DFF)',
-                            }}
+                            className="rounded-[6px] px-5 font-medium"
                         >
                             Save Password
                         </Button>

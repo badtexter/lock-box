@@ -7,7 +7,7 @@ export default function AppSidebarLayout({
     breadcrumbs = [],
 }: AppLayoutProps) {
     return (
-        <div className="flex min-h-screen flex-col bg-background">
+        <div className="brand-bg flex min-h-screen flex-col">
             {/* Navbar */}
             <AppHeader />
 

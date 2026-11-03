@@ -1,5 +1,6 @@
 import { router } from '@inertiajs/react';
-import { FormEvent, useState } from 'react';
+import type { FormEvent } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import type { Account, AccountFormErrors, AccountFormValues } from '@/types';
 
@@ -30,7 +31,10 @@ export function useAccountForm(onClose: () => void) {
 
     const openEditModal = (accounts: Account[], id: number) => {
         const acc = accounts.find((a) => a.id === id);
-        if (!acc) return;
+
+        if (!acc) {
+            return;
+        }
 
         setEditingId(id);
         setFormValues({
@@ -44,27 +48,30 @@ export function useAccountForm(onClose: () => void) {
         const errors: AccountFormErrors = {};
 
         if (!formValues.platform.trim()) {
-            errors.platform = 'To pole jest wymagane.';
+            errors.platform = 'This field is required.';
         }
 
         if (!formValues.email.trim()) {
-            errors.email = 'To pole jest wymagane.';
+            errors.email = 'This field is required.';
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formValues.email)) {
-            errors.email = 'Wprowadź poprawny adres e-mail.';
+            errors.email = 'Enter a valid email address.';
         }
 
         if (!formValues.password) {
-            errors.password = 'To pole jest wymagane.';
+            errors.password = 'This field is required.';
         }
 
         setFormErrors(errors);
+
         return Object.keys(errors).length === 0;
     };
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (!validateForm()) return;
+        if (!validateForm()) {
+            return;
+        }
 
         const payload = {
             platform: formValues.platform,

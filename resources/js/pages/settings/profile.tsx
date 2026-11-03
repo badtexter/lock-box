@@ -51,7 +51,7 @@ export default function Profile({
 
                                 <Input
                                     id="name"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 h-10 w-full rounded-[6px]"
                                     defaultValue={auth.user.name}
                                     name="name"
                                     required
@@ -71,7 +71,7 @@ export default function Profile({
                                 <Input
                                     id="email"
                                     type="email"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 h-10 w-full rounded-[6px]"
                                     defaultValue={auth.user.email}
                                     name="email"
                                     required
@@ -93,7 +93,7 @@ export default function Profile({
                                             <Link
                                                 href={send()}
                                                 as="button"
-                                                className="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
+                                                className="text-foreground underline decoration-muted-foreground/40 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current!"
                                             >
                                                 Click here to re-send the
                                                 verification email.
@@ -102,7 +102,7 @@ export default function Profile({
 
                                         {status ===
                                             'verification-link-sent' && (
-                                            <div className="mt-2 text-sm font-medium text-green-600">
+                                            <div className="mt-2 text-sm font-medium text-[#247b50] dark:text-[#3fc07a]">
                                                 A new verification link has been
                                                 sent to your email address.
                                             </div>
@@ -114,6 +114,7 @@ export default function Profile({
                                 <Button
                                     disabled={processing}
                                     data-test="update-profile-button"
+                                    className="rounded-[6px] px-5 font-medium"
                                 >
                                     Save
                                 </Button>

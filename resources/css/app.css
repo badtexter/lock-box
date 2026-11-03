@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Geist+Mono:wght@400;500&display=swap');
 
 @import 'tailwindcss';
 
@@ -10,7 +10,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-    --font-sans: 'Outfit', 'Bitcount Single';
+    --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, monospace;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -60,75 +61,134 @@
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/*
+   LockBox brand palette — six flat colours plus two gradients, applied as the project's actual
+   tokens (replaces the earlier generic achromatic-ledger / blue-cyan experiments):
+     01 #00033D  dark navy   — dark mode ground
+     02 #0033FF  blue        — primary brand colour
+     03 #977DFF  purple      — secondary accent, pairs with 02 in the gradients
+     04 #EAEDF8  light grey  — light mode ground
+     05 #030812  near-black  — ink / text
+     06 #FFFFFF  white       — surfaces
+     Gradient 01: 02 → 03, diagonal — the signature gradient (brand mark, auth split panel)
+     Gradient 02: a radial blue glow fading out — the page background glow
+*/
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --destructive-foreground: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.87 0 0);
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.87 0 0);
+    --background: #eaedf8;
+    --foreground: #030812;
+    --card: #ffffff;
+    --card-foreground: #030812;
+    --popover: #ffffff;
+    --popover-foreground: #030812;
+    --primary: #0033ff;
+    --primary-foreground: #ffffff;
+    --secondary: #e4e8fa;
+    --secondary-foreground: #030812;
+    --muted: #e3e7f3;
+    --muted-foreground: #5b6178;
+    --accent: #efecff;
+    --accent-foreground: #030812;
+    --destructive: #c4242a;
+    --destructive-foreground: #ffffff;
+    --border: #d7dbee;
+    --input: #d7dbee;
+    --ring: #0033ff;
+    --chart-1: #0033ff;
+    --chart-2: #977dff;
+    --chart-3: #00033d;
+    --chart-4: #2e7d32;
+    --chart-5: #92400e;
+    --radius: 0.5rem;
+    --sidebar: #ffffff;
+    --sidebar-foreground: #030812;
+    --sidebar-primary: #0033ff;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #efecff;
+    --sidebar-accent-foreground: #030812;
+    --sidebar-border: #d7dbee;
+    --sidebar-ring: #0033ff;
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.145 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.145 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.985 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.396 0.141 25.723);
-    --destructive-foreground: oklch(0.637 0.237 25.331);
-    --border: oklch(0.269 0 0);
-    --input: oklch(0.269 0 0);
-    --ring: oklch(0.439 0 0);
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.985 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(0.269 0 0);
-    --sidebar-ring: oklch(0.439 0 0);
+    --background: #00033d;
+    --foreground: #ffffff;
+    --card: #0a1050;
+    --card-foreground: #ffffff;
+    --popover: #0a1050;
+    --popover-foreground: #ffffff;
+    --primary: #0033ff;
+    --primary-foreground: #ffffff;
+    --secondary: #141a5e;
+    --secondary-foreground: #ffffff;
+    --muted: #0a0f45;
+    --muted-foreground: #9aa3c9;
+    --accent: #1b1f66;
+    --accent-foreground: #ffffff;
+    --destructive: #e5566f;
+    --destructive-foreground: #ffffff;
+    --border: #1e2566;
+    --input: #1e2566;
+    --ring: #977dff;
+    --chart-1: #977dff;
+    --chart-2: #0033ff;
+    --chart-3: #ffffff;
+    --chart-4: #3fc07a;
+    --chart-5: #e5566f;
+    --sidebar: #0a1050;
+    --sidebar-foreground: #ffffff;
+    --sidebar-primary: #0033ff;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #1b1f66;
+    --sidebar-accent-foreground: #ffffff;
+    --sidebar-border: #1e2566;
+    --sidebar-ring: #977dff;
+}
+
+/*
+   Gradient 01 — the signature gradient, used only on the brand mark; buttons stay flat.
+*/
+.brand-gradient {
+    background-image: linear-gradient(135deg, #0033ff, #977dff);
+}
+
+/* A gentler version of the same pair, for a full colour panel (the auth split screen) rather than a small accent. */
+.brand-gradient-soft {
+    background-image: linear-gradient(135deg, #3d5cff, #b3a0ff);
+}
+
+/*
+   Gradient 02 — a radial blue/purple glow fading out, used as a page background instead of a flat
+   fill. Full-page wrappers only (dashboard, settings, auth, welcome) — cards and panels on top
+   stay flat and opaque.
+*/
+.brand-bg {
+    background-color: var(--background);
+    background-image:
+        radial-gradient(
+            ellipse 70% 60% at 10% -10%,
+            rgba(0, 51, 255, 0.18),
+            transparent 62%
+        ),
+        radial-gradient(
+            ellipse 65% 55% at 100% 0%,
+            rgba(151, 125, 255, 0.16),
+            transparent 58%
+        );
+    background-attachment: fixed;
+}
+
+.dark .brand-bg {
+    background-image:
+        radial-gradient(
+            ellipse 70% 60% at 10% -10%,
+            rgba(0, 51, 255, 0.34),
+            transparent 62%
+        ),
+        radial-gradient(
+            ellipse 65% 55% at 100% 0%,
+            rgba(151, 125, 255, 0.26),
+            transparent 55%
+        );
 }
 
 @layer base {
@@ -136,7 +196,35 @@
         @apply border-border;
     }
 
+    html {
+        scrollbar-gutter: stable;
+    }
+
     body {
         @apply bg-background text-foreground;
+    }
+}
+
+/* Entrance for the parts of a section (page rules, SKILL.md step 9): transform + opacity only. */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fade-in-up 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fade-in-up {
+        animation: none;
+        opacity: 1;
+        transform: none;
     }
 }

@@ -33,7 +33,7 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                                 name="email"
                                 value={email}
                                 readOnly
-                                className="h-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm"
+                                className="h-10 rounded-[6px]"
                             />
                             <InputError
                                 message={errors.email}
@@ -50,7 +50,7 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                                 autoFocus
                                 placeholder="New password"
                                 passwordrules={passwordRules}
-                                className="h-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm"
+                                className="h-10 rounded-[6px]"
                             />
                             <InputError message={errors.password} />
                         </div>
@@ -65,7 +65,7 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                                 autoComplete="new-password"
                                 placeholder="Confirm password"
                                 passwordrules={passwordRules}
-                                className="h-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm"
+                                className="h-10 rounded-[6px]"
                             />
                             <InputError
                                 message={errors.password_confirmation}
@@ -77,11 +77,7 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                             type="submit"
                             disabled={processing}
                             data-test="reset-password-button"
-                            className="mt-4 h-12 w-full rounded-xl text-white shadow-lg transition-all hover:brightness-110"
-                            style={{
-                                background:
-                                    'linear-gradient(135deg,#2B5CFF,#977DFF)',
-                            }}
+                            className="mt-4 h-10 w-full rounded-[6px] font-medium"
                         >
                             {processing && <Spinner />}
                             Create new password
