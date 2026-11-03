@@ -76,6 +76,10 @@ export default function PasswordCard({
                 <p className="mt-1 text-sm text-slate-500 dark:text-white/50">
                     {displayEmail}
                 </p>
+
+                <p className="mt-1 text-xs text-slate-400 dark:text-white/30">
+                    Added {addedOn}
+                </p>
             </div>
 
             <div className="mt-5 flex items-center justify-between">

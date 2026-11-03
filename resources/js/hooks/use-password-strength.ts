@@ -2,7 +2,9 @@ import { useMemo } from 'react';
 
 export function usePasswordStrength(password: string): string {
     return useMemo(() => {
-        if (!password) return '';
+        if (!password) {
+            return '';
+        }
 
         const missing: string[] = [];
 
@@ -18,7 +20,9 @@ export function usePasswordStrength(password: string): string {
             missing.push('a special character');
         }
 
-        if (missing.length === 0) return 'Looks good.';
+        if (missing.length === 0) {
+            return 'Looks good.';
+        }
 
         const joined = missing.join(', ').replace(/, ([^,]+)$/, ' and $1');
 

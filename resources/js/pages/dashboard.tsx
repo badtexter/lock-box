@@ -30,11 +30,15 @@ export default function Dashboard() {
 
     const filteredItems = useMemo(() => {
         const query = searchTerm.trim().toLowerCase();
-        if (!query) return items;
+
+        if (!query) {
+            return items;
+        }
 
         return items.filter((item) => {
             const platform = item.platform.toLowerCase();
             const email = (item.username ?? item.email ?? '').toLowerCase();
+
             return platform.includes(query) || email.includes(query);
         });
     }, [items, searchTerm]);
@@ -45,7 +49,9 @@ export default function Dashboard() {
     };
 
     const handleDelete = (id: number) => {
-        if (!confirm('Delete this entry?')) return;
+        if (!confirm('Delete this entry?')) {
+            return;
+        }
 
         router.delete(`/accounts/${id}`, {
             onSuccess: () => {
@@ -65,7 +71,7 @@ export default function Dashboard() {
         <>
             <Head title="Dashboard" />
 
-            <div className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-[#F5F8FF] dark:bg-[#00033D]">
+            <div className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-[#F5F8FF] dark:bg-[#00033D]">
                 <DashboardBackground />
 
                 <div className="relative z-10 mx-auto max-w-7xl p-6 lg:p-10">

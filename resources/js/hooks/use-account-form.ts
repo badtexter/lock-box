@@ -1,5 +1,6 @@
 import { router } from '@inertiajs/react';
-import { FormEvent, useState } from 'react';
+import type { FormEvent } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import type { Account, AccountFormErrors, AccountFormValues } from '@/types';
 
@@ -30,7 +31,10 @@ export function useAccountForm(onClose: () => void) {
 
     const openEditModal = (accounts: Account[], id: number) => {
         const acc = accounts.find((a) => a.id === id);
-        if (!acc) return;
+
+        if (!acc) {
+            return;
+        }
 
         setEditingId(id);
         setFormValues({
@@ -58,13 +62,16 @@ export function useAccountForm(onClose: () => void) {
         }
 
         setFormErrors(errors);
+
         return Object.keys(errors).length === 0;
     };
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (!validateForm()) return;
+        if (!validateForm()) {
+            return;
+        }
 
         const payload = {
             platform: formValues.platform,

@@ -11,11 +11,7 @@ import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
 import { dashboard } from '@/routes';
 
-type Props = {
-    breadcrumbs?: Array<{ label: string; href?: string }>;
-};
-
-export function AppHeader({ breadcrumbs = [] }: Props) {
+export function AppHeader() {
     const page = usePage();
     const { auth } = page.props;
     const getInitials = useInitials();
@@ -23,8 +19,8 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
 
     return (
         <>
-            <div className="sticky top-0 z-50 border-b border-white/10 bg-white/60 backdrop-blur-2xl dark:border-white/5 dark:bg-[#00033D]/60">
-                <div className="mx-auto flex h-16 items-center justify-between px-4 md:max-w-7xl">
+            <div className="sticky top-4 z-50 mx-auto mt-4 w-full max-w-7xl px-4">
+                <div className="flex h-16 items-center justify-between rounded-full border border-slate-200/70 bg-white/70 px-5 shadow-lg shadow-slate-900/5 backdrop-blur-2xl dark:border-white/10 dark:bg-[#0b0f2f]/70 dark:shadow-none">
                     {/* LEFT - BRAND */}
                     <Link
                         href={dashboard()}
