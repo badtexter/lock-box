@@ -131,6 +131,30 @@
     --sidebar-ring: oklch(0.439 0 0);
 }
 
+@keyframes lb-float-1 {
+    0% {
+        transform: translate(-40px, -25px) scale(1);
+    }
+    50% {
+        transform: translate(35px, 30px) scale(1.08);
+    }
+    100% {
+        transform: translate(-40px, -25px) scale(1);
+    }
+}
+
+@keyframes lb-float-2 {
+    0% {
+        transform: translate(30px, 20px) scale(1.05);
+    }
+    50% {
+        transform: translate(-35px, -25px) scale(0.95);
+    }
+    100% {
+        transform: translate(30px, 20px) scale(1.05);
+    }
+}
+
 @layer base {
     * {
         @apply border-border;

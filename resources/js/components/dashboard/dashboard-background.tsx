@@ -30,27 +30,28 @@ export default function DashboardBackground() {
                 }}
             />
 
+            {/* Big, soft, slowly drifting glow centered behind the content */}
             <div
-                className="absolute top-[-20vw] right-[-20vw] h-[60vw] w-[60vw] rounded-full"
+                className="absolute top-1/2 left-1/2 -mt-[35vw] -ml-[35vw] h-[70vw] w-[70vw] animate-[lb-float-1_22s_ease-in-out_infinite] rounded-full opacity-70 dark:opacity-40"
                 style={{
                     background: `
                         radial-gradient(
                             circle,
-                            rgba(151,125,255,.18),
-                            rgba(0,51,255,.08),
-                            transparent 70%
+                            rgba(151,125,255,.16),
+                            rgba(0,51,255,.07) 45%,
+                            transparent 72%
                         )
                     `,
                 }}
             />
 
             <div
-                className="absolute bottom-[-25vw] left-[-25vw] h-[70vw] w-[70vw] rounded-full"
+                className="absolute top-1/2 left-1/2 -mt-[27vw] -ml-[27vw] h-[54vw] w-[54vw] animate-[lb-float-2_26s_ease-in-out_infinite] rounded-full opacity-70 dark:opacity-30"
                 style={{
                     background: `
                         radial-gradient(
                             circle,
-                            rgba(0,51,255,.12),
+                            rgba(0,51,255,.1),
                             transparent 70%
                         )
                     `,
