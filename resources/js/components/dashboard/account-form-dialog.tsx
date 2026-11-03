@@ -1,5 +1,7 @@
 import { RefreshCw } from 'lucide-react';
-import { FormEvent } from 'react';
+import type { FormEvent } from 'react';
+import InputError from '@/components/input-error';
+import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -9,9 +11,7 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
-import PasswordInput from '@/components/password-input';
 import type { AccountFormErrors, AccountFormValues } from '@/types';
 
 type AccountFormDialogProps = {
@@ -49,9 +49,9 @@ export default function AccountFormDialog({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-xl overflow-hidden border-slate-200/70 bg-white/95 backdrop-blur-2xl dark:border-white/10 dark:bg-[#07103d]/95">
+            <DialogContent className="max-w-xl overflow-hidden rounded-3xl border-slate-300/80 bg-white shadow-2xl shadow-slate-900/20 dark:border-white/10 dark:bg-[#0b0f2f]">
                 <DialogHeader className="space-y-4">
-                    <DialogTitle className="text-xl font-semibold">
+                    <DialogTitle className="text-xl font-extrabold">
                         {editingId ? 'Edit Password' : 'Add New Password'}
                     </DialogTitle>
                     <p className="text-sm text-slate-500 dark:text-white/50">
@@ -70,7 +70,7 @@ export default function AccountFormDialog({
                             }
                             placeholder="GitHub"
                             required
-                            className="h-12 rounded-xl border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03]"
+                            className="h-12 rounded-xl border-slate-300 bg-white dark:border-white/10 dark:bg-white/[0.03]"
                         />
                         <InputError message={formErrors.platform} />
                     </div>
@@ -87,7 +87,7 @@ export default function AccountFormDialog({
                             }
                             placeholder="me@example.com"
                             required
-                            className="h-12 rounded-xl border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03]"
+                            className="h-12 rounded-xl border-slate-300 bg-white dark:border-white/10 dark:bg-white/[0.03]"
                         />
                         <InputError message={formErrors.email} />
                     </div>
@@ -114,7 +114,7 @@ export default function AccountFormDialog({
                             }
                             placeholder="Generated or custom password"
                             required
-                            className="h-12 rounded-xl border-slate-200 bg-white font-mono dark:border-white/10 dark:bg-white/[0.03]"
+                            className="h-12 rounded-xl border-slate-300 bg-white font-mono dark:border-white/10 dark:bg-white/[0.03]"
                         />
                         <InputError message={formErrors.password} />
                         {passwordStrengthHint ? (
@@ -128,7 +128,7 @@ export default function AccountFormDialog({
                         <Button
                             variant="ghost"
                             onClick={onCancel}
-                            className="rounded-xl"
+                            className="rounded-full"
                             type="button"
                         >
                             Cancel
@@ -136,10 +136,10 @@ export default function AccountFormDialog({
 
                         <Button
                             type="submit"
-                            className="rounded-xl text-white shadow-lg transition-all hover:brightness-110"
+                            className="rounded-full px-6 font-semibold text-white shadow-[0_10px_25px_rgba(43,92,255,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(43,92,255,0.45)]"
                             style={{
                                 background:
-                                    'linear-gradient(135deg,#2B5CFF,#977DFF)',
+                                    'linear-gradient(135deg,#2B5CFF,#8A5CFF)',
                             }}
                         >
                             Save Password

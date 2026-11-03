@@ -1,4 +1,5 @@
-import { FormEvent } from 'react';
+import type { FormEvent } from 'react';
+import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -8,7 +9,6 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
 import type { MasterPromptState } from '@/types';
 
@@ -30,9 +30,9 @@ export default function MasterPasswordDialog({
             open={!!prompt.action}
             onOpenChange={(open) => !open && onClose()}
         >
-            <DialogContent className="max-w-md border-slate-200/70 bg-white/95 backdrop-blur-2xl dark:border-white/10 dark:bg-[#07103d]/95">
+            <DialogContent className="max-w-md rounded-3xl border-slate-300/80 bg-white shadow-2xl shadow-slate-900/20 dark:border-white/10 dark:bg-[#0b0f2f]">
                 <DialogHeader className="space-y-4">
-                    <DialogTitle className="text-xl font-semibold">
+                    <DialogTitle className="text-xl font-extrabold">
                         Confirm master password
                     </DialogTitle>
                     <p className="text-sm text-slate-500 dark:text-white/50">
@@ -51,7 +51,7 @@ export default function MasterPasswordDialog({
                             onChange={(e) => onPasswordChange(e.target.value)}
                             autoFocus
                             disabled={prompt.loading}
-                            className="h-12 rounded-xl border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03]"
+                            className="h-12 rounded-xl border-slate-300 bg-white dark:border-white/10 dark:bg-white/[0.03]"
                         />
                         <InputError message={prompt.error} />
                     </div>
@@ -60,7 +60,7 @@ export default function MasterPasswordDialog({
                         <Button
                             variant="ghost"
                             onClick={onClose}
-                            className="rounded-xl"
+                            className="rounded-full"
                             type="button"
                             disabled={prompt.loading}
                         >
@@ -70,10 +70,10 @@ export default function MasterPasswordDialog({
                         <Button
                             type="submit"
                             disabled={prompt.loading}
-                            className="rounded-xl text-white shadow-lg transition-all hover:brightness-110"
+                            className="rounded-full px-6 font-semibold text-white shadow-[0_10px_25px_rgba(43,92,255,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(43,92,255,0.45)]"
                             style={{
                                 background:
-                                    'linear-gradient(135deg,#2B5CFF,#977DFF)',
+                                    'linear-gradient(135deg,#2B5CFF,#8A5CFF)',
                             }}
                         >
                             {prompt.loading ? 'Confirming...' : 'Confirm'}
