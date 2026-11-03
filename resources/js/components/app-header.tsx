@@ -19,23 +19,24 @@ export function AppHeader() {
 
     return (
         <>
-            <div className="sticky top-4 z-50 mx-auto mt-4 w-full max-w-7xl px-4">
-                <div className="flex h-16 items-center justify-between rounded-full border border-slate-200/70 bg-white/70 px-5 shadow-lg shadow-slate-900/5 backdrop-blur-2xl dark:border-white/10 dark:bg-[#0b0f2f]/70 dark:shadow-none">
+            <div className="sticky top-3 z-50 mx-auto mt-3 w-full max-w-md px-4">
+                <div className="flex h-11 items-center justify-between rounded-full border border-black/10 bg-[#030812]/95 px-3 shadow-lg shadow-black/20 backdrop-blur-2xl dark:border-white/10 dark:bg-white/95 dark:shadow-slate-900/10">
                     {/* LEFT - BRAND */}
                     <Link
                         href={dashboard()}
                         prefetch
-                        className="flex items-center gap-3 font-semibold text-[#030812] dark:text-white"
+                        className="flex items-center gap-3 pl-2 font-semibold text-white dark:text-[#030812]"
                     >
-                        <span className="text-lg tracking-tight">LockBox</span>
+                        <span className="text-sm tracking-tight">LockBox</span>
                     </Link>
 
                     {/* RIGHT - USER + MOBILE MENU */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1">
                         {/* Theme Toggle */}
                         <Button
                             variant="ghost"
                             size="icon"
+                            className="h-8 w-8"
                             onClick={() =>
                                 updateAppearance(
                                     appearance === 'light' ? 'dark' : 'light',
@@ -44,9 +45,9 @@ export function AppHeader() {
                             title="Toggle theme"
                         >
                             {appearance === 'light' ? (
-                                <Sparkles className="h-5 w-5 text-amber-500" />
+                                <Sparkles className="h-4 w-4 text-amber-500" />
                             ) : (
-                                <Moon className="h-5 w-5 text-white" />
+                                <Moon className="h-4 w-4 text-white dark:text-[#030812]" />
                             )}
                         </Button>
 
@@ -56,14 +57,14 @@ export function AppHeader() {
                                 <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="rounded-full"
+                                    className="h-8 w-8 rounded-full"
                                 >
-                                    <Avatar className="h-8 w-8">
+                                    <Avatar className="h-7 w-7">
                                         <AvatarImage
                                             src={(auth.user as any)?.avatar_url}
                                             alt={(auth.user as any)?.name}
                                         />
-                                        <AvatarFallback className="bg-gradient-to-br from-[#0033FF] to-[#977DFF] text-white">
+                                        <AvatarFallback className="bg-gradient-to-br from-[#0033FF] to-[#977DFF] text-xs text-white">
                                             {getInitials(
                                                 (auth.user as any)?.name,
                                             )}

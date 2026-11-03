@@ -71,7 +71,7 @@ export default function Dashboard() {
         <>
             <Head title="Dashboard" />
 
-            <div className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-[#F5F8FF] dark:bg-[#00033D]">
+            <div className="relative min-h-[calc(100vh-3.5rem)] overflow-hidden bg-[#F5F8FF] dark:bg-[#00033D]">
                 <DashboardBackground />
 
                 <div className="relative z-10 mx-auto max-w-7xl p-6 lg:p-10">
