@@ -32,7 +32,7 @@ export default function MasterPasswordDialog({
         >
             <DialogContent className="max-w-md rounded-3xl border-slate-300/80 bg-white shadow-2xl shadow-slate-900/20 dark:border-white/10 dark:bg-[#0b0f2f]">
                 <DialogHeader className="space-y-4">
-                    <DialogTitle className="text-xl font-extrabold">
+                    <DialogTitle className="font-display text-xl font-bold">
                         Confirm master password
                     </DialogTitle>
                     <p className="text-sm text-slate-500 dark:text-white/50">

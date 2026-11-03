@@ -36,7 +36,7 @@ export default function PasswordDetail({
                         {account.platform[0]}
                     </div>
                     <div className="min-w-0">
-                        <h2 className="truncate text-xl font-extrabold text-[#030812] dark:text-white">
+                        <h2 className="truncate font-display text-xl font-bold text-[#030812] dark:text-white">
                             {account.platform}
                         </h2>
                         <p className="truncate text-sm text-slate-500 dark:text-white/50">

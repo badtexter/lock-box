@@ -46,7 +46,7 @@ export default function Welcome() {
                 {/* NAVBAR */}
                 <nav className="relative z-20 container mx-auto flex items-center justify-between px-8 py-8">
                     <div className="flex items-center gap-3">
-                        <span className="text-3xl font-bold text-[#030812] dark:text-white">
+                        <span className="font-display text-3xl font-bold text-[#030812] dark:text-white">
                             LockBox
                         </span>
                     </div>
@@ -150,7 +150,7 @@ export default function Welcome() {
                             </span>
                         </div>
 
-                        <h1 className="text-6xl leading-[0.95] font-bold tracking-tight text-[#030812] md:text-8xl dark:text-white">
+                        <h1 className="font-display text-6xl leading-[0.95] font-bold tracking-tight text-[#030812] md:text-8xl dark:text-white">
                             Secure your
                             <br />
                             passwords.

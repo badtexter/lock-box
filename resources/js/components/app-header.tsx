@@ -27,7 +27,9 @@ export function AppHeader() {
                         prefetch
                         className="flex items-center gap-3 pl-2 font-semibold text-white dark:text-[#030812]"
                     >
-                        <span className="text-sm tracking-tight">LockBox</span>
+                        <span className="font-display text-sm tracking-tight">
+                            LockBox
+                        </span>
                     </Link>
 
                     {/* RIGHT - USER + MOBILE MENU */}
