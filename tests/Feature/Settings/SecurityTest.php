@@ -75,15 +75,15 @@ test('password can be updated', function () {
         ->from(route('security.edit'))
         ->put(route('user-password.update'), [
             'current_password' => 'password',
-            'password' => 'new-password',
-            'password_confirmation' => 'new-password',
+            'password' => 'New-Vault-Key-99',
+            'password_confirmation' => 'New-Vault-Key-99',
         ]);
 
     $response
         ->assertSessionHasNoErrors()
         ->assertRedirect(route('security.edit'));
 
-    expect(Hash::check('new-password', $user->refresh()->password))->toBeTrue();
+    expect(Hash::check('New-Vault-Key-99', $user->refresh()->password))->toBeTrue();
 });
 
 test('correct password must be provided to update password', function () {
