@@ -24,3 +24,6 @@ export type MasterPromptState = {
     error?: string;
     loading: boolean;
 };
+
+/** Number of times a password was found in a known breach; null = check failed/unknown. */
+export type BreachCount = number | null;

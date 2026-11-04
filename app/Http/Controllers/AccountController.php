@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Services\PasswordCipher;
+use App\Services\PwnedPasswordChecker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -62,7 +63,7 @@ class AccountController extends Controller
         return response()->json($data);
     }
 
-    public function reveal(Request $request, Account $account)
+    public function reveal(Request $request, Account $account, PwnedPasswordChecker $pwnedPasswordChecker)
     {
         $this->authorize('view', $account);
 
@@ -84,6 +85,9 @@ class AccountController extends Controller
             return response()->json(['message' => 'Unable to reveal password.'], 400);
         }
 
-        return response()->json(['password' => $password]);
+        return response()->json([
+            'password' => $password,
+            'breach_count' => $pwnedPasswordChecker->timesSeen($password),
+        ]);
     }
 }

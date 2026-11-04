@@ -1,10 +1,11 @@
-import { Copy, Eye, Pencil, Trash2 } from 'lucide-react';
+import { Copy, Eye, Pencil, ShieldAlert, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import type { Account } from '@/types';
+import type { Account, BreachCount } from '@/types';
 
 type PasswordDetailProps = {
     account: Account;
     revealed?: string | null;
+    breachCount?: BreachCount;
     visible?: boolean;
     onCopy: (id: number) => void;
     onToggleReveal: (id: number) => void;
@@ -15,6 +16,7 @@ type PasswordDetailProps = {
 export default function PasswordDetail({
     account,
     revealed,
+    breachCount,
     visible,
     onCopy,
     onToggleReveal,
@@ -100,6 +102,17 @@ export default function PasswordDetail({
                     </div>
                 </div>
             </div>
+
+            {visible && !!breachCount && (
+                <div className="mt-4 flex items-start gap-2 rounded-[6px] border border-[#ffedea] bg-[#fff6f5] px-3 py-2.5 text-sm text-[#c4242a] dark:border-[#2c1a20] dark:bg-[#2c1a20] dark:text-[#e5566f]">
+                    <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" />
+                    <span>
+                        Found in {breachCount.toLocaleString()} known data
+                        breach{breachCount === 1 ? '' : 'es'}. Consider changing
+                        this password.
+                    </span>
+                </div>
+            )}
 
             <p className="mt-4 text-xs text-muted-foreground">
                 Added {addedOn}

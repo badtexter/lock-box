@@ -44,12 +44,17 @@ Not a production password manager — don't store real credentials in it.
   never view, edit, reveal or delete another's data.
 - **Rate-limited everywhere it matters** — login, 2FA, passkeys and master-password-gated
   reveals are all throttled per user/credential to slow down brute-force attempts.
+- **Breach monitoring** — every revealed password is checked against the Have I Been Pwned
+  range API (k-anonymity: only a 5-character hash prefix ever leaves the server) and flagged
+  if it's known to be compromised.
+- **Hardened HTTP responses** — CSP, `X-Frame-Options`, `Referrer-Policy` and
+  `Permissions-Policy` headers on every response (relaxed in local dev so Vite HMR keeps working).
 - **Light and dark mode**, responsive down to mobile.
 
 ## Tech stack
 
 **Backend** — Laravel 13 · PHP 8.3+ · Laravel Fortify (auth, 2FA) · Laravel Passkeys (WebAuthn)
-· SQLite · Pest 4
+· SQLite · Pest 4 · Larastan (static analysis)
 
 **Frontend** — Inertia.js v3 · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui
 
@@ -83,7 +88,14 @@ The app is then available at `http://localhost`.
 
 Feature tests cover the vault's CRUD and authorization (a user can never touch another user's
 credentials), the master-password reveal flow (correct/incorrect password, legacy-cipher
-accounts), authentication, 2FA and profile/security settings.
+accounts, rate limiting, breach detection), authentication, 2FA, profile/security settings and
+the security-headers middleware.
+
+Static analysis runs separately via [Larastan](https://github.com/larastan/larastan):
+
+```bash
+composer analyse
+```
 
 ## Security notes
 
@@ -105,7 +117,6 @@ accounts), authentication, 2FA and profile/security settings.
 
 - Replace the classroom cipher with real, audited encryption (AES-256-GCM via Laravel's `Crypt`
   facade) and migrate existing records
-- Password breach monitoring (Have I Been Pwned range API)
 - Secure password sharing between users
 - Browser extension for autofill
 
