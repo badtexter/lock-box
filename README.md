@@ -1,11 +1,19 @@
 # LockBox
 
+[![tests](https://github.com/badtexter/lock-box/actions/workflows/tests.yml/badge.svg)](https://github.com/badtexter/lock-box/actions/workflows/tests.yml)
+[![linter](https://github.com/badtexter/lock-box/actions/workflows/lint.yml/badge.svg)](https://github.com/badtexter/lock-box/actions/workflows/lint.yml)
+
 A self-hosted password manager built to show full-stack craft: an encrypted credential vault,
 master-password-gated reveals, 2FA, and passwordless sign-in with passkeys — on a Laravel +
 Inertia + React stack.
 
-Built as a portfolio project. Not a production password manager — see
-[Security notes](#security-notes) before trusting it with anything real.
+Originally built as a university cybersecurity course project: the brief required implementing
+classical ciphers (Caesar, Playfair) by hand rather than reaching for a library, so the vault's
+encryption is a from-scratch, **intentionally non-production** cipher — see
+[Security notes](#security-notes) for exactly what that means and why it's not used to protect
+anything real.
+
+Not a production password manager — don't store real credentials in it.
 
 ## Screenshots
 
@@ -20,8 +28,10 @@ Built as a portfolio project. Not a production password manager — see
 
 ## Features
 
-- **Encrypted vault** — every credential is encrypted at rest with a custom cipher
-  (hex → Caesar shift → Playfair square), never stored or logged in plain text.
+- **Encrypted vault** — every credential is encrypted at rest with a custom, hand-rolled cipher
+  (hex → Caesar shift → Playfair square) built for a cybersecurity course assignment, never
+  stored or logged in plain text. See [Security notes](#security-notes) — this is a teaching
+  cipher, not a cryptographically sound one.
 - **Master-password-gated reveal** — viewing or copying a stored password re-confirms the
   account's own password before decrypting anything, server-side.
 - **Strong password generator** — 20 characters, guaranteed upper/lower/number/symbol mix,
@@ -75,9 +85,15 @@ accounts), authentication, 2FA and profile/security settings.
 
 ## Security notes
 
-- Credential passwords are encrypted with a from-scratch cipher built for this project — it has
-  not been audited and should not be treated as cryptographically strong. Use a real, audited
-  password manager for anything that matters.
+- **The vault cipher is a classroom exercise, not real cryptography.** It's a composition of a
+  Caesar shift and a Playfair square (see
+  [`app/Services/PasswordCipher.php`](app/Services/PasswordCipher.php)) — both are centuries-old
+  pencil-and-paper ciphers with a tiny key space and well-known plaintext-recovery attacks. They
+  were a deliberate choice for a cybersecurity course assignment that asked for classical ciphers
+  implemented from scratch, not an attempt at production-grade encryption. **Do not store real
+  passwords in this app.** A real implementation would use an audited primitive such as
+  AES-256-GCM via Laravel's own `Crypt` facade — see
+  [Future improvements](#future-improvements).
 - The vault's "master password" is the user's own account password, checked server-side on every
   reveal.
 - Account passwords (the ones protecting the vault itself) require 14+ characters with mixed
@@ -85,6 +101,8 @@ accounts), authentication, 2FA and profile/security settings.
 
 ## Future improvements
 
+- Replace the classroom cipher with real, audited encryption (AES-256-GCM via Laravel's `Crypt`
+  facade) and migrate existing records
 - Password breach monitoring (Have I Been Pwned range API)
 - Secure password sharing between users
 - Browser extension for autofill
