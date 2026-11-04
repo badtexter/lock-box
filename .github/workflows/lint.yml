@@ -38,6 +38,9 @@ jobs:
       - name: Run Pint
         run: composer lint
 
+      - name: Run Static Analysis
+        run: composer analyse -- --memory-limit=1G
+
       - name: Format Frontend
         run: npm run format
 

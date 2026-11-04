@@ -1,7 +1,7 @@
 import type { FormEvent } from 'react';
 import { useCallback, useRef, useState } from 'react';
 import { toast } from 'sonner';
-import type { MasterPromptState } from '@/types';
+import type { BreachCount, MasterPromptState } from '@/types';
 
 const INITIAL_STATE: MasterPromptState = {
     action: null,
@@ -12,10 +12,15 @@ const INITIAL_STATE: MasterPromptState = {
 
 const REVEAL_DURATION_MS = 10_000;
 
+type RevealResult = {
+    password: string;
+    breachCount: BreachCount;
+};
+
 async function fetchRevealedPassword(
     id: number,
     masterPassword: string,
-): Promise<string | null> {
+): Promise<RevealResult | null> {
     const tokenMeta = document.querySelector(
         'meta[name="csrf-token"]',
     ) as HTMLMetaElement | null;
@@ -45,13 +50,16 @@ async function fetchRevealedPassword(
 
     const data = await res.json();
 
-    return data.password;
+    return { password: data.password, breachCount: data.breach_count };
 }
 
 export function useMasterPassword() {
     const [prompt, setPrompt] = useState<MasterPromptState>(INITIAL_STATE);
     const [revealedPasswords, setRevealedPasswords] = useState<
         Record<number, string>
+    >({});
+    const [breachCounts, setBreachCounts] = useState<
+        Record<number, BreachCount>
     >({});
     const [visibleIds, setVisibleIds] = useState<Record<number, boolean>>({});
     const timersRef = useRef<Record<number, ReturnType<typeof setTimeout>>>({});
@@ -103,15 +111,24 @@ export function useMasterPassword() {
                 loading: true,
             }));
 
-            const pwd = await fetchRevealedPassword(accountId, password);
+            const result = await fetchRevealedPassword(accountId, password);
 
-            if (!pwd) {
+            if (!result) {
                 setPrompt((prev) => ({ ...prev, loading: false }));
 
                 return;
             }
 
+            const { password: pwd, breachCount } = result;
+
             setRevealedPasswords((prev) => ({ ...prev, [accountId]: pwd }));
+            setBreachCounts((prev) => ({ ...prev, [accountId]: breachCount }));
+
+            if (breachCount) {
+                toast.warning(
+                    `This password was found in ${breachCount.toLocaleString()} known data breach${breachCount === 1 ? '' : 'es'}.`,
+                );
+            }
 
             if (action === 'copy') {
                 try {
@@ -176,6 +193,7 @@ export function useMasterPassword() {
     return {
         prompt,
         revealedPasswords,
+        breachCounts,
         visibleIds,
         closePrompt,
         confirmMasterPassword,

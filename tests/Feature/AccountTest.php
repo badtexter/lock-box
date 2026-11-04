@@ -3,6 +3,9 @@
 use App\Models\Account;
 use App\Models\User;
 use App\Services\PasswordCipher;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\RateLimiter;
 
 test('guests cannot manage accounts', function () {
     $account = Account::factory()->create();
@@ -139,6 +142,8 @@ test('a user cannot delete another user\'s account', function () {
 });
 
 test('the owner can reveal their password with the correct master password', function () {
+    Http::fake(['api.pwnedpasswords.com/*' => Http::response('')]);
+
     $user = User::factory()->create(); // password: 'password'
     $account = Account::factory()->for($user)->create([
         'password' => PasswordCipher::encrypt('the-real-password'),
@@ -148,7 +153,10 @@ test('the owner can reveal their password with the correct master password', fun
         'master_password' => 'password',
     ]);
 
-    $response->assertSuccessful()->assertJson(['password' => 'the-real-password']);
+    $response->assertSuccessful()->assertJson([
+        'password' => 'the-real-password',
+        'breach_count' => 0,
+    ]);
 });
 
 test('revealing a password fails with the wrong master password', function () {
@@ -181,6 +189,8 @@ test('a user cannot reveal another user\'s password', function () {
 });
 
 test('revealing a password still works for accounts encrypted before the cipher migration', function () {
+    Http::fake(['api.pwnedpasswords.com/*' => Http::response('')]);
+
     $user = User::factory()->create(); // password: 'password'
     $account = Account::factory()->for($user)->create([
         'password' => encrypt('legacy-password'),
@@ -191,4 +201,63 @@ test('revealing a password still works for accounts encrypted before the cipher 
     ]);
 
     $response->assertSuccessful()->assertJson(['password' => 'legacy-password']);
+});
+
+test('reveal attempts are rate limited per user', function () {
+    $user = User::factory()->create(); // password: 'password'
+    $account = Account::factory()->for($user)->create([
+        'password' => PasswordCipher::encrypt('the-real-password'),
+    ]);
+
+    RateLimiter::increment(md5('vault-reveal'.$user->id), amount: 10);
+
+    $response = $this->actingAs($user)->postJson(route('accounts.reveal', $account), [
+        'master_password' => 'password',
+    ]);
+
+    $response->assertTooManyRequests();
+});
+
+test('revealing a breached password reports how many times it has been seen', function () {
+    $plain = 'the-real-password';
+    $hash = strtoupper(sha1($plain));
+    $prefix = substr($hash, 0, 5);
+    $suffix = substr($hash, 5);
+
+    Http::fake([
+        "api.pwnedpasswords.com/range/{$prefix}" => Http::response(
+            "{$suffix}:42\nFFFF0000FFFF0000FFFF0000FFFF0000FFFF:3",
+        ),
+    ]);
+
+    $user = User::factory()->create(); // password: 'password'
+    $account = Account::factory()->for($user)->create([
+        'password' => PasswordCipher::encrypt($plain),
+    ]);
+
+    $response = $this->actingAs($user)->postJson(route('accounts.reveal', $account), [
+        'master_password' => 'password',
+    ]);
+
+    $response->assertSuccessful()->assertJson(['breach_count' => 42]);
+});
+
+test('reveal degrades gracefully when the breach-check API is unreachable', function () {
+    Http::fake(function () {
+        throw new ConnectionException('offline');
+    });
+
+    $user = User::factory()->create(); // password: 'password'
+    $account = Account::factory()->for($user)->create([
+        'password' => PasswordCipher::encrypt('the-real-password'),
+    ]);
+
+    $response = $this->actingAs($user)->postJson(route('accounts.reveal', $account), [
+        'master_password' => 'password',
+    ]);
+
+    $response->assertSuccessful()->assertJson([
+        'password' => 'the-real-password',
+        'breach_count' => null,
+    ]);
 });

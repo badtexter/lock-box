@@ -118,6 +118,9 @@ export default function Dashboard() {
                                     revealed={
                                         master.revealedPasswords[selected.id]
                                     }
+                                    breachCount={
+                                        master.breachCounts[selected.id]
+                                    }
                                     visible={!!master.visibleIds[selected.id]}
                                     onCopy={master.handleCopy}
                                     onToggleReveal={master.handleToggleReveal}
