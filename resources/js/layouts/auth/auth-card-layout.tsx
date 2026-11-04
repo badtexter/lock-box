@@ -8,8 +8,8 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { home } from '@/routes';
 import { useAppearance } from '@/hooks/use-appearance';
+import { home } from '@/routes';
 
 export default function AuthCardLayout({
     children,

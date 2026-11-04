@@ -1,8 +1,8 @@
 import { Link } from '@inertiajs/react';
 // Logo icon removed — using text-only branding
+import { useAppearance } from '@/hooks/use-appearance';
 import { home } from '@/routes';
 import type { AuthLayoutProps } from '@/types';
-import { useAppearance } from '@/hooks/use-appearance';
 
 export default function AuthSimpleLayout({
     children,
