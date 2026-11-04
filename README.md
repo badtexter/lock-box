@@ -106,3 +106,7 @@ accounts), authentication, 2FA and profile/security settings.
 - Password breach monitoring (Have I Been Pwned range API)
 - Secure password sharing between users
 - Browser extension for autofill
+
+## License
+
+[MIT](LICENSE)
