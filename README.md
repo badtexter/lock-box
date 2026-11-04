@@ -53,7 +53,7 @@ Not a production password manager — don't store real credentials in it.
 
 ## Tech stack
 
-**Backend** — Laravel 13 · PHP 8.3+ · Laravel Fortify (auth, 2FA) · Laravel Passkeys (WebAuthn)
+**Backend** — Laravel 13 · PHP 8.4+ · Laravel Fortify (auth, 2FA) · Laravel Passkeys (WebAuthn)
 · SQLite · Pest 4 · Larastan (static analysis)
 
 **Frontend** — Inertia.js v3 · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui
@@ -62,7 +62,7 @@ Not a production password manager — don't store real credentials in it.
 
 ## Getting started
 
-Requires Docker (for Sail), PHP 8.3+ and Node 20+ on the host for the initial install step.
+Requires Docker (for Sail), PHP 8.4+ and Node 20+ on the host for the initial install step.
 
 ```bash
 composer install
