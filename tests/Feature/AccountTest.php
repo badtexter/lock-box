@@ -3,6 +3,7 @@
 use App\Models\Account;
 use App\Models\User;
 use App\Services\PasswordCipher;
+use Illuminate\Support\Facades\RateLimiter;
 
 test('guests cannot manage accounts', function () {
     $account = Account::factory()->create();
@@ -191,4 +192,19 @@ test('revealing a password still works for accounts encrypted before the cipher 
     ]);
 
     $response->assertSuccessful()->assertJson(['password' => 'legacy-password']);
+});
+
+test('reveal attempts are rate limited per user', function () {
+    $user = User::factory()->create(); // password: 'password'
+    $account = Account::factory()->for($user)->create([
+        'password' => PasswordCipher::encrypt('the-real-password'),
+    ]);
+
+    RateLimiter::increment(md5('vault-reveal'.$user->id), amount: 10);
+
+    $response = $this->actingAs($user)->postJson(route('accounts.reveal', $account), [
+        'master_password' => 'password',
+    ]);
+
+    $response->assertTooManyRequests();
 });

@@ -72,7 +72,8 @@ export default function PasswordDetail({
                     Password
                 </span>
                 <div className="mt-2 flex items-center justify-between gap-3 rounded-[6px] border border-border bg-muted px-3 py-2.5">
-                    <span className="font-mono text-sm tracking-[0.1em] text-foreground">{/* taste-skill-ignore: a password field, not prose */}
+                    <span className="font-mono text-sm tracking-[0.1em] text-foreground">
+                        {/* taste-skill-ignore: a password field, not prose */}
                         {visible
                             ? (revealed ?? '••••••••••••')
                             : '••••••••••••'}

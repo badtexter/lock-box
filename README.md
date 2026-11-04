@@ -42,6 +42,8 @@ Not a production password manager — don't store real credentials in it.
   account.
 - **Per-user authorization** — every credential is scoped and policy-checked, so one user can
   never view, edit, reveal or delete another's data.
+- **Rate-limited everywhere it matters** — login, 2FA, passkeys and master-password-gated
+  reveals are all throttled per user/credential to slow down brute-force attempts.
 - **Light and dark mode**, responsive down to mobile.
 
 ## Tech stack
@@ -106,3 +108,7 @@ accounts), authentication, 2FA and profile/security settings.
 - Password breach monitoring (Have I Been Pwned range API)
 - Secure password sharing between users
 - Browser extension for autofill
+
+## License
+
+[MIT](LICENSE)
