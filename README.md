@@ -1,48 +1,90 @@
 # LockBox
 
-LockBox is a secure password management application built with Laravel and React. It allows users to safely store, organize, and manage their credentials in one centralized place while providing a modern and responsive user experience.
+A self-hosted password manager built to show full-stack craft: an encrypted credential vault,
+master-password-gated reveals, 2FA, and passwordless sign-in with passkeys — on a Laravel +
+Inertia + React stack.
+
+Built as a portfolio project. Not a production password manager — see
+[Security notes](#security-notes) before trusting it with anything real.
+
+## Screenshots
+
+| | |
+|---|---|
+| **Landing page** | **Log in** (split-screen, passkey support) |
+| ![Landing page](docs/screenshots/welcome.png) | ![Log in](docs/screenshots/login.png) |
+| **Vault — light** | **Vault — dark** |
+| ![Vault, light mode](docs/screenshots/dashboard.png) | ![Vault, dark mode](docs/screenshots/dashboard-dark.png) |
+| **Profile settings** | **Security — password, 2FA, passkeys** |
+| ![Profile settings](docs/screenshots/settings.png) | ![Security settings](docs/screenshots/settings-security.png) |
 
 ## Features
 
-* Secure storage of usernames and passwords
-* Master password protection
-* Password encryption for enhanced security
-* Password visibility toggle
-* Strong password generator
-* Modern React-based user interface
-* Responsive design
-* CRUD operations for credential management
-* Two-factor authentication (2FA)
+- **Encrypted vault** — every credential is encrypted at rest with a custom cipher
+  (hex → Caesar shift → Playfair square), never stored or logged in plain text.
+- **Master-password-gated reveal** — viewing or copying a stored password re-confirms the
+  account's own password before decrypting anything, server-side.
+- **Strong password generator** — 20 characters, guaranteed upper/lower/number/symbol mix,
+  generated with `crypto.getRandomValues`.
+- **Search** — instant client-side filtering by platform or email.
+- **Two-factor authentication** — TOTP with QR setup and single-use recovery codes.
+- **Passkeys** — WebAuthn-based passwordless sign-in, register/remove multiple passkeys per
+  account.
+- **Per-user authorization** — every credential is scoped and policy-checked, so one user can
+  never view, edit, reveal or delete another's data.
+- **Light and dark mode**, responsive down to mobile.
 
-## Technologies
+## Tech stack
 
-### Backend
+**Backend** — Laravel 13 · PHP 8.3+ · Laravel Fortify (auth, 2FA) · Laravel Passkeys (WebAuthn)
+· SQLite · Pest 4
 
-* Laravel
-* PHP
-* SQLite
-* Laravel Authentication
+**Frontend** — Inertia.js v3 · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui
 
-### Frontend
+**Dev environment** — Laravel Sail (Docker)
 
-* React
-* TypeScript
-* Bootstrap / Tailwind CSS
+## Getting started
 
-## Purpose
+Requires Docker (for Sail), PHP 8.3+ and Node 20+ on the host for the initial install step.
 
-The purpose of this project is to provide a secure and user-friendly password management solution while demonstrating full-stack development skills using Laravel and React. 
-Developed as a portfolio project to showcase full-stack web development skills, REST API integration, authentication mechanisms, database management, and security best practices using Laravel and React.
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
 
-## Security Features
+# Laravel Sail (Docker)
+php artisan sail:install --with=mailpit
+./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate
 
-* Encrypted password storage
-* Secure authentication system
-* Protected user data
-* Password strength support
+npm install
+npm run build   # or `npm run dev` for hot reload
+```
 
-## Future Improvements
+The app is then available at `http://localhost`.
 
-* Password breach monitoring
-* Secure password sharing
-* Browser extension integration
+## Testing
+
+```bash
+./vendor/bin/sail artisan test --compact
+```
+
+Feature tests cover the vault's CRUD and authorization (a user can never touch another user's
+credentials), the master-password reveal flow (correct/incorrect password, legacy-cipher
+accounts), authentication, 2FA and profile/security settings.
+
+## Security notes
+
+- Credential passwords are encrypted with a from-scratch cipher built for this project — it has
+  not been audited and should not be treated as cryptographically strong. Use a real, audited
+  password manager for anything that matters.
+- The vault's "master password" is the user's own account password, checked server-side on every
+  reveal.
+- Account passwords (the ones protecting the vault itself) require 14+ characters with mixed
+  case, numbers and symbols, and are checked against known-breached passwords on signup.
+
+## Future improvements
+
+- Password breach monitoring (Have I Been Pwned range API)
+- Secure password sharing between users
+- Browser extension for autofill
